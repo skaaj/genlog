@@ -1,5 +1,4 @@
-﻿using Genlog.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,66 +21,70 @@ namespace Genlog
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewManager _viewManager;
+        private Dictionary<string, Activity> _activities;
+        private Activity _currentActivity;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _viewManager = ViewManager.Instance;
+            _activities = new Dictionary<string, Activity>();
+
+            _activities.Add("home", new HomeActivity(this));
+            _activities.Add("help", new HelpActivity(this));
+            _activities.Add("stats", new StatisticsActivity(this));
+            _activities.Add("memtest", new MemoryTestActivity(this));
+            _activities.Add("focustest", new FocusTestActivity(this));
+
+            Launch("home");
         }
 
-        private bool Show(string page)
+        public UserControl Area
         {
-            UserControl newView = _viewManager[page];
+            set
+            {
+                contentArea.Content = value;
+            }
+        }
 
-            if (newView == null) return false;
+        // TODO : vérifier si l'activité n'est pas déjà celle courante
+        public void Launch(string activity)
+        {
+            if (_activities.ContainsKey(activity))
+            {
+                _currentActivity = _activities[activity];
 
-            contentArea.Content = newView;
-            return true;
+                Area = _currentActivity.View;
+            }
         }
 
         /*
-         * EVENTS
+         * Events
          */
 
         private void OnClickHome(object sender, RoutedEventArgs e)
         {
-            Stopwatch s = Stopwatch.StartNew();
-            Show("home");
-
-            s.Stop();
-            Console.WriteLine(s.Elapsed);
+            Launch("home");
         }
 
-        private void OnClickMemTest(object sender, RoutedEventArgs e)
+        private void OnClickMemoryTest(object sender, RoutedEventArgs e)
         {
-            Show("memtest");
+            Launch("memtest");
         }
 
-        private void OnClickMenu(object sender, RoutedEventArgs e)
+        private void OnClickFocusTest(object sender, RoutedEventArgs e)
         {
-            MenuItem clickedItem = (MenuItem)sender;
-           
-            switch (clickedItem.Header.ToString())
-            {
-                case("_Accueil"):
-                    Show("home");
-                    break;
-                case ("Test _1"):
-                    Show("memtest");
-                    break;
-                case ("Test _2"):
-                    Show("foctest");
-                    break;
-                case ("_Statistiques"):
-                    Show("stats");
-                    break;
-                case ("A_ide"):
-                    Show("help");
-                    break;
-                default:break;
-            }
+            Launch("focustest");
+        }
+
+        private void OnClickStats(object sender, RoutedEventArgs e)
+        {
+            Launch("stats");
+        }
+
+        private void OnClickHelp(object sender, RoutedEventArgs e)
+        {
+            Launch("help");
         }
     }
 }

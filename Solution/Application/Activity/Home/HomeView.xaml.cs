@@ -13,16 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Genlog.View
+namespace Genlog
 {
     /// <summary>
-    /// Logique d'interaction pour HelpView.xaml
+    /// Logique d'interaction pour HomeView.xaml
     /// </summary>
-    public partial class HelpView : UserControl
+    public partial class HomeView : UserControl
     {
-        public HelpView()
+        public HomeView()
         {
             InitializeComponent();
+
+            Console.WriteLine("HomeView::Create called");
         }
     }
 }

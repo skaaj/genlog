@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Genlog
 {
     /// <summary>
-    /// Logique d'interaction pour HomeView.xaml
+    /// Logique d'interaction pour FocusTestView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class FocusTestView : UserControl
     {
-        public HomeView()
+        public FocusTestView()
         {
             InitializeComponent();
+        }
+
+        private void OnClickOK(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -57,28 +57,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\FocusTestView.xaml.cs">
+    <Compile Include="Activity\Activity.cs" />
+    <Compile Include="Activity\FocusTest\FocusTestActivity.cs" />
+    <Compile Include="Activity\Help\HelpActivity.cs" />
+    <Compile Include="Activity\Home\HomeActivity.cs" />
+    <Compile Include="Activity\MemoryTest\MemoryTestActivity.cs" />
+    <Compile Include="Activity\FocusTest\FocusTestView.xaml.cs">
       <DependentUpon>FocusTestView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HelpView.xaml.cs">
+    <Compile Include="Activity\Help\HelpView.xaml.cs">
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MemoryTestView.xaml.cs">
+    <Compile Include="Activity\MemoryTest\MemoryTestView.xaml.cs">
       <DependentUpon>MemoryTestView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StatisticsView.xaml.cs">
+    <Compile Include="Activity\Statistics\StatisticsActivity.cs" />
+    <Compile Include="Activity\Statistics\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewManager.cs" />
-    <Page Include="View\FocusTestView.xaml">
+    <Page Include="Activity\FocusTest\FocusTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HelpView.xaml">
+    <Page Include="Activity\Help\HelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HomeView.xaml">
+    <Page Include="Activity\Home\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -90,18 +95,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\HomeView.xaml.cs">
+    <Compile Include="Activity\Home\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\MemoryTestView.xaml">
+    <Page Include="Activity\MemoryTest\MemoryTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\StatisticsView.xaml">
+    <Page Include="Activity\Statistics\StatisticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
