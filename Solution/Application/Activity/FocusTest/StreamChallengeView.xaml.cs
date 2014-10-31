@@ -16,22 +16,17 @@ using System.Windows.Shapes;
 namespace Genlog
 {
     /// <summary>
-    /// Logique d'interaction pour FocusTestView.xaml
+    /// Logique d'interaction pour StreamChallengeView.xaml
     /// </summary>
-    public partial class FocusTestView : UserControl
+    public partial class StreamChallengeView : UserControl
     {
         private Activity _parent;
-        
-        public FocusTestView(Activity parent)
+
+        public StreamChallengeView(Activity parent)
         {
             InitializeComponent();
 
             _parent = parent;
-        }
-
-        private void OnSubmit(object sender, RoutedEventArgs e)
-        {
-            _parent.SetView("challenge");
         }
     }
 }

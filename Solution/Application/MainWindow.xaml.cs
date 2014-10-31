@@ -36,7 +36,14 @@ namespace Genlog
             _activities.Add("memtest", new MemoryTestActivity(this));
             _activities.Add("focustest", new FocusTestActivity(this));
 
+            _activities["focustest"].OnViewChanged += MainWindow_OnViewChanged;
+
             Launch("home");
+        }
+
+        void MainWindow_OnViewChanged(UserControl sender, EventArgs e)
+        {
+            Area = sender;
         }
 
         public UserControl Area

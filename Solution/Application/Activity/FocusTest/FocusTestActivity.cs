@@ -10,7 +10,8 @@ namespace Genlog
     {
         public FocusTestActivity(MainWindow context) : base(context)
         {
-            AddView("home", new FocusTestView());
+            AddView("home", new FocusTestView(this));
+            AddView("challenge", new StreamChallengeView(this));
 
             SetView("home");
         }

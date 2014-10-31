@@ -12,6 +12,9 @@ namespace Genlog
         private MainWindow Context { get; set; }
         private Dictionary<string, UserControl> _views;
 
+        public event ViewChangedHandler OnViewChanged;
+        public delegate void ViewChangedHandler(UserControl sender, EventArgs e);
+
         public UserControl View { get; private set; }
 
         public Activity(MainWindow context)
@@ -27,11 +30,14 @@ namespace Genlog
             _views.Add(id, view);
         }
 
-        protected void SetView(string id)
+        public void SetView(string id)
         {
             if (_views.ContainsKey(id))
             {
                 View = _views[id];
+
+                if(OnViewChanged != null)
+                    OnViewChanged(View, null);
             }
         }
     }

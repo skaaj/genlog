@@ -59,6 +59,9 @@
     </ApplicationDefinition>
     <Compile Include="Activity\Activity.cs" />
     <Compile Include="Activity\FocusTest\FocusTestActivity.cs" />
+    <Compile Include="Activity\FocusTest\StreamChallengeView.xaml.cs">
+      <DependentUpon>StreamChallengeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Activity\Help\HelpActivity.cs" />
     <Compile Include="Activity\Home\HomeActivity.cs" />
     <Compile Include="Activity\MemoryTest\MemoryTestActivity.cs" />
@@ -76,6 +79,10 @@
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Activity\FocusTest\FocusTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Activity\FocusTest\StreamChallengeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
