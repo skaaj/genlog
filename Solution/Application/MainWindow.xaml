@@ -1,0 +1,23 @@
+﻿<Window x:Class="Genlog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="600" Width="800">
+    
+    <Grid>
+        
+        <Grid.DataContext>
+            <XmlDataProvider Source="Data/SampleData.xml" XPath="/Users/User" />
+        </Grid.DataContext>
+        
+        <Menu IsMainMenu="True" Grid.Row="0">
+            <MenuItem Header="_Accueil" Click="OnClickMenu" />
+            <MenuItem Header="Test _1" Click="OnClickMenu" />
+            <MenuItem Header="Test _2" Click="OnClickMenu" />
+            <MenuItem Header="_Statistiques" Click="OnClickMenu" />
+            <MenuItem Header="A_ide" Click="OnClickMenu" />
+        </Menu>
+        <UserControl Grid.Row="1" x:Name="contentArea" Margin="0,20,0,0">
+            
+        </UserControl>
+    </Grid>
+</Window>
