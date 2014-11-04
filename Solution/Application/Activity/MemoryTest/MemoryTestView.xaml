@@ -7,6 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Label Content="MemoryTestView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
+        <Button Content="lol" HorizontalAlignment="Left" Margin="85,101,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </UserControl>
