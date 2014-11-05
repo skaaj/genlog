@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Genlog
 {
@@ -21,6 +22,7 @@ namespace Genlog
     public partial class StreamChallengeView : UserControl
     {
         private Activity _parent;
+        private DispatcherTimer timer;
 
         public StreamChallengeView(Activity parent)
         {
