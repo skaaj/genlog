@@ -12,27 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Genlog
 {
     /// <summary>
-    /// Logique d'interaction pour MemoryTestView.xaml
+    /// Logique d'interaction pour ResulatatMemorizationView.xaml
     /// </summary>
-    public partial class MemoryTestView : UserControl
+    public partial class ResultatMemorizationView : UserControl
     {
-
         private Activity _parent;
 
-        public MemoryTestView(Activity parent)
+        public ResultatMemorizationView(Activity parent)
         {
             InitializeComponent();
 
             _parent = parent;
-        }
 
+
+        }
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            _parent.SetView("challengememory");
+            _parent.SetView("home");
         }
     }
 }

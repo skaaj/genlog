@@ -64,6 +64,9 @@
     </Compile>
     <Compile Include="Activity\Help\HelpActivity.cs" />
     <Compile Include="Activity\Home\HomeActivity.cs" />
+    <Compile Include="Activity\MemoryTest\MemorizationView.xaml.cs">
+      <DependentUpon>MemorizationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Activity\MemoryTest\MemoryTestActivity.cs" />
     <Compile Include="Activity\FocusTest\FocusTestView.xaml.cs">
       <DependentUpon>FocusTestView.xaml</DependentUpon>
@@ -73,6 +76,9 @@
     </Compile>
     <Compile Include="Activity\MemoryTest\MemoryTestView.xaml.cs">
       <DependentUpon>MemoryTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Activity\MemoryTest\ResultatMemorizationView.xaml.cs">
+      <DependentUpon>ResultatMemorizationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Activity\Statistics\StatisticsActivity.cs" />
     <Compile Include="Activity\Statistics\StatisticsView.xaml.cs">
@@ -91,6 +97,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Activity\Home\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Activity\MemoryTest\MemorizationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Activity\MemoryTest\ResultatMemorizationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +150,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
