@@ -37,6 +37,7 @@ namespace Genlog
             _activities.Add("focustest", new FocusTestActivity(this));
 
             _activities["focustest"].OnViewChanged += MainWindow_OnViewChanged;
+            _activities["memtest"].OnViewChanged += MainWindow_OnViewChanged;
 
             Launch("home");
         }
