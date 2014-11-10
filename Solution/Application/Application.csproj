@@ -58,33 +58,33 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Activity\Activity.cs" />
-    <Compile Include="Activity\FocusTest\FocusTestActivity.cs" />
+    <Compile Include="Activity\FocusTest\FocusActivity.cs" />
     <Compile Include="Activity\FocusTest\StreamChallengeView.xaml.cs">
       <DependentUpon>StreamChallengeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Activity\Help\HelpActivity.cs" />
     <Compile Include="Activity\Home\HomeActivity.cs" />
-    <Compile Include="Activity\MemoryTest\MemorizationView.xaml.cs">
-      <DependentUpon>MemorizationView.xaml</DependentUpon>
+    <Compile Include="Activity\MemoryTest\MemoryChallengeView.xaml.cs">
+      <DependentUpon>MemoryChallengeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Activity\MemoryTest\MemoryTestActivity.cs" />
-    <Compile Include="Activity\FocusTest\FocusTestView.xaml.cs">
-      <DependentUpon>FocusTestView.xaml</DependentUpon>
+    <Compile Include="Activity\MemoryTest\MemoryActivity.cs" />
+    <Compile Include="Activity\FocusTest\FocusView.xaml.cs">
+      <DependentUpon>FocusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Activity\Help\HelpView.xaml.cs">
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Activity\MemoryTest\MemoryTestView.xaml.cs">
-      <DependentUpon>MemoryTestView.xaml</DependentUpon>
+    <Compile Include="Activity\MemoryTest\MemoryView.xaml.cs">
+      <DependentUpon>MemoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Activity\MemoryTest\ResultatMemorizationView.xaml.cs">
-      <DependentUpon>ResultatMemorizationView.xaml</DependentUpon>
+    <Compile Include="Activity\MemoryTest\MemoryResultView.xaml.cs">
+      <DependentUpon>MemoryResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Activity\Statistics\StatisticsActivity.cs" />
     <Compile Include="Activity\Statistics\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Activity\FocusTest\FocusTestView.xaml">
+    <Page Include="Activity\FocusTest\FocusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,11 +100,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Activity\MemoryTest\MemorizationView.xaml">
+    <Page Include="Activity\MemoryTest\MemoryChallengeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Activity\MemoryTest\ResultatMemorizationView.xaml">
+    <Page Include="Activity\MemoryTest\MemoryResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,7 +123,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Activity\MemoryTest\MemoryTestView.xaml">
+    <Page Include="Activity\MemoryTest\MemoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,7 +150,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

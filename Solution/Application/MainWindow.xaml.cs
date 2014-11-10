@@ -36,33 +36,43 @@ namespace Genlog
             _activities.Add("memtest", new MemoryTestActivity(this));
             _activities.Add("focustest", new FocusTestActivity(this));
 
-            _activities["focustest"].OnViewChanged += MainWindow_OnViewChanged;
-            _activities["memtest"].OnViewChanged += MainWindow_OnViewChanged;
+            foreach (KeyValuePair<string, Activity> entry in _activities)
+                entry.Value.OnViewChanged += MainWindow_OnViewChanged;
 
             Launch("home");
         }
 
-        void MainWindow_OnViewChanged(UserControl sender, EventArgs e)
+        void MainWindow_OnViewChanged(Activity sender, ViewChangedArgs e)
         {
-            Area = sender;
+            if(sender == _currentActivity)
+                Area = e.RequestedView;
         }
 
         public UserControl Area
         {
             set
             {
+                value.Width = contentArea.Width;
+                value.Height = contentArea.Height;
+
                 contentArea.Content = value;
             }
         }
 
-        // TODO : vérifier si l'activité n'est pas déjà celle courante
         public void Launch(string activity)
         {
             if (_activities.ContainsKey(activity))
             {
-                _currentActivity = _activities[activity];
+                Activity tmp = _activities[activity];
 
-                Area = _currentActivity.View;
+                if (tmp != _currentActivity)
+                {
+                    if(_currentActivity != null)
+                        _currentActivity.Stop();
+
+                    _currentActivity = tmp;
+                    Area = _currentActivity.View;
+                }
             }
         }
 
