@@ -66,6 +66,10 @@
     <Compile Include="Activity\Home\HomeActivity.cs" />
     <Compile Include="Activity\IStartable.cs" />
     <Compile Include="Activity\IStoppable.cs" />
+    <Compile Include="Activity\MemoryTest\AnswerMemoryView.xaml.cs">
+      <DependentUpon>AnswerMemoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Activity\MemoryTest\ImageNombre.cs" />
     <Compile Include="Activity\MemoryTest\MemoryChallengeView.xaml.cs">
       <DependentUpon>MemoryChallengeView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Activity\Home\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Activity\MemoryTest\AnswerMemoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
