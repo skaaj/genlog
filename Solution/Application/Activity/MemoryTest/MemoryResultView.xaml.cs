@@ -33,7 +33,7 @@ namespace Genlog
         }
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            _parent.SetView("home");
+            _parent.Show("home");
         }
     }
 }

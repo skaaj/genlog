@@ -30,7 +30,7 @@ namespace Genlog
             timer.Tick += new EventHandler(challengeView.TimerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
 
-            SetView("home");
+            Show("home");
         }
     }
 }

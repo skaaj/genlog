@@ -18,13 +18,23 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour HomeView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class HomeView : UserControl, IStartable ,IStoppable
     {
         public HomeView()
         {
             InitializeComponent();
 
             Console.WriteLine("HomeView::Create called");
+        }
+
+        public void Stop()
+        {
+            Console.WriteLine("I'm a view and because my activity stops, I stop.");
+        }
+
+        public void Start()
+        {
+            Console.WriteLine("I'm a view and because my activity starts, I start.");
         }
     }
 }

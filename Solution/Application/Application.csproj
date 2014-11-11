@@ -64,6 +64,8 @@
     </Compile>
     <Compile Include="Activity\Help\HelpActivity.cs" />
     <Compile Include="Activity\Home\HomeActivity.cs" />
+    <Compile Include="Activity\IStartable.cs" />
+    <Compile Include="Activity\IStoppable.cs" />
     <Compile Include="Activity\MemoryTest\MemoryChallengeView.xaml.cs">
       <DependentUpon>MemoryChallengeView.xaml</DependentUpon>
     </Compile>

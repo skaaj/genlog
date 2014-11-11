@@ -21,30 +21,35 @@ namespace Genlog
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dictionary<string, Activity> _activities;
+
         private Activity _currentActivity;
+        private Dictionary<Activities, Activity> _activities;
+        public enum Activities { Home, Help, Stats, Memory, Focus };
+
+        #region Window
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _activities = new Dictionary<string, Activity>();
-
-            _activities.Add("home", new HomeActivity(this));
-            _activities.Add("help", new HelpActivity(this));
-            _activities.Add("stats", new StatisticsActivity(this));
-            _activities.Add("memtest", new MemoryTestActivity(this));
-            _activities.Add("focustest", new FocusTestActivity(this));
-
-            foreach (KeyValuePair<string, Activity> entry in _activities)
-                entry.Value.OnViewChanged += MainWindow_OnViewChanged;
-
-            Launch("home");
+            _activities = new Dictionary<Activities, Activity>();
         }
 
-        void MainWindow_OnViewChanged(Activity sender, ViewChangedArgs e)
+        private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            if(sender == _currentActivity)
+            AddActivity(Activities.Home, new HomeActivity(this));
+            AddActivity(Activities.Help, new HelpActivity(this));
+            AddActivity(Activities.Focus, new FocusActivity(this));
+            AddActivity(Activities.Stats, new StatisticsActivity(this));
+            AddActivity(Activities.Memory, new MemoryTestActivity(this));
+
+            Run(Activities.Home);
+        }
+
+        private void WindowUpdateRequested(Activity sender, ViewChangedArgs e)
+        {
+            // seul l'activité courante peut changer la vue
+            if (sender == _currentActivity)
                 Area = e.RequestedView;
         }
 
@@ -52,6 +57,7 @@ namespace Genlog
         {
             set
             {
+                // testme
                 value.Width = contentArea.Width;
                 value.Height = contentArea.Height;
 
@@ -59,50 +65,74 @@ namespace Genlog
             }
         }
 
-        public void Launch(string activity)
-        {
-            if (_activities.ContainsKey(activity))
-            {
-                Activity tmp = _activities[activity];
+        #endregion
 
+        #region Activity
+
+        private void AddActivity(Activities activityID, Activity activityRef)
+        {
+            // on ajoute la nouvelle activité
+            _activities.Add(activityID, activityRef);
+            
+            // on abonne la fenêtre à l'activité
+            _activities[activityID].OnViewChanged += WindowUpdateRequested;
+        }
+
+        public void Run(Activities activityID)
+        {
+            // Si l'activitée demandée existe
+            if (_activities.ContainsKey(activityID))
+            {
+                Activity tmp = _activities[activityID];
+
+                // on ne relance pas l'activité courante
                 if (tmp != _currentActivity)
                 {
+                    // on arrête l'activité courante
                     if(_currentActivity != null)
                         _currentActivity.Stop();
 
+                    // on met à jour l'activité et sa vue actuelle
                     _currentActivity = tmp;
-                    Area = _currentActivity.View;
+
+                    // on démarre l'activité
+                    _currentActivity.Start();
+
+                    Area = _currentActivity.CurrentView;
                 }
             }
         }
 
-        /*
-         * Events
-         */
+        #endregion
+
+        #region Button callbacks
 
         private void OnClickHome(object sender, RoutedEventArgs e)
         {
-            Launch("home");
+            Run(Activities.Home);
         }
 
         private void OnClickMemoryTest(object sender, RoutedEventArgs e)
         {
-            Launch("memtest");
+            Run(Activities.Memory);
         }
 
         private void OnClickFocusTest(object sender, RoutedEventArgs e)
         {
-            Launch("focustest");
+            Run(Activities.Focus);
         }
 
         private void OnClickStats(object sender, RoutedEventArgs e)
         {
-            Launch("stats");
+            Run(Activities.Stats);
         }
 
         private void OnClickHelp(object sender, RoutedEventArgs e)
         {
-            Launch("help");
+            Run(Activities.Help);
         }
+
+        #endregion
+
     }
 }

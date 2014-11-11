@@ -32,7 +32,7 @@ namespace Genlog
 
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            _parent.SetView("challenge");
+            _parent.Show("challenge");
             _parent.timer.Start();
         }
     }

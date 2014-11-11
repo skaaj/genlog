@@ -18,11 +18,11 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour FocusTestView.xaml
     /// </summary>
-    public partial class FocusTestView : UserControl
+    public partial class FocusView : UserControl
     {
         private Activity _parent;
         
-        public FocusTestView(Activity parent)
+        public FocusView(Activity parent)
         {
             InitializeComponent();
 
@@ -31,7 +31,7 @@ namespace Genlog
 
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            _parent.SetView("challenge");
+            _parent.Show("stream"); // fixme : string = danger
         }
     }
 }

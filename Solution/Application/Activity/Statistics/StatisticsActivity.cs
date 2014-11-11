@@ -13,7 +13,7 @@ namespace Genlog
         {
             AddView("home", new StatisticsView());
 
-            SetView("home");
+            Show("home");
         }
     }
 }

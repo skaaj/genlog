@@ -8,7 +8,7 @@ namespace Genlog
         {
             AddView("home", new HelpView());
 
-            SetView("home");
+            Show("home");
         }
     }
 }

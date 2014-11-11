@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace Genlog
 {
-    public class FocusTestActivity : Activity
+    public class FocusActivity : Activity
     {
-        public FocusTestActivity(MainWindow context) : base(context)
-        {
-            AddView("home", new FocusTestView(this));
-            AddView("challenge", new StreamChallengeView(this));
 
-            SetView("home");
+        private FocusView homeView;
+        private StreamChallengeView streamView;
+
+        public FocusActivity(MainWindow context) : base(context)
+        {
+            AddView("home", new FocusView(this));
+            AddView("stream", new StreamChallengeView(this));
+
+            Show("home");
         }
     }
 }

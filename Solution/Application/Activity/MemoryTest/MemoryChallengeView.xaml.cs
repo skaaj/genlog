@@ -41,7 +41,7 @@ namespace Genlog
             if (timeLeft <= 0)
             {
                 _parent.timer.Stop();
-                _parent.SetView("result");
+                _parent.Show("result");
             }
         }
     }
