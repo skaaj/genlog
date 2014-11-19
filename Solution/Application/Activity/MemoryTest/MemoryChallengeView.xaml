@@ -10,7 +10,7 @@
         <Label Content="MemoryTestRun" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Temps "/><Run Language="fr-fr" Text="restant"/></TextBlock>
         <TextBlock Name="TBCountDown" HorizontalAlignment="Left" Margin="163,214,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="36" Width="104"/>
-        <WrapPanel Name="Affichage_image" HorizontalAlignment="Left" Height="173" Margin="10,36,0,0" VerticalAlignment="Top" Width="280" RenderTransformOrigin="0.897,0.896"/>
+        <WrapPanel Name="Affichage_image" HorizontalAlignment="Left" Height="173" Margin="0,41,0,0" VerticalAlignment="Top" Width="290" RenderTransformOrigin="0.897,0.896"/>
 
     </Grid>
 </UserControl>
