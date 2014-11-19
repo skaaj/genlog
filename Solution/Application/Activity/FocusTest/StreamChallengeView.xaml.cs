@@ -30,8 +30,8 @@ namespace Genlog
 
         private Random _randomizer;
 
-        private int _count = 0;
-        private int _interval = 5;
+        private int _count;
+        private int _interval;
 
         public StreamChallengeView(Activity parent)
         {
@@ -64,8 +64,9 @@ namespace Genlog
         {
             _animation = new DoubleAnimation();
             _animation.From = 0.0;
-            _animation.To = canvas.ActualWidth;
+            _animation.To = canvas.ActualWidth + 20;
             _animation.Duration = new Duration(TimeSpan.FromSeconds(_interval));
+            _animation.EasingFunction = new ElasticEase();
 
             _storyboard = new Storyboard();
             _storyboard.Children.Add(_animation);
@@ -122,7 +123,6 @@ namespace Genlog
 
         private Line BuildLine(string name, int x1, int y1, int x2, int y2, int thickness, Brush color)
         {
-            // Add a Line Element
             Line myLine = new Line();
             myLine.Name = name;
             myLine.Stroke = color;
@@ -179,6 +179,11 @@ namespace Genlog
         private void CanvasLoaded(object sender, RoutedEventArgs e)
         {
             _animation.To = canvas.ActualWidth;
+        }
+
+        private void CanvasSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            _animation.To = canvas.ActualWidth + 20;
         }
 
     }
