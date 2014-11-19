@@ -24,22 +24,27 @@ namespace Genlog
     {
         private MemoryTestActivity _parent;
 
+        List<ImageNombre> ListeComplete;
+
         public MemorizationView(MemoryTestActivity parent)
         {
             InitializeComponent();
-
             _parent = parent;
 
-            parent.listeMemorisation = new List<ImageNombre>();
+            _parent.listeMemorisation = new List<ImageNombre>();
+            ListeComplete = new List<ImageNombre>();
 
+            CreateList();
         }
+
+
 
         // A chaque tick, rafraichir le compteur
         public void TimerTick(object sender, EventArgs e)
         {
             int timeLeft = int.Parse(TBCountDown.Text);
             TBCountDown.Text = (timeLeft - 1).ToString();
-
+            
             if (timeLeft <= 0)
             {
                 _parent.timer.Stop();
@@ -47,25 +52,55 @@ namespace Genlog
             }
         }
 
-        public void CreateList(MemoryTestActivity P)
+
+
+
+        // Méthode création des listes d'images avec nombres 
+
+        public void CreateList()
         {
             //Ajout des images du dossier dans une liste
-            DirectoryInfo path = new DirectoryInfo("Images Mémoire/");
+            DirectoryInfo path = new DirectoryInfo("../../Img/");
             string chemin;
             Random rnd = new Random();
             int nombre;
 
 
+            // Récupération de toutes les images
             foreach (FileInfo fichier in path.GetFiles())
             {
                 
                 nombre = rnd.Next(1, 999);
 
-                chemin = System.IO.Path.GetFullPath("Images Mémoire/"+fichier.Name);
+                chemin = System.IO.Path.GetFullPath("../../Img/"+fichier.Name);
 
-                P.listeMemorisation.Add(new ImageNombre(chemin, (nombre).ToString()));
+                ListeComplete.Add(new ImageNombre(chemin, (nombre).ToString()));
             }
 
+        }
+
+        public void TrieAffichage()
+        {
+            Random rnd = new Random();
+            int nombre;
+
+            List<ImageNombre> x = ListeComplete;
+
+            for (int z = 0; z < _parent.difficulte; z++)
+            {
+                nombre = rnd.Next(0, x.Count);
+
+                _parent.listeMemorisation.Add(ListeComplete[nombre]);
+
+                x.RemoveAt(nombre);
+                
+
+            }
+
+
+
+
+            // Affichage des images
             foreach (ImageNombre imgnb in _parent.listeMemorisation)
             {
                 Image image = new Image();
@@ -76,11 +111,8 @@ namespace Genlog
                 lbl.Width = 40;
                 lbl.Content = imgnb._nombre;
 
-
-
                 BitmapImage myBitmapImage = new BitmapImage();
                 myBitmapImage.BeginInit();
-                //"C:/Users/Gwendal/Documents/GitHub/Projet génie Logiciel/genlog/Solution/Application/bin/Debug/Images Mémoire/"
                 myBitmapImage.UriSource = new Uri(imgnb._image);
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
@@ -88,17 +120,15 @@ namespace Genlog
 
                 Affichage_image.Children.Add(image);
                 Affichage_image.Children.Add(lbl);
-
             }
-
         }
 
+        // Start du timer
         public void Start()
         {
-
+            TrieAffichage();
             TBCountDown.Text = (_parent.tempsMemorisation).ToString();
             _parent.timer.Start();
-            CreateList(_parent);
         }
     }
 }
