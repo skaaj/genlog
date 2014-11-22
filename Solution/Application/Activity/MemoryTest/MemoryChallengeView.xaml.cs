@@ -23,8 +23,8 @@ namespace Genlog
     public partial class MemorizationView : UserControl, IStartable
     {
         private MemoryTestActivity _parent;
-
         List<ImageNombre> ListeComplete;
+
 
         public MemorizationView(MemoryTestActivity parent)
         {
@@ -34,7 +34,7 @@ namespace Genlog
             _parent.listeMemorisation = new List<ImageNombre>();
             ListeComplete = new List<ImageNombre>();
 
-            CreateList();
+            
         }
 
 
@@ -65,6 +65,8 @@ namespace Genlog
             Random rnd = new Random();
             int nombre;
 
+            
+            ListeComplete.Clear();
 
             // Récupération de toutes les images
             foreach (FileInfo fichier in path.GetFiles())
@@ -83,21 +85,18 @@ namespace Genlog
         {
             Random rnd = new Random();
             int nombre;
+            _parent.listeMemorisation.Clear();
 
             List<ImageNombre> x = ListeComplete;
 
             for (int z = 0; z < _parent.difficulte; z++)
             {
                 nombre = rnd.Next(0, x.Count);
-
                 _parent.listeMemorisation.Add(ListeComplete[nombre]);
-
-                x.RemoveAt(nombre);
-                
-
+                x.RemoveAt(nombre);            
             }
 
-
+            Affichage_image.Children.Clear();
 
 
             // Affichage des images
@@ -126,6 +125,7 @@ namespace Genlog
         // Start du timer
         public void Start()
         {
+            CreateList();
             TrieAffichage();
             TBCountDown.Text = (_parent.tempsMemorisation).ToString();
             _parent.timer.Start();

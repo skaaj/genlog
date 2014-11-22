@@ -24,21 +24,25 @@ namespace Genlog
     {
         private MemoryTestActivity _parent;
 
+        public int[] equivalent;
+        List<TextBox> listedebox;
+
 
         public AnswerMemoryView(MemoryTestActivity parent)
         {
             InitializeComponent();
-
-            _parent = parent;
-
-            
+            _parent = parent;          
         }
+
 
         // Onsubmit
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-                _parent.Show("result");
+            VerificationReponse();
+            _parent.Show("result");
         }
+
+
 
         public void AffichageRandom()
         {
@@ -46,7 +50,7 @@ namespace Genlog
 
             // rendu random de l'affichage // Création des textbox
             List<int> listecompte = new List<int> { };
-            List<TextBox> listedebox = new List<TextBox> { };
+            listedebox = new List<TextBox> { };
 
 
             for (int cpt = 1; listecompte.Count < _parent.listeMemorisation.Count; cpt++)
@@ -58,7 +62,7 @@ namespace Genlog
                         }
 
 
-            int[] equivalent = new int[listecompte.Count];
+            equivalent = new int[listecompte.Count];
             int nombre; 
             Random rnd = new Random();
             
@@ -72,6 +76,7 @@ namespace Genlog
 
             }
 
+            Affichage_image_answer.Children.Clear();
 
             for (int cpt = 0; cpt < _parent.listeMemorisation.Count; cpt++)
             {
@@ -94,6 +99,26 @@ namespace Genlog
                 Affichage_image_answer.Children.Add(image);
                 Affichage_image_answer.Children.Add(listedebox.ElementAt(equivalent[cpt] - 1));
 
+            }
+        }
+
+
+
+        // Verification des réponses apportées par l'utilisateur
+        public void VerificationReponse()
+        {
+            _parent.ListeReponse = new List<ImageNombre> { };
+            _parent.ListeReponse.Clear();
+
+
+            for (int z = 0; z < _parent.listeMemorisation.Count; z++)
+            {
+                _parent.ListeReponse.Add(new ImageNombre(_parent.listeMemorisation.ElementAt(z)._image, listedebox.ElementAt(z).Text, true));
+
+                if (_parent.ListeReponse.ElementAt(z)._nombre != _parent.listeMemorisation.ElementAt(z)._nombre)
+                {
+                    _parent.ListeReponse.ElementAt(z)._result = false;
+                }
             }
         }
 

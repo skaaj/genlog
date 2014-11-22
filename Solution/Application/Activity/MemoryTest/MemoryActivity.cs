@@ -11,10 +11,10 @@ namespace Genlog
     public class MemoryTestActivity : Activity
     {
         public DispatcherTimer timer;
-        public int tempsMemorisation;
-        public int difficulte;
-
+        public int tempsMemorisation;       // Temps donné pour la mémorisation des figure et des nombres
+        public int difficulte;              // Difficulté de la mémorisation
         public List<ImageNombre> listeMemorisation;
+        public List<ImageNombre> ListeReponse;
 
         // Views
         public MemoryTestView homeView;

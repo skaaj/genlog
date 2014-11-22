@@ -37,11 +37,18 @@ namespace Genlog
 
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            _parent.tempsMemorisation = int.Parse(champs_temps.Text);
-            _parent.difficulte = int.Parse(champs_nombre.Text);
+            try {_parent.tempsMemorisation = int.Parse(champs_temps.Text);}
+            catch { _parent.tempsMemorisation = 0; }
+            try { _parent.difficulte = int.Parse(champs_nombre.Text); }
+            catch { _parent.difficulte = 0; }
+
+            
 
             if (_parent.difficulte < 11 && _parent.difficulte > 0 && _parent.tempsMemorisation > 0 && _parent.tempsMemorisation < 61)
             {
+                champs_temps.Text = String.Empty;
+                champs_nombre.Text = String.Empty;
+
                 _parent.Show("challenge");
             }
 
