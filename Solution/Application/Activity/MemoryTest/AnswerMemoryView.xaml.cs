@@ -24,6 +24,7 @@ namespace Genlog
     {
         private MemoryTestActivity _parent;
 
+
         public AnswerMemoryView(MemoryTestActivity parent)
         {
             InitializeComponent();
@@ -41,27 +42,57 @@ namespace Genlog
 
         public void AffichageRandom()
         {
+
+
+            // rendu random de l'affichage // Création des textbox
+            List<int> listecompte = new List<int> { };
+            List<TextBox> listedebox = new List<TextBox> { };
+
+
+            for (int cpt = 1; listecompte.Count < _parent.listeMemorisation.Count; cpt++)
+                        {
+                            listecompte.Add(cpt);
+                            listedebox.Add(new TextBox());
+                            listedebox.ElementAt(cpt-1).Width = 40;
+                            listedebox.ElementAt(cpt-1).Height = 20;
+                        }
+
+
+            int[] equivalent = new int[listecompte.Count];
+            int nombre; 
+            Random rnd = new Random();
+            
             // Affichage des images
-            foreach (ImageNombre imgnb in _parent.listeMemorisation)
+
+            for (int cpt = 0; listecompte.Count > 0; cpt++)
             {
+                nombre = rnd.Next(1, listecompte.Count);
+                equivalent[cpt] = listecompte.ElementAt(nombre-1);
+                listecompte.RemoveAt(nombre-1);
+
+            }
+
+
+            for (int cpt = 0; cpt < _parent.listeMemorisation.Count; cpt++)
+            {
+
                 Image image = new Image();
                 image.Height = 20;
                 image.Width = 50;
 
                 Label lbl = new Label();
                 lbl.Width = 40;
-                lbl.Content = imgnb._nombre;
-
-
+                lbl.Content = _parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._nombre;
 
                 BitmapImage myBitmapImage = new BitmapImage();
                 myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(imgnb._image);
+                myBitmapImage.UriSource = new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._image);
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
                 image.Source = myBitmapImage;
 
                 Affichage_image_answer.Children.Add(image);
+                Affichage_image_answer.Children.Add(listedebox.ElementAt(equivalent[cpt] - 1));
 
             }
         }
@@ -70,5 +101,6 @@ namespace Genlog
         {
             AffichageRandom();
         }
+
     }
 }
