@@ -59,12 +59,17 @@ namespace Genlog
                 lbl.Width = 40;
                 lbl.Content = imgnb._nombre;
 
+                /*
                 BitmapImage myBitmapImage = new BitmapImage();
                 myBitmapImage.BeginInit();
                 myBitmapImage.UriSource = new Uri(imgnb._image);
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
                 image.Source = myBitmapImage;
+                */
+
+
+                image.Source = new BitmapImage(new Uri(imgnb._image));
 
                 Affichage_resultat.Children.Add(image);
                 Affichage_resultat.Children.Add(lbl);

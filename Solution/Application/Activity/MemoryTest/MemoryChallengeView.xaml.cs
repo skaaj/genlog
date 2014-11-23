@@ -109,13 +109,16 @@ namespace Genlog
                 Label lbl = new Label();
                 lbl.Width = 40;
                 lbl.Content = imgnb._nombre;
-
+                /*
                 BitmapImage myBitmapImage = new BitmapImage();
                 myBitmapImage.BeginInit();
                 myBitmapImage.UriSource = new Uri(imgnb._image);
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
-                image.Source = myBitmapImage;
+                image.Source = Image.F
+                */
+
+                image.Source = new BitmapImage(new Uri(imgnb._image));
 
                 Affichage_image.Children.Add(image);
                 Affichage_image.Children.Add(lbl);

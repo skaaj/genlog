@@ -12,6 +12,9 @@ namespace Genlog
         private FocusView homeView;
         private StreamChallengeView streamView;
 
+        public int Speed { get; set; }
+        public int Level { get; set; }
+
         public FocusActivity(MainWindow context) : base(context)
         {
             AddView("home", new FocusView(this));

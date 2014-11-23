@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,120 +23,351 @@ namespace Genlog
     /// </summary>
     public partial class StreamChallengeView : UserControl, IStartable, IStoppable
     {
-        private Activity _parent;
+        private FocusActivity _parent;
 
-        private DispatcherTimer timer;
-        private Storyboard _storyboard;
+        private DispatcherTimer _timer;
         private DoubleAnimation _animation;
 
         private Random _randomizer;
 
-        private int _count;
         private int _interval;
+        private int _level;
 
-        public StreamChallengeView(Activity parent)
+        private int _shapeSize;
+        private double _yCenter;
+        private double _xCenter;
+
+        private double equilateralFactor = 2.0 / Math.Sqrt(3.0);
+
+        private List<Brush> _colors;
+
+        private enum ShapeEnum { Square, Triangle, Circle, Unknown }; // fixme : order
+        private enum ColorEnum { Red, Green, Blue };
+
+        private ShapeEnum _correctShape;
+        private int _correctColor; // index dans _colors
+        private Shape _template;
+        private bool _hasDots;
+
+        private int _good;
+        private int _bad;
+
+        public StreamChallengeView(FocusActivity parent)
         {
             InitializeComponent();
 
-            _count = 0;
-            _interval = 2;
+            _parent = parent;
+
             _randomizer = new Random();
 
-            _parent = parent;
+            _colors = new List<Brush>();
+            _colors.Add(Brushes.DarkRed);
+            _colors.Add(Brushes.DarkGreen);
+            _colors.Add(Brushes.DarkBlue);
         }
 
         public void Start()
         {
+            _interval = _parent.Speed * 1000;
+            _level = _parent.Level;
+
             InitializeAnimation();
 
-            timer.Start();
+            GenerateRule();
+
+            _timer.Start();
             Console.WriteLine("Timer started :)");
         }
 
         public void Stop()
         {
-            timer.Stop();
+            _timer.Stop();
             Console.WriteLine("Timer stopped sir !");
         }
+
+        #region rule
+
+        private void GenerateRule()
+        {
+            bool[] negations = { false, false, false };
+            int randomIndex;
+            int nbPlaced = 0;
+
+            _correctShape = (ShapeEnum)_randomizer.Next(0, 3);
+            _correctColor = _randomizer.Next(0, 3);
+
+            // ~1,3 microseconds (w/ i5-4430 @ 3.0 Ghz)
+            while (nbPlaced < (_level - 1))
+            {
+                randomIndex = _randomizer.Next(0, 3);
+
+                if (!negations[randomIndex])
+                {
+                    negations[randomIndex] = true;
+                    nbPlaced++;
+                }
+            }
+
+            StringBuilder strBuilder = new StringBuilder();
+            if (negations[0])
+                strBuilder.Append("Ne cliquez pas sur les");
+            else
+                strBuilder.Append("Cliquez sur les");
+
+            switch (_correctShape)
+            {
+                case ShapeEnum.Square:
+                    strBuilder.Append(" carrés, ");
+                    _template = ShapeFactory.Rectangle(1, 1);
+                    break;
+                case ShapeEnum.Triangle:
+                    strBuilder.Append(" triangles, ");
+                    _template = ShapeFactory.EquilateralTriangle(1);
+                    break;
+                case ShapeEnum.Circle:
+                    strBuilder.Append(" cercles, ");
+                    _template = ShapeFactory.Ellipse(1, 1);
+                    break;
+                default:
+                    strBuilder.Append(" formes, ");
+                    break;
+            }
+
+            if (negations[1])
+                strBuilder.Append("qui ne sont pas");
+            else
+                strBuilder.Append("de couleur");
+
+            switch (_correctColor)
+            {
+                case 0:
+                    strBuilder.Append(" rouge et ");
+                    break;
+                case 1:
+                    strBuilder.Append(" vert et ");
+                    break;
+                case 2:
+                    strBuilder.Append(" bleu et ");
+                    break;
+                default:
+                    break;
+            }
+
+            _template.Fill = _colors[_correctColor];
+
+            if (negations[0])
+            {
+                _hasDots = false;
+                strBuilder.Append("qui n'ont pas de points noirs.");
+            }
+            else
+            {
+                _hasDots = true;
+                strBuilder.Append("qui ont des points noirs.");
+            }
+
+            ruleLabel.Content = strBuilder.ToString();
+        }
+
+        #endregion
 
         #region shapes
 
         private void InitializeAnimation()
         {
             _animation = new DoubleAnimation();
-            _animation.From = 0.0;
-            _animation.To = canvas.ActualWidth + 20;
-            _animation.Duration = new Duration(TimeSpan.FromSeconds(_interval));
-            _animation.EasingFunction = new ElasticEase();
+            _animation.From = -200.0;
+            _animation.Duration = new Duration(TimeSpan.FromMilliseconds(_interval));
+            //_animation.EasingFunction = new SineEase();
 
-            _storyboard = new Storyboard();
-            _storyboard.Children.Add(_animation);
-
-            timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(TimerTick);
-            timer.Interval = new TimeSpan(0, 0, _interval);
+            _timer = new DispatcherTimer();
+            _timer.Tick += new EventHandler(TimerTick);
+            _timer.Interval = TimeSpan.FromMilliseconds(_interval / 2);
         }
 
         private void SpawnShape()
         {
-            Shape s;
+            Shape shape;
+            bool validity = _randomizer.NextDouble() < 0.5 ? true : false;
 
-            int randomInt = _randomizer.Next() % 3;
+            double shapeY = _yCenter - (_shapeSize / 2);
 
-            Console.WriteLine(randomInt);
+            int chosenColor = _randomizer.Next(0, _colors.Count);
+            ShapeEnum chosenShape = (ShapeEnum)_randomizer.Next(0, 3);
+            bool hasDots = _randomizer.NextDouble() < 0.5 ? true : false;
 
-            switch (randomInt)
+            if (validity)
             {
-                case 0:
-                    s = BuildLine("line" + _count++, 0, 0, 50, 50, 20, Brushes.IndianRed);
+                hasDots = _hasDots;
+                chosenColor = _correctColor;
+                chosenShape = _correctShape;
+            }
+            else
+            {
+                while (chosenShape == _correctShape && chosenColor == _correctColor && _hasDots == hasDots)
+                {
+                    chosenShape = (ShapeEnum)_randomizer.Next(0, 3);
+                    chosenColor = _randomizer.Next(0, _colors.Count);
+                    hasDots     = _randomizer.NextDouble() < 0.5 ? true : false;
+                }
+            }
+
+            // On créer la forme
+            switch (chosenShape)
+            {
+                case ShapeEnum.Square:
+                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
+                    break;
+                case ShapeEnum.Triangle:
+                    shape = ShapeFactory.EquilateralTriangle((int)(_shapeSize * equilateralFactor));
+                    break;
+                case ShapeEnum.Circle:
+                    shape = ShapeFactory.Ellipse(_shapeSize, _shapeSize);
                     break;
                 default:
-                    s = BuildRectangle("rect" + _count++, 50, 50, 0, 0, Brushes.IndianRed);
+                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
                     break;
             }
 
-            this.RegisterName(s.Name, s);
+            // On lui donne sa couleur
+            shape.Fill = _colors[chosenColor];
 
-            if (randomInt == 0)
-                s.MouseDown += OnRectangleClickOK;
+            if (validity)
+            {
+                shape.MouseDown += OnCorrectAnswer;
+                shape.Unloaded += (s, e) =>
+                {
+                    _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
+                };
+            }
             else
-                s.MouseDown += OnRectangleClick;
+            {
+                shape.MouseDown += OnWrongAnswer;
+            }
 
-            Storyboard.SetTargetName(_animation, s.Name);
-            Storyboard.SetTargetProperty(_animation, new PropertyPath(Canvas.LeftProperty));
+            if (hasDots)
+            {
+                Canvas complexShape = ShapeFactory.AddDots(shape, 3, 20, 10);
+                canvas.Children.Add(complexShape);
+                Canvas.SetTop(complexShape, shapeY);
+                complexShape.BeginAnimation(Canvas.LeftProperty, _animation);
+            }
+            else
+            {
+                canvas.Children.Add(shape);
+                Canvas.SetTop(shape, shapeY);
+                shape.BeginAnimation(Canvas.LeftProperty, _animation);
+            }
 
-            s.Loaded += new RoutedEventHandler(ShapeLoaded);
-            canvas.Children.Add(s);
+            if (canvas.Children.Count > 4)
+                canvas.Children.RemoveRange(2, 1);
+            Console.WriteLine(canvas.Children.Count);
         }
 
-        private Rectangle BuildRectangle(string name, int width, int height, int x, int y, Brush color)
+        void shape_Unloaded(object sender, RoutedEventArgs e)
         {
-            Rectangle tmp = new Rectangle();
-            tmp.Name = name;
-            tmp.Width = width;
-            tmp.Height = height;
-            Canvas.SetTop(tmp, x);
-            Canvas.SetTop(tmp, y);
-            tmp.Fill = color;
-
-            return tmp;
+            _bad++;
+            Console.WriteLine("T'es con !");
         }
 
-        private Line BuildLine(string name, int x1, int y1, int x2, int y2, int thickness, Brush color)
+        void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
         {
-            Line myLine = new Line();
-            myLine.Name = name;
-            myLine.Stroke = color;
-            myLine.X1 = x1;
-            myLine.X2 = x2;
-            myLine.Y1 = y1;
-            myLine.Y2 = y2;
-            myLine.StrokeThickness = thickness;
-            myLine.RenderTransformOrigin = new Point(0.0, 0.0);
+            Shape s = sender as Shape;
+            s.MouseDown -= OnCorrectAnswer;
 
-            myLine.RenderTransform = new RotateTransform(45);
+            _good++;
 
-            return myLine;
+            Console.WriteLine("Correct answer");
+        }
+
+        void OnWrongAnswer(object sender, MouseButtonEventArgs e)
+        {
+            Shape s = sender as Shape;
+            s.MouseDown -= OnWrongAnswer;
+
+            _bad++;
+
+            Console.WriteLine("Bad answer");
+        }
+
+        /*
+        private void SpawnShapeOld()
+        {
+            Shape shape = null;
+
+            // TIRAGES
+            int randShape = _randomizer.Next(0, 3);
+            int randColor = _randomizer.Next(0, _colors.Count);
+            double randValidity = _randomizer.NextDouble();
+            double randDots = _randomizer.NextDouble();
+            double validityProbability = 0.10; // 
+
+            Console.WriteLine("(" + randShape + ", " + randValidity + ")");
+
+            // INITS
+            double shapeY = _yCenter - (_shapeSize / 2);
+
+            // SUCCESS or NOT
+            if (randValidity < validityProbability)
+            {
+                randShape = (int)_correctShape;
+                randColor = (int)_correctColor;
+                randDots = _hasDots ? 0.0 : 1.0;
+            }
+
+            // CHOIX FORME
+            switch (randShape)
+            {
+                case 0:
+                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
+                    break;
+                case 1:
+                    shape = ShapeFactory.EquilateralTriangle((int)(_shapeSize * equilateralFactor));
+                    break;
+                case 2:
+                    shape = ShapeFactory.Ellipse(_shapeSize, _shapeSize);
+                    break;
+                default:
+                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
+                    break;
+            }
+
+            // CHOIX COULEUR
+            shape.Fill = _colors[randColor];
+
+            // HAS DOTS
+            Canvas complexShape = null;
+            if (randDots < 0.5)
+            {
+                complexShape = ShapeFactory.AddDots(shape, 3, 20, 10);
+            }
+
+            // FIXME
+            if (canvas.Children.Count > 20)
+                canvas.Children.RemoveRange(2, canvas.Children.Count - 10);
+
+            // SUCCESS or NOT
+            if (randValidity < validityProbability)
+            {
+                shape.MouseDown += OnRectangleClickOK;
+            }
+            else
+            {
+                shape.MouseDown += OnRectangleClick;
+            }
+
+            if (complexShape == null)
+            {
+                canvas.Children.Add(shape);
+                Canvas.SetTop(shape, shapeY);
+                shape.BeginAnimation(Canvas.LeftProperty, _animation);
+            }
+            else
+            {
+                canvas.Children.Add(complexShape);
+                Canvas.SetTop(complexShape, shapeY);
+                complexShape.BeginAnimation(Canvas.LeftProperty, _animation);
+            }
         }
 
         void OnRectangleClick(object sender, MouseButtonEventArgs e)
@@ -143,8 +375,8 @@ namespace Genlog
             Shape s = sender as Shape;
             if (s != null)
             {
+                s.StrokeThickness = 10;
                 s.Stroke = new SolidColorBrush(Colors.Red);
-                s.Fill = new SolidColorBrush(Colors.Red);
             }
         }
 
@@ -153,25 +385,15 @@ namespace Genlog
             Shape r = sender as Shape;
             if (r != null)
             {
-                r.Fill = new SolidColorBrush(Colors.Green);
+                r.StrokeThickness = 10;
                 r.Stroke = new SolidColorBrush(Colors.Green);
             }
         }
-
-        private void ShapeLoaded(object sender, RoutedEventArgs e)
-        {
-            _storyboard.Begin(this);
-        }
+        */
 
         private void TimerTick(object sender, EventArgs e)
         {
             SpawnShape();
-        }
-
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UserControl uc = sender as UserControl;
-            _animation.To = uc.ActualWidth + 20;
         }
 
         #endregion
@@ -179,12 +401,27 @@ namespace Genlog
         private void CanvasLoaded(object sender, RoutedEventArgs e)
         {
             _animation.To = canvas.ActualWidth;
+
+            _shapeSize = (int)(canvas.ActualHeight / 3);
+            _yCenter = canvas.ActualHeight / 2;
+            _xCenter = canvas.ActualWidth / 2;
+
+            Line middle = new Line();
+            middle.Stroke = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
+            middle.X1 = canvas.ActualWidth / 2;
+            middle.X2 = middle.X1;
+            middle.Y1 = 0;
+            middle.Y2 = canvas.ActualHeight;
+            middle.StrokeThickness = 2;
+
+            canvas.Children.Add(middle);
+
+            SpawnShape();
         }
 
-        private void CanvasSizeChanged(object sender, SizeChangedEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _animation.To = canvas.ActualWidth + 20;
+            // refactoring inc
         }
-
     }
 }

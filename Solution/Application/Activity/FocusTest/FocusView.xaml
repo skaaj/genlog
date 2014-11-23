@@ -10,9 +10,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="Description du test" VerticalAlignment="Top" Height="139" Width="280"/>
         <Label Content="Paramétres" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,214,0,0" TextWrapping="Wrap" Text="Vitesse" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="82,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
+        <TextBox x:Name="speedTextBox" HorizontalAlignment="Left" Height="23" Margin="82,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,246,0,0" TextWrapping="Wrap" Text="Difficulté" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="82,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
+        <TextBox x:Name="levelTextBox" HorizontalAlignment="Left" Height="23" Margin="82,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
         <Button Content="Passer au test" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="280" Click="OnSubmit"/>
     </Grid>
 </UserControl>

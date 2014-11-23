@@ -89,12 +89,16 @@ namespace Genlog
                 lbl.Width = 40;
                 lbl.Content = _parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._nombre;
 
+                /*
                 BitmapImage myBitmapImage = new BitmapImage();
                 myBitmapImage.BeginInit();
                 myBitmapImage.UriSource = new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._image);
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
                 image.Source = myBitmapImage;
+                */
+
+                image.Source = new BitmapImage(new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt] - 1)._image));
 
                 Affichage_image_answer.Children.Add(image);
                 Affichage_image_answer.Children.Add(listedebox.ElementAt(equivalent[cpt] - 1));

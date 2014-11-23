@@ -20,9 +20,9 @@ namespace Genlog
     /// </summary>
     public partial class FocusView : UserControl
     {
-        private Activity _parent;
+        private FocusActivity _parent;
         
-        public FocusView(Activity parent)
+        public FocusView(FocusActivity parent)
         {
             InitializeComponent();
 
@@ -31,6 +31,15 @@ namespace Genlog
 
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
+            int speed = int.Parse(speedTextBox.Text);
+            int level = int.Parse(levelTextBox.Text);
+
+            if (speed > 1 && speed < 9 && level > 0 && level < 5)
+            {
+                _parent.Speed = speed;
+                _parent.Level = level;
+            }
+
             _parent.Show("stream"); // fixme : string = danger
         }
     }
