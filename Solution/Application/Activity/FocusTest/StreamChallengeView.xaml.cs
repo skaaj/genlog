@@ -178,7 +178,7 @@ namespace Genlog
             _animation = new DoubleAnimation();
             _animation.From = -200.0;
             _animation.Duration = new Duration(TimeSpan.FromMilliseconds(_interval));
-            //_animation.EasingFunction = new SineEase();
+            _animation.EasingFunction = new SineEase();
 
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(TimerTick);
@@ -247,7 +247,7 @@ namespace Genlog
 
             if (hasDots)
             {
-                Canvas complexShape = ShapeFactory.AddDots(shape, 3, 20, 10);
+                Canvas complexShape = ShapeFactory.AddDots(shape, 2, 20, 10);
                 canvas.Children.Add(complexShape);
                 Canvas.SetTop(complexShape, shapeY);
                 complexShape.BeginAnimation(Canvas.LeftProperty, _animation);
@@ -262,12 +262,6 @@ namespace Genlog
             if (canvas.Children.Count > 4)
                 canvas.Children.RemoveRange(2, 1);
             Console.WriteLine(canvas.Children.Count);
-        }
-
-        void shape_Unloaded(object sender, RoutedEventArgs e)
-        {
-            _bad++;
-            Console.WriteLine("T'es con !");
         }
 
         void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
@@ -289,107 +283,6 @@ namespace Genlog
 
             Console.WriteLine("Bad answer");
         }
-
-        /*
-        private void SpawnShapeOld()
-        {
-            Shape shape = null;
-
-            // TIRAGES
-            int randShape = _randomizer.Next(0, 3);
-            int randColor = _randomizer.Next(0, _colors.Count);
-            double randValidity = _randomizer.NextDouble();
-            double randDots = _randomizer.NextDouble();
-            double validityProbability = 0.10; // 
-
-            Console.WriteLine("(" + randShape + ", " + randValidity + ")");
-
-            // INITS
-            double shapeY = _yCenter - (_shapeSize / 2);
-
-            // SUCCESS or NOT
-            if (randValidity < validityProbability)
-            {
-                randShape = (int)_correctShape;
-                randColor = (int)_correctColor;
-                randDots = _hasDots ? 0.0 : 1.0;
-            }
-
-            // CHOIX FORME
-            switch (randShape)
-            {
-                case 0:
-                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
-                    break;
-                case 1:
-                    shape = ShapeFactory.EquilateralTriangle((int)(_shapeSize * equilateralFactor));
-                    break;
-                case 2:
-                    shape = ShapeFactory.Ellipse(_shapeSize, _shapeSize);
-                    break;
-                default:
-                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
-                    break;
-            }
-
-            // CHOIX COULEUR
-            shape.Fill = _colors[randColor];
-
-            // HAS DOTS
-            Canvas complexShape = null;
-            if (randDots < 0.5)
-            {
-                complexShape = ShapeFactory.AddDots(shape, 3, 20, 10);
-            }
-
-            // FIXME
-            if (canvas.Children.Count > 20)
-                canvas.Children.RemoveRange(2, canvas.Children.Count - 10);
-
-            // SUCCESS or NOT
-            if (randValidity < validityProbability)
-            {
-                shape.MouseDown += OnRectangleClickOK;
-            }
-            else
-            {
-                shape.MouseDown += OnRectangleClick;
-            }
-
-            if (complexShape == null)
-            {
-                canvas.Children.Add(shape);
-                Canvas.SetTop(shape, shapeY);
-                shape.BeginAnimation(Canvas.LeftProperty, _animation);
-            }
-            else
-            {
-                canvas.Children.Add(complexShape);
-                Canvas.SetTop(complexShape, shapeY);
-                complexShape.BeginAnimation(Canvas.LeftProperty, _animation);
-            }
-        }
-
-        void OnRectangleClick(object sender, MouseButtonEventArgs e)
-        {
-            Shape s = sender as Shape;
-            if (s != null)
-            {
-                s.StrokeThickness = 10;
-                s.Stroke = new SolidColorBrush(Colors.Red);
-            }
-        }
-
-        void OnRectangleClickOK(object sender, MouseButtonEventArgs e)
-        {
-            Shape r = sender as Shape;
-            if (r != null)
-            {
-                r.StrokeThickness = 10;
-                r.Stroke = new SolidColorBrush(Colors.Green);
-            }
-        }
-        */
 
         private void TimerTick(object sender, EventArgs e)
         {

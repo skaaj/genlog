@@ -31,16 +31,18 @@ namespace Genlog
 
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            int speed = int.Parse(speedTextBox.Text);
-            int level = int.Parse(levelTextBox.Text);
+            int speed;
+            int.TryParse(speedTextBox.Text, out speed);
+            int level;
+            int.TryParse(levelTextBox.Text, out level);
 
             if (speed > 1 && speed < 9 && level > 0 && level < 5)
             {
                 _parent.Speed = speed;
                 _parent.Level = level;
-            }
+                _parent.Show("stream"); // fixme : string = danger
 
-            _parent.Show("stream"); // fixme : string = danger
+            }
         }
     }
 }

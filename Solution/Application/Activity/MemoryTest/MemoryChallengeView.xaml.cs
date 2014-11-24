@@ -23,8 +23,9 @@ namespace Genlog
     public partial class MemorizationView : UserControl, IStartable
     {
         private MemoryTestActivity _parent;
-        List<ImageNombre> ListeComplete;
-
+        private List<ImageNombre> _images;
+        private Random _randomizer;
+        private DispatcherTimer _timer;
 
         public MemorizationView(MemoryTestActivity parent)
         {
@@ -32,12 +33,14 @@ namespace Genlog
             _parent = parent;
 
             _parent.listeMemorisation = new List<ImageNombre>();
-            ListeComplete = new List<ImageNombre>();
+            _images = new List<ImageNombre>();
+            _randomizer = new Random();
 
-            
+            // Timer pour le test de mémorisation 
+            _timer = new DispatcherTimer();
+            _timer.Tick += new EventHandler(TimerTick);
+            _timer.Interval = new TimeSpan(0, 0, 1);
         }
-
-
 
         // A chaque tick, rafraichir le compteur
         public void TimerTick(object sender, EventArgs e)
@@ -47,57 +50,48 @@ namespace Genlog
             
             if (timeLeft <= 0)
             {
-                _parent.timer.Stop();
+                _timer.Stop();
                 _parent.Show("answer");
             }
         }
 
-
-
-
         // Méthode création des listes d'images avec nombres 
-
-        public void CreateList()
+        public void LoadImagesFromDirectory(string directoryPath)
         {
             //Ajout des images du dossier dans une liste
-            DirectoryInfo path = new DirectoryInfo("../../Img/");
-            string chemin;
-            Random rnd = new Random();
-            int nombre;
-
+            DirectoryInfo directory = new DirectoryInfo(directoryPath);
+            string filePath;
+            int randomInt;
             
-            ListeComplete.Clear();
+            _images.Clear();
 
             // Récupération de toutes les images
-            foreach (FileInfo fichier in path.GetFiles())
+            foreach (FileInfo fichier in directory.GetFiles())
             {
-                
-                nombre = rnd.Next(1, 999);
+                randomInt = _randomizer.Next(1, 999);
+                filePath = System.IO.Path.GetFullPath("../../Img/" + fichier.Name);
 
-                chemin = System.IO.Path.GetFullPath("../../Img/"+fichier.Name);
+                if (filePath[filePath.Length - 1] == 'b') continue; // bad patch fixme please!
 
-                ListeComplete.Add(new ImageNombre(chemin, (nombre).ToString()));
+                _images.Add(new ImageNombre(filePath, (randomInt).ToString()));
             }
-
         }
 
         public void TrieAffichage()
         {
-            Random rnd = new Random();
             int nombre;
             _parent.listeMemorisation.Clear();
 
-            List<ImageNombre> x = ListeComplete;
+            List<ImageNombre> x = _images;
 
             for (int z = 0; z < _parent.difficulte; z++)
             {
-                nombre = rnd.Next(0, x.Count);
-                _parent.listeMemorisation.Add(ListeComplete[nombre]);
+                nombre = _randomizer.Next(0, x.Count);
+                _parent.listeMemorisation.Add(_images[nombre]);
                 x.RemoveAt(nombre);            
             }
 
             Affichage_image.Children.Clear();
-
 
             // Affichage des images
             foreach (ImageNombre imgnb in _parent.listeMemorisation)
@@ -109,14 +103,6 @@ namespace Genlog
                 Label lbl = new Label();
                 lbl.Width = 40;
                 lbl.Content = imgnb._nombre;
-                /*
-                BitmapImage myBitmapImage = new BitmapImage();
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(imgnb._image);
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-                image.Source = Image.F
-                */
 
                 image.Source = new BitmapImage(new Uri(imgnb._image));
 
@@ -128,10 +114,10 @@ namespace Genlog
         // Start du timer
         public void Start()
         {
-            CreateList();
+            LoadImagesFromDirectory("../../Img");
             TrieAffichage();
             TBCountDown.Text = (_parent.tempsMemorisation).ToString();
-            _parent.timer.Start();
+            _timer.Start();
         }
     }
 }

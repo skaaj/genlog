@@ -10,7 +10,6 @@ namespace Genlog
 {
     public class MemoryTestActivity : Activity
     {
-        public DispatcherTimer timer;
         public int tempsMemorisation;       // Temps donné pour la mémorisation des figure et des nombres
         public int difficulte;              // Difficulté de la mémorisation
         public List<ImageNombre> listeMemorisation;
@@ -30,17 +29,10 @@ namespace Genlog
             resultView = new ResultatMemorizationView(this);
             answerView = new AnswerMemoryView(this);
 
-
             AddView("home", homeView);
             AddView("result", resultView);
             AddView("challenge", challengeView);
             AddView("answer", answerView);
-
-            // Timer pour le test de mémorisation 
-            timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(challengeView.TimerTick);
-            timer.Interval = new TimeSpan(0, 0, 1);
-
 
             Show("home");
         }
