@@ -14,8 +14,8 @@
         <Label x:Name="Nombre_reponses_justes" Content="Label" HorizontalAlignment="Left" Margin="178,158,0,0" VerticalAlignment="Top" Width="112"/>
         <Label Content="Votre Nom :" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.211,0.154" Width="95"/>
         <Label Content="Votre Prénom :" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox x:Name="Nom" HorizontalAlignment="Left" Height="23" Margin="110,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.158,1.652"/>
-        <TextBox x:Name="Prénom" HorizontalAlignment="Left" Height="23" Margin="110,228,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.158,1.652"/>
+        <TextBox x:Name="Nom" HorizontalAlignment="Left" Height="23" Margin="110,203,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.158,1.652"/>
+        <TextBox x:Name="Prénom" HorizontalAlignment="Left" Height="23" Margin="110,228,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.158,1.652"/>
 
     </Grid>
 </UserControl>

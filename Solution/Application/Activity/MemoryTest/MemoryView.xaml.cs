@@ -27,12 +27,8 @@ namespace Genlog
         public MemoryTestView(MemoryTestActivity parent)
         {
             InitializeComponent();
-
             _parent = parent;
-
-
         }
-
 
 
         private void OnSubmit(object sender, RoutedEventArgs e)
@@ -41,19 +37,18 @@ namespace Genlog
             catch { _parent.tempsMemorisation = 0; }
             try { _parent.difficulte = int.Parse(champs_nombre.Text); }
             catch { _parent.difficulte = 0; }
-
             
-
             if (_parent.difficulte < 11 && _parent.difficulte > 0 && _parent.tempsMemorisation > 0 && _parent.tempsMemorisation < 61)
             {
                 champs_temps.Text = String.Empty;
                 champs_nombre.Text = String.Empty;
-
                 _parent.Show("challenge");
             }
 
             else
             {
+                champs_temps.Text = String.Empty;
+                champs_nombre.Text = String.Empty;
                 var bc = new BrushConverter();
                 Passez_au_test.Content = "Paramètres non valide. Revalidez une fois changés";
                 Passez_au_test.Background = (Brush)bc.ConvertFrom("#FFFF9090"); ;

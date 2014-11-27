@@ -26,9 +26,7 @@ namespace Genlog
         public ResultatMemorizationView(MemoryTestActivity parent)
         {
             InitializeComponent();
-
             _parent = parent;
-
 
         }
         private void OnSubmit(object sender, RoutedEventArgs e)
@@ -46,10 +44,6 @@ namespace Genlog
             // Affichage des images
             foreach (ImageNombre imgnb in _parent.ListeReponse)
             {
-                if( imgnb._result == true)
-                {
-                    nbreponsejuste = nbreponsejuste+1;
-                }
 
                 Image image = new Image();
                 image.Height = 20;
@@ -59,22 +53,25 @@ namespace Genlog
                 lbl.Width = 40;
                 lbl.Content = imgnb._nombre;
 
-                /*
-                BitmapImage myBitmapImage = new BitmapImage();
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(imgnb._image);
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-                image.Source = myBitmapImage;
-                */
-
-
                 image.Source = new BitmapImage(new Uri(imgnb._image));
 
                 Affichage_resultat.Children.Add(image);
-                Affichage_resultat.Children.Add(lbl);
-            }
 
+
+                BrushConverter bc = new BrushConverter();       // Changement de couleur selon la véracité de la réponse
+                if (imgnb._result != true)
+                {
+                    lbl.Background = (Brush)bc.ConvertFrom("#FFFF9090");
+                }
+                else 
+                {
+                    nbreponsejuste = nbreponsejuste + 1;
+                    lbl.Background = (Brush)bc.ConvertFrom("#8ad628");
+                }
+
+
+                Affichage_resultat.Children.Add(lbl); 
+            }
 
             Nombre_reponses_justes.Content = (nbreponsejuste).ToString() + " / " + (_parent.ListeReponse.Count).ToString();
 

@@ -7,8 +7,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Label Content="MemoryTestView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <Button x:Name="Passez_au_test" Content="Valider et passer au résultat" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="280" Click="OnSubmit" Background="#FFCDCDCD"/>
-        <WrapPanel x:Name="Affichage_image_answer" HorizontalAlignment="Left" Height="224" Margin="0,41,0,0" VerticalAlignment="Top" Width="290" RenderTransformOrigin="0.897,0.896"/>
+        <Image x:Name="imagebox" HorizontalAlignment="Left" Height="100" Margin="10,41,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="nombrebox" HorizontalAlignment="Left" Height="23" Margin="156,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Suivant" Content="suivant" HorizontalAlignment="Left" Margin="173,119,0,0" VerticalAlignment="Top" Width="75" Click="Suivant_Click"/>
 
     </Grid>
 </UserControl>

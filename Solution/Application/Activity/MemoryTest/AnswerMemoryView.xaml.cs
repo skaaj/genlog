@@ -26,6 +26,7 @@ namespace Genlog
 
         public int[] equivalent;
         List<TextBox> listedebox;
+        int cpt = 0;
 
 
         public AnswerMemoryView(MemoryTestActivity parent)
@@ -35,75 +36,37 @@ namespace Genlog
         }
 
 
-        // Onsubmit
-        private void OnSubmit(object sender, RoutedEventArgs e)
-        {
-            VerificationReponse();
-            _parent.Show("result");
-        }
-
-
 
         public void AffichageRandom()
         {
-
-
-            // rendu random de l'affichage // Création des textbox
             List<int> listecompte = new List<int> { };
             listedebox = new List<TextBox> { };
 
 
-            for (int cpt = 1; listecompte.Count < _parent.listeMemorisation.Count; cpt++)
-                        {
-                            listecompte.Add(cpt);
-                            listedebox.Add(new TextBox());
-                            listedebox.ElementAt(cpt-1).Width = 40;
-                            listedebox.ElementAt(cpt-1).Height = 20;
-                        }
+            for (int p = 1; listecompte.Count < _parent.listeMemorisation.Count; p++)
+                        { listecompte.Add(p); }
 
 
             equivalent = new int[listecompte.Count];
             int nombre; 
             Random rnd = new Random();
             
-            // Affichage des images
+            // Equivalence entre le nouveau random et l'affichage initial
 
-            for (int cpt = 0; listecompte.Count > 0; cpt++)
+            for (int c = 0; listecompte.Count > 0; c++)
             {
                 nombre = rnd.Next(1, listecompte.Count);
-                equivalent[cpt] = listecompte.ElementAt(nombre-1);
+                equivalent[c] = listecompte.ElementAt(nombre-1);
                 listecompte.RemoveAt(nombre-1);
 
             }
 
-            Affichage_image_answer.Children.Clear();
-
-            for (int cpt = 0; cpt < _parent.listeMemorisation.Count; cpt++)
-            {
-
-                Image image = new Image();
-                image.Height = 20;
-                image.Width = 50;
+            //Affichage des images
 
                 Label lbl = new Label();
                 lbl.Width = 40;
                 lbl.Content = _parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._nombre;
-
-                /*
-                BitmapImage myBitmapImage = new BitmapImage();
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._image);
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-                image.Source = myBitmapImage;
-                */
-
-                image.Source = new BitmapImage(new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt] - 1)._image));
-
-                Affichage_image_answer.Children.Add(image);
-                Affichage_image_answer.Children.Add(listedebox.ElementAt(equivalent[cpt] - 1));
-
-            }
+                imagebox.Source = new BitmapImage(new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt] - 1)._image));
         }
 
 
@@ -111,23 +74,47 @@ namespace Genlog
         // Verification des réponses apportées par l'utilisateur
         public void VerificationReponse()
         {
-            _parent.ListeReponse = new List<ImageNombre> { };
-            _parent.ListeReponse.Clear();
-
-
+            
             for (int z = 0; z < _parent.listeMemorisation.Count; z++)
             {
-                _parent.ListeReponse.Add(new ImageNombre(_parent.listeMemorisation.ElementAt(z)._image, listedebox.ElementAt(z).Text, true));
 
-                if (_parent.ListeReponse.ElementAt(z)._nombre != _parent.listeMemorisation.ElementAt(z)._nombre)
+                if (_parent.ListeReponse.ElementAt(z)._nombre != _parent.listeMemorisation.ElementAt(equivalent[z] - 1)._nombre)
                 {
                     _parent.ListeReponse.ElementAt(z)._result = false;
                 }
             }
         }
 
+
+        private void Suivant_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _parent.ListeReponse.Add(new ImageNombre(_parent.listeMemorisation.ElementAt(cpt)._image, nombrebox.Text));
+            }
+            catch
+            { }
+
+            if (cpt < _parent.listeMemorisation.Count - 1)
+            {
+                nombrebox.Text = null;
+                cpt = cpt + 1;
+                imagebox.Source = new BitmapImage(new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt] - 1)._image));
+            }
+            else
+            {
+                imagebox.Source = null;
+                nombrebox.Text = null;
+                VerificationReponse();
+                _parent.Show("result");
+            }
+        }
+
         public void Start()
         {
+            _parent.ListeReponse = new List<ImageNombre> { };
+            _parent.ListeReponse.Clear();
+            cpt = 0;
             AffichageRandom();
         }
 
