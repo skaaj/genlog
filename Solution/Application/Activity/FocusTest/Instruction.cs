@@ -54,11 +54,11 @@ namespace Genlog
 
         private string ColorToString(Brush b)
         {
-            if (b == Brushes.Red)
+            if (b == Brushes.DarkRed)
                 return " rouges et ";
-            if (b == Brushes.Green)
+            if (b == Brushes.DarkGreen)
                 return " vertes et ";
-            if (b == Brushes.Blue)
+            if (b == Brushes.DarkBlue)
                 return " bleues et ";
             else
             {
