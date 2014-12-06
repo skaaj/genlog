@@ -41,7 +41,12 @@ namespace Genlog
                 _parent.Speed = speed;
                 _parent.Level = level;
                 _parent.Show("stream"); // fixme : string = danger
-
+            }
+            else
+            {
+                _parent.Speed = 2;
+                _parent.Level = 4;
+                _parent.Show("stream"); // fixme : string = danger
             }
         }
     }

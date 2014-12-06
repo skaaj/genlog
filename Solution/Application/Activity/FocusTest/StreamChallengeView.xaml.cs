@@ -31,7 +31,6 @@ namespace Genlog
         private Random _randomizer;
 
         private int _interval;
-        private int _level;
 
         private int _shapeSize;
         private double _yCenter;
@@ -39,18 +38,10 @@ namespace Genlog
 
         private double equilateralFactor = 2.0 / Math.Sqrt(3.0);
 
-        private List<Brush> _colors;
-
-        private enum ShapeEnum { Square, Triangle, Circle, Unknown }; // fixme : order
-        private enum ColorEnum { Red, Green, Blue };
-
-        private ShapeEnum _correctShape;
-        private int _correctColor; // index dans _colors
-        private Shape _template;
-        private bool _hasDots;
-
         private int _good;
         private int _bad;
+
+        private Instruction instruction;
 
         public StreamChallengeView(FocusActivity parent)
         {
@@ -59,21 +50,16 @@ namespace Genlog
             _parent = parent;
 
             _randomizer = new Random();
-
-            _colors = new List<Brush>();
-            _colors.Add(Brushes.DarkRed);
-            _colors.Add(Brushes.DarkGreen);
-            _colors.Add(Brushes.DarkBlue);
         }
 
         public void Start()
         {
             _interval = _parent.Speed * 1000;
-            _level = _parent.Level;
+
+            instruction = new Instruction(_parent.Level);
+            ruleLabel.Content = instruction;
 
             InitializeAnimation();
-
-            GenerateRule();
 
             _timer.Start();
             Console.WriteLine("Timer started :)");
@@ -85,92 +71,6 @@ namespace Genlog
             Console.WriteLine("Timer stopped sir !");
         }
 
-        #region rule
-
-        private void GenerateRule()
-        {
-            bool[] negations = { false, false, false };
-            int randomIndex;
-            int nbPlaced = 0;
-
-            _correctShape = (ShapeEnum)_randomizer.Next(0, 3);
-            _correctColor = _randomizer.Next(0, 3);
-
-            // ~1,3 microseconds (w/ i5-4430 @ 3.0 Ghz)
-            while (nbPlaced < (_level - 1))
-            {
-                randomIndex = _randomizer.Next(0, 3);
-
-                if (!negations[randomIndex])
-                {
-                    negations[randomIndex] = true;
-                    nbPlaced++;
-                }
-            }
-
-            StringBuilder strBuilder = new StringBuilder();
-            if (negations[0])
-                strBuilder.Append("Ne cliquez pas sur les");
-            else
-                strBuilder.Append("Cliquez sur les");
-
-            switch (_correctShape)
-            {
-                case ShapeEnum.Square:
-                    strBuilder.Append(" carrés, ");
-                    _template = ShapeFactory.Rectangle(1, 1);
-                    break;
-                case ShapeEnum.Triangle:
-                    strBuilder.Append(" triangles, ");
-                    _template = ShapeFactory.EquilateralTriangle(1);
-                    break;
-                case ShapeEnum.Circle:
-                    strBuilder.Append(" cercles, ");
-                    _template = ShapeFactory.Ellipse(1, 1);
-                    break;
-                default:
-                    strBuilder.Append(" formes, ");
-                    break;
-            }
-
-            if (negations[1])
-                strBuilder.Append("qui ne sont pas");
-            else
-                strBuilder.Append("de couleur");
-
-            switch (_correctColor)
-            {
-                case 0:
-                    strBuilder.Append(" rouge et ");
-                    break;
-                case 1:
-                    strBuilder.Append(" vert et ");
-                    break;
-                case 2:
-                    strBuilder.Append(" bleu et ");
-                    break;
-                default:
-                    break;
-            }
-
-            _template.Fill = _colors[_correctColor];
-
-            if (negations[0])
-            {
-                _hasDots = false;
-                strBuilder.Append("qui n'ont pas de points noirs.");
-            }
-            else
-            {
-                _hasDots = true;
-                strBuilder.Append("qui ont des points noirs.");
-            }
-
-            ruleLabel.Content = strBuilder.ToString();
-        }
-
-        #endregion
-
         #region shapes
 
         private void InitializeAnimation()
@@ -178,7 +78,10 @@ namespace Genlog
             _animation = new DoubleAnimation();
             _animation.From = -200.0;
             _animation.Duration = new Duration(TimeSpan.FromMilliseconds(_interval));
-            _animation.EasingFunction = new SineEase();
+            EasingFunctionBase ease = new CircleEase();
+            ease.EasingMode = EasingMode.EaseIn;
+            _animation.EasingFunction = ease;
+
 
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(TimerTick);
@@ -187,10 +90,67 @@ namespace Genlog
 
         private void SpawnShape()
         {
+            // FORME
+            // Si on veut une forme valide
+            //      On donne une forme qui va bien
+            // Sinon
+            //      On donne une forme aléatoire
+
+            // COULEUR
+            //      Pareil
+
+            // POINTS
+            // Si on veut une forme valide
+            //      On donne les points ou pas selon la consigne
+            // Sinon 
+            //      On laisse l'aléatoire
+
+            // -> Ici on est sûr que si on voulait un forme valide on l'a
+            //      Du coups, on met la callback
+            // -> Si on voulait une forme incorrect
+            // On vérifie que la consigne est pas respectée
+            // Oui ? on met la callback error | Non ? on change un critére au aléatoire
+
+            Shape shape;
+            bool valid = _randomizer.NextDouble() < 0.5 ? true : false;
+
+            shape = ShapeFactory.BuildRandomShape(_shapeSize);
+            shape.Fill = ShapeFactory.GetRandomColor();
+
+            if (valid)
+            {
+                if(!instruction.Negations[0]) // Pas de négation
+                    shape = ShapeFactory.BuildShape(instruction.Shape, _shapeSize);
+                else
+                    shape = ShapeFactory.BuildOtherShape(instruction.Shape, _shapeSize);
+
+                if (!instruction.Negations[1])
+                    shape.Fill = instruction.Color;
+                else
+                    shape.Fill = ShapeFactory.GetOtherColor(instruction.Color);
+
+                shape.MouseDown += OnCorrectAnswer;
+                shape.Unloaded += (s, e) =>
+                {
+                    _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
+                };
+            }
+            else
+            {
+                shape.MouseDown += OnWrongAnswer;
+            }
+
+            canvas.Children.Add(shape);
+            Canvas.SetTop(shape, _yCenter - (_shapeSize / 2));
+            shape.BeginAnimation(Canvas.LeftProperty, _animation);
+
+            if (canvas.Children.Count > 4)
+                canvas.Children.RemoveRange(2, 1);
+            
+            /*
             Shape shape;
             bool validity = _randomizer.NextDouble() < 0.5 ? true : false;
 
-            double shapeY = _yCenter - (_shapeSize / 2);
 
             int chosenColor = _randomizer.Next(0, _colors.Count);
             ShapeEnum chosenShape = (ShapeEnum)_randomizer.Next(0, 3);
@@ -262,11 +222,16 @@ namespace Genlog
             if (canvas.Children.Count > 4)
                 canvas.Children.RemoveRange(2, 1);
             Console.WriteLine(canvas.Children.Count);
+            */
         }
 
         void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
         {
             Shape s = sender as Shape;
+
+            s.Stroke = Brushes.Green;
+            s.StrokeThickness = 10;
+            
             s.MouseDown -= OnCorrectAnswer;
 
             _good++;
@@ -277,6 +242,10 @@ namespace Genlog
         void OnWrongAnswer(object sender, MouseButtonEventArgs e)
         {
             Shape s = sender as Shape;
+
+            s.Stroke = Brushes.Red;
+            s.StrokeThickness = 10;
+            
             s.MouseDown -= OnWrongAnswer;
 
             _bad++;

@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Activity\Activity.cs" />
     <Compile Include="Activity\FocusTest\FocusActivity.cs" />
+    <Compile Include="Activity\FocusTest\Instruction.cs" />
     <Compile Include="Activity\FocusTest\ShapeFactory.cs" />
     <Compile Include="Activity\FocusTest\StreamChallengeView.xaml.cs">
       <DependentUpon>StreamChallengeView.xaml</DependentUpon>

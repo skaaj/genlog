@@ -8,12 +8,10 @@ namespace Genlog
 {
     public class FocusActivity : Activity
     {
-
-        private FocusView homeView;
-        private StreamChallengeView streamView;
-
         public int Speed { get; set; }
         public int Level { get; set; }
+
+        public static Random Randomizer = new Random();
 
         public FocusActivity(MainWindow context) : base(context)
         {

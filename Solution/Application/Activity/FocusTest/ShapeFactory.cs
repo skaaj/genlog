@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,60 @@ using System.Windows.Shapes;
 
 namespace Genlog
 {
-    class ShapeFactory
+    public class ShapeFactory
     {
-        private static double equilateralFactor = Math.Sqrt(3.0) / 2.0;
+        private static double eqFactor = Math.Sqrt(3.0) / 2.0;
+        private static double invEqFactor = 2.0 / Math.Sqrt(3.0);
+
+        public enum ShapeEnum { Square, Triangle, Circle };
+        public static List<Brush> ColorList = new List<Brush>()
+        {
+            Brushes.DarkRed,
+            Brushes.DarkGreen,
+            Brushes.DarkBlue
+        };
+
+        //static ShapeFactory()
+        //{
+        //    ColorList = new List<Brush>();
+        //}
+
+        //public ShapeFactory()
+        //{
+        //    /*
+        //    ShapeFactory.ColorList.Add(Brushes.Red);
+        //    ShapeFactory.ColorList.Add(Brushes.Green);
+        //    ShapeFactory.ColorList.Add(Brushes.Blue);
+        //     * */
+        //}
+
+        public static int ShapeEnumCount
+        {
+            get
+            {
+                return Enum.GetNames(typeof(ShapeFactory.ShapeEnum)).Length;
+            }
+        }
+
+        public static Brush GetRandomColor()
+        {
+            return ColorList[FocusActivity.Randomizer.Next(0, ColorList.Count)];
+        }
+
+        public static Brush GetOtherColor(Brush b)
+        {
+            Brush selected = b;
+
+            Stopwatch sw = Stopwatch.StartNew();
+            while (selected == b)
+            {
+                selected = GetRandomColor();
+            }
+            sw.Stop();
+            Console.WriteLine("Color found in : " + sw.Elapsed);
+
+            return selected;
+        }
 
         public static Rectangle Rectangle(int w, int h)
         {
@@ -36,7 +88,7 @@ namespace Genlog
         {
             Polygon p = new Polygon();
 
-            double height = equilateralFactor * s;
+            double height = eqFactor * s;
             p.Points = new PointCollection(){
                 new Point(0, height),
                 new Point(s / 2, 0),
@@ -97,6 +149,65 @@ namespace Genlog
             }
 
             return c;
+        }
+
+        public static Shape BuildShape(ShapeEnum ID, int size)
+        {
+            Shape s;
+
+            switch (ID)
+            {
+                case ShapeEnum.Square:
+                    s = Rectangle(size, size);
+                    break;
+                case ShapeEnum.Triangle:
+                    s = EquilateralTriangle((int)(size * invEqFactor));
+                    break;
+                case ShapeEnum.Circle:
+                    s = Ellipse(size, size);
+                    break;
+                default:
+                        throw new Exception("La forme désirée n'existe pas.");
+            }
+
+            return s;
+        }
+
+        public static Shape BuildOtherShape(ShapeEnum ID, int size)
+        {
+            ShapeEnum selected = ID;
+
+            Stopwatch sw = Stopwatch.StartNew();
+            while (selected == ID)
+            {
+                selected = (ShapeEnum) FocusActivity.Randomizer.Next(0, ShapeEnumCount);
+
+                if (sw.ElapsedMilliseconds > 1)
+                    selected = (ShapeEnum)(((int)ID + 1) % ShapeEnumCount);
+            }
+            sw.Stop();
+            Console.WriteLine("Debug : " + sw.ElapsedMilliseconds);
+
+
+            return BuildShape(selected, size);
+        }
+
+        public static Shape BuildRandomShape(int size)
+        {
+            Shape s;
+
+            Random randomizer = new Random();
+            double val = randomizer.NextDouble();
+
+            // fixme
+            if(val < 0.33)
+                s = Rectangle(size, size);
+            if(val < 0.66)
+                s = EquilateralTriangle((int)(size * invEqFactor));
+            else
+                s = Ellipse(size, size);
+
+            return s;
         }
     }
 }
