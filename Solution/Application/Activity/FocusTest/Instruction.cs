@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Genlog
 {
     public class Instruction
     {
-        public Brush Color { get; set; }
         public bool[] Negations { get; set; }
-        public ShapeFactory.ShapeEnum Shape { get; set; }
+        public ShapeProperty Property { get; set; }
 
-        public Instruction(int level)
+        public Instruction(int level, FocusModel model)
         {
             Negations = new bool[3];
 
@@ -22,8 +22,9 @@ namespace Genlog
 
             Random randomizer = new Random();
 
-            Color = ShapeFactory.GetRandomColor();
-            Shape = (ShapeFactory.ShapeEnum)randomizer.Next(0, ShapeFactory.ShapeEnumCount);
+            Property = new ShapeProperty();
+            Property.Color = model.Colors[randomizer.Next(model.Colors.Count)];
+            Property.Shape = (FocusModel.Shapes)randomizer.Next(FocusModel.ShapesCount);
 
             while (nbPlaced < (level - 1)) // Tant qu'on a pas placé toutes les négations
             {
@@ -37,17 +38,17 @@ namespace Genlog
             }
         }
 
-        private string ShapeEnumToString(ShapeFactory.ShapeEnum se)
+        private string ShapeEnumToString(FocusModel.Shapes se)
         {
-            if (se == ShapeFactory.ShapeEnum.Square)
+            if (se == FocusModel.Shapes.Square)
                 return " carrés, ";
-            if (se == ShapeFactory.ShapeEnum.Triangle)
+            if (se == FocusModel.Shapes.Triangle)
                 return " triangles, ";
-            if (se == ShapeFactory.ShapeEnum.Circle)
+            if (se == FocusModel.Shapes.Circle)
                 return " cercles, ";
             else
             {
-                se = ShapeFactory.ShapeEnum.Square;
+                se = FocusModel.Shapes.Square;
                 return " carrés, ";
             }
         }
@@ -71,18 +72,18 @@ namespace Genlog
         {
             StringBuilder strBuilder = new StringBuilder();
             if (Negations[0])
-                strBuilder.Append("Cliquez sur les formes qui ne sont pas des ");
+                strBuilder.Append("Cliquez sur les formes qui ne sont pas des");
             else
                 strBuilder.Append("Cliquez sur les formes");
 
-            strBuilder.Append(ShapeEnumToString(Shape));
+            strBuilder.Append(ShapeEnumToString(Property.Shape));
 
             if (Negations[1])
                 strBuilder.Append("qui ne sont pas");
             else
                 strBuilder.Append("de couleur");
 
-            strBuilder.Append(ColorToString(Color));
+            strBuilder.Append(ColorToString(Property.Color));
 
             if (Negations[2])
             {

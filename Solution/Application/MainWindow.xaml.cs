@@ -32,6 +32,9 @@ namespace Genlog
         {
             InitializeComponent();
 
+            Uri iconUri = new Uri("../../Data/user.ico", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
+
             _activities = new Dictionary<Activities, Activity>();
         }
 

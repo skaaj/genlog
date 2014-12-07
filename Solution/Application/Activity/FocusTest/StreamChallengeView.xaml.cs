@@ -41,6 +41,7 @@ namespace Genlog
         private int _good;
         private int _bad;
 
+        private FocusModel _model;
         private Instruction instruction;
 
         public StreamChallengeView(FocusActivity parent)
@@ -50,13 +51,14 @@ namespace Genlog
             _parent = parent;
 
             _randomizer = new Random();
+            _model = new FocusModel();
         }
 
         public void Start()
         {
             _interval = _parent.Speed * 1000;
 
-            instruction = new Instruction(_parent.Level);
+            instruction = new Instruction(_parent.Level, _model);
             ruleLabel.Content = instruction;
 
             InitializeAnimation();
@@ -76,7 +78,6 @@ namespace Genlog
         private void InitializeAnimation()
         {
             _animation = new DoubleAnimation();
-            _animation.From = -200.0;
             _animation.Duration = new Duration(TimeSpan.FromMilliseconds(_interval));
             EasingFunctionBase ease = new CircleEase();
             ease.EasingMode = EasingMode.EaseIn;
@@ -88,47 +89,58 @@ namespace Genlog
             _timer.Interval = TimeSpan.FromMilliseconds(_interval / 2);
         }
 
+        private FocusModel.Shapes PickOtherShape(FocusModel.Shapes s)
+        {
+            FocusModel.Shapes[] availableShapes = new FocusModel.Shapes[FocusModel.ShapesCount - 1];
+
+            int i = 0;
+            Type enumType = typeof(FocusModel.Shapes);
+            
+            foreach (FocusModel.Shapes value in Enum.GetValues(enumType))
+                if (value != s)
+                    availableShapes[i++] = value;
+
+            i = _randomizer.Next(availableShapes.Length);
+
+            return availableShapes[i];
+        }
+        /*
+            Brush[] availableColors = _model.Colors.Where(brush => (brush != b)).ToArray();
+
+            int i = _randomizer.Next(availableColors.Length);
+
+            return availableColors[i];
+             */
+        private Brush PickOtherColor(Brush b)
+        {
+            return _model.Colors.Where(brush => (brush != b)).ToArray()[_randomizer.Next(_model.Colors.Count - 1)];
+        }
+
         private void SpawnShape()
         {
-            // FORME
-            // Si on veut une forme valide
-            //      On donne une forme qui va bien
-            // Sinon
-            //      On donne une forme aléatoire
+            CustomShape shape;
+            ShapeProperty property = new ShapeProperty();
 
-            // COULEUR
-            //      Pareil
+            bool isValid = _randomizer.NextDouble() < 0.5 ? true : false;
 
-            // POINTS
-            // Si on veut une forme valide
-            //      On donne les points ou pas selon la consigne
-            // Sinon 
-            //      On laisse l'aléatoire
-
-            // -> Ici on est sûr que si on voulait un forme valide on l'a
-            //      Du coups, on met la callback
-            // -> Si on voulait une forme incorrect
-            // On vérifie que la consigne est pas respectée
-            // Oui ? on met la callback error | Non ? on change un critére au aléatoire
-
-            Shape shape;
-            bool valid = _randomizer.NextDouble() < 0.5 ? true : false;
-
-            shape = ShapeFactory.BuildRandomShape(_shapeSize);
-            shape.Fill = ShapeFactory.GetRandomColor();
-
-            if (valid)
+            if (isValid)
             {
-                if(!instruction.Negations[0]) // Pas de négation
-                    shape = ShapeFactory.BuildShape(instruction.Shape, _shapeSize);
+                if (!instruction.Negations[0])
+                    property.Shape = instruction.Property.Shape;
                 else
-                    shape = ShapeFactory.BuildOtherShape(instruction.Shape, _shapeSize);
+                    property.Shape = PickOtherShape(instruction.Property.Shape);
 
                 if (!instruction.Negations[1])
-                    shape.Fill = instruction.Color;
+                    property.Color = instruction.Property.Color;
                 else
-                    shape.Fill = ShapeFactory.GetOtherColor(instruction.Color);
+                    property.Color = PickOtherColor(instruction.Property.Color);
 
+                if (!instruction.Negations[2])
+                    property.HasDots = true;
+                else
+                    property.HasDots = false;
+
+                shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnCorrectAnswer;
                 shape.Unloaded += (s, e) =>
                 {
@@ -137,102 +149,36 @@ namespace Genlog
             }
             else
             {
+                property.Shape = (FocusModel.Shapes) _randomizer.Next(FocusModel.ShapesCount);
+                property.Color = _model.Colors[_randomizer.Next(_model.Colors.Count)];
+                property.HasDots = _randomizer.NextDouble() < 0.5 ? true : false;
+
+                if (property.Respect(instruction))
+                {
+                    property.HasDots = !property.HasDots;
+                }
+
+                shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnWrongAnswer;
             }
 
+            _animation.From = -shape.RuntimeWidth;
             canvas.Children.Add(shape);
             Canvas.SetTop(shape, _yCenter - (_shapeSize / 2));
             shape.BeginAnimation(Canvas.LeftProperty, _animation);
 
             if (canvas.Children.Count > 4)
                 canvas.Children.RemoveRange(2, 1);
-            
-            /*
-            Shape shape;
-            bool validity = _randomizer.NextDouble() < 0.5 ? true : false;
-
-
-            int chosenColor = _randomizer.Next(0, _colors.Count);
-            ShapeEnum chosenShape = (ShapeEnum)_randomizer.Next(0, 3);
-            bool hasDots = _randomizer.NextDouble() < 0.5 ? true : false;
-
-            if (validity)
-            {
-                hasDots = _hasDots;
-                chosenColor = _correctColor;
-                chosenShape = _correctShape;
-            }
-            else
-            {
-                while (chosenShape == _correctShape && chosenColor == _correctColor && _hasDots == hasDots)
-                {
-                    chosenShape = (ShapeEnum)_randomizer.Next(0, 3);
-                    chosenColor = _randomizer.Next(0, _colors.Count);
-                    hasDots     = _randomizer.NextDouble() < 0.5 ? true : false;
-                }
-            }
-
-            // On créer la forme
-            switch (chosenShape)
-            {
-                case ShapeEnum.Square:
-                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
-                    break;
-                case ShapeEnum.Triangle:
-                    shape = ShapeFactory.EquilateralTriangle((int)(_shapeSize * equilateralFactor));
-                    break;
-                case ShapeEnum.Circle:
-                    shape = ShapeFactory.Ellipse(_shapeSize, _shapeSize);
-                    break;
-                default:
-                    shape = ShapeFactory.Rectangle(_shapeSize, _shapeSize);
-                    break;
-            }
-
-            // On lui donne sa couleur
-            shape.Fill = _colors[chosenColor];
-
-            if (validity)
-            {
-                shape.MouseDown += OnCorrectAnswer;
-                shape.Unloaded += (s, e) =>
-                {
-                    _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
-                };
-            }
-            else
-            {
-                shape.MouseDown += OnWrongAnswer;
-            }
-
-            if (hasDots)
-            {
-                Canvas complexShape = ShapeFactory.AddDots(shape, 2, 20, 10);
-                canvas.Children.Add(complexShape);
-                Canvas.SetTop(complexShape, shapeY);
-                complexShape.BeginAnimation(Canvas.LeftProperty, _animation);
-            }
-            else
-            {
-                canvas.Children.Add(shape);
-                Canvas.SetTop(shape, shapeY);
-                shape.BeginAnimation(Canvas.LeftProperty, _animation);
-            }
-
-            if (canvas.Children.Count > 4)
-                canvas.Children.RemoveRange(2, 1);
-            Console.WriteLine(canvas.Children.Count);
-            */
         }
 
         void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
         {
-            Shape s = sender as Shape;
+            CustomShape canvas = sender as CustomShape;
 
-            s.Stroke = Brushes.Green;
-            s.StrokeThickness = 10;
+            canvas.InnerShape.Stroke = Brushes.Green;
+            canvas.InnerShape.StrokeThickness = 10;
             
-            s.MouseDown -= OnCorrectAnswer;
+            canvas.MouseDown -= OnCorrectAnswer;
 
             _good++;
 
@@ -241,12 +187,12 @@ namespace Genlog
 
         void OnWrongAnswer(object sender, MouseButtonEventArgs e)
         {
-            Shape s = sender as Shape;
+            CustomShape canvas = sender as CustomShape;
 
-            s.Stroke = Brushes.Red;
-            s.StrokeThickness = 10;
+            canvas.InnerShape.Stroke = Brushes.Red;
+            canvas.InnerShape.StrokeThickness = 10;
             
-            s.MouseDown -= OnWrongAnswer;
+            canvas.MouseDown -= OnWrongAnswer;
 
             _bad++;
 
