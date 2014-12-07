@@ -40,6 +40,7 @@ namespace Genlog
 
         private int _good;
         private int _bad;
+        private int _gone;
 
         private FocusModel _model;
         private Instruction instruction;
@@ -142,10 +143,8 @@ namespace Genlog
 
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnCorrectAnswer;
-                shape.Unloaded += (s, e) =>
-                {
-                    _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
-                };
+                shape.Unloaded += OnShapeGoneUnclicked;
+                shape.Unloaded += OnShapeUnloaded;
             }
             else
             {
@@ -167,8 +166,22 @@ namespace Genlog
             Canvas.SetTop(shape, _yCenter - (_shapeSize / 2));
             shape.BeginAnimation(Canvas.LeftProperty, _animation);
 
-            if (canvas.Children.Count > 4)
-                canvas.Children.RemoveRange(2, 1);
+            if (canvas.Children.Count > 6)
+                canvas.Children.RemoveRange(4, 1);
+        }
+
+        void OnShapeUnloaded(object sender, RoutedEventArgs e)
+        {
+            _gone++;
+
+            if (_gone == 3)
+                ruleLabel.Content += " (Fin détectée)";
+        }
+
+        void OnShapeGoneUnclicked(object sender, RoutedEventArgs e)
+        {
+            _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
+            labelBad.Content = _bad.ToString();
         }
 
         void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
@@ -177,10 +190,13 @@ namespace Genlog
 
             canvas.InnerShape.Stroke = Brushes.Green;
             canvas.InnerShape.StrokeThickness = 10;
-            
+
             canvas.MouseDown -= OnCorrectAnswer;
+            canvas.Unloaded -= OnShapeGoneUnclicked;
 
             _good++;
+
+            labelGood.Content = _good.ToString();
 
             Console.WriteLine("Correct answer");
         }
@@ -195,6 +211,7 @@ namespace Genlog
             canvas.MouseDown -= OnWrongAnswer;
 
             _bad++;
+            labelBad.Content = _bad.ToString();
 
             Console.WriteLine("Bad answer");
         }

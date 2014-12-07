@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
 
 namespace Genlog
 {
@@ -25,6 +26,23 @@ namespace Genlog
         public HelpView()
         {
             InitializeComponent();
+        }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            XElement xelement = XElement.Load(@"../../data/DataSample.xml");
+            IEnumerable<XElement> employees = xelement.Elements();
+
+            xelement.Add(new XElement("User",
+                 new XAttribute("firstname", "Benjamin"),
+                 new XAttribute("lastname", "Denom")));
+
+            xelement.Save(@"../../data/DataSample.xml");
+
+            foreach (var employee in employees)
+            {
+                Console.WriteLine(employee.Attribute("firstname").Value);
+            }
         }
     }
 }
