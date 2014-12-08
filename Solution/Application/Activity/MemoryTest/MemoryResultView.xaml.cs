@@ -46,11 +46,12 @@ namespace Genlog
             {
 
                 Image image = new Image();
-                image.Height = 20;
-                image.Width = 50;
+                image.Height = 60;
+                image.Width = 150;
 
                 Label lbl = new Label();
-                lbl.Width = 40;
+                lbl.Width = 100;
+                lbl.FontSize = 16;
                 lbl.Content = imgnb._nombre;
 
                 image.Source = new BitmapImage(new Uri(imgnb._image));

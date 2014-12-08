@@ -105,6 +105,7 @@ namespace Genlog
                 Label lbl = new Label();
                 lbl.Margin = new Thickness(20);
                 lbl.Width = 80;
+                lbl.FontSize = 16;
                 lbl.Content = imgnb._nombre;
 
                 image.Source = new BitmapImage(new Uri(imgnb._image));

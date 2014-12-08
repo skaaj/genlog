@@ -3,19 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="1000" d:DesignWidth="1000">
+
     <Grid>
-        <Label Content="MemoryResultat View" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="155,13,0,0" TextWrapping="Wrap" Text="Temps terminé, résultats" VerticalAlignment="Top" Height="24" Width="145"/>
-        <Button x:Name="Sauvegarde_Fin" Content="Sauvegarder et quitter" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="280" Click="OnSubmit" Background="#FFCDCDCD"/>
-        <WrapPanel x:Name="Affichage_resultat" HorizontalAlignment="Left" Height="112" Margin="0,41,0,0" VerticalAlignment="Top" Width="290" RenderTransformOrigin="0.897,0.896"/>
-        <Label Content="Nombre de réponses justes :" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.921,-0.423" Width="163"/>
-        <Label x:Name="Nombre_reponses_justes" Content="Label" HorizontalAlignment="Left" Margin="178,158,0,0" VerticalAlignment="Top" Width="112"/>
-        <Label Content="Votre Nom :" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.211,0.154" Width="95"/>
-        <Label Content="Votre Prénom :" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox x:Name="Nom" HorizontalAlignment="Left" Height="23" Margin="110,203,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.158,1.652"/>
-        <TextBox x:Name="Prénom" HorizontalAlignment="Left" Height="23" Margin="110,228,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.158,1.652"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Content="MemoryResultat View" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,10,0,0"  Width="280" FontWeight="Bold" FontSize="22"/>
+        <TextBlock Grid.ColumnSpan="2"  Grid.Column="0" Grid.Row="0"  Margin="10,60,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="Temps terminé, résultats"  Height="24" FontSize="16" />
+        <Button Grid.Column="1" Grid.Row="3" x:Name="Sauvegarde_Fin" Content="Sauvegarder et quitter"  Margin="10,10,0,0" VerticalAlignment="Top"  Click="OnSubmit" Background="#FFCDCDCD" FontSize="16"/>
+        <WrapPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" x:Name="Affichage_resultat" HorizontalAlignment="Left"  Margin="10,10,10,10"  RenderTransformOrigin="0.897,0.896"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Nombre de réponses justes :" HorizontalAlignment="Left" Margin="10,10,0,0"  RenderTransformOrigin="-0.921,-0.423" FontSize="16" FontWeight="Bold" TextWrapping="Wrap"/>
+        <Label Grid.Column="0" Grid.Row="2" x:Name="Nombre_reponses_justes" Content="Label" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Width="112" FontSize="16"/>
+        <Label Grid.Column="1" Grid.Row="2" Content="Votre Nom :"  Margin="10,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.211,0.154" FontSize="16" />
+        <Label Grid.Column="1" Grid.Row="2" Content="Votre Prénom :"  Margin="10,55,0,0" VerticalAlignment="Top" FontSize="16" />
+        <TextBox Grid.Column="1" Grid.Row="2" x:Name="Nom" HorizontalAlignment="Right"  Margin="10,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" MinWidth="200" MaxWidth="300" RenderTransformOrigin="0.158,1.652" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16"/>
+        <TextBox Grid.Column="1" Grid.Row="2" x:Name="Prénom" HorizontalAlignment="Right"  Margin="10,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" MinWidth="200" MaxWidth="300" RenderTransformOrigin="0.158,1.652" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" />
 
     </Grid>
 </UserControl>
