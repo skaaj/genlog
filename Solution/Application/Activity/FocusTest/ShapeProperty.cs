@@ -25,13 +25,11 @@ namespace Genlog
                 return false;
             if (negations[1] && (Color == instColor))
                 return false;
-            if (negations[2] && (HasDots == instHasDots))
-                return false;
             if (!negations[0] && (Shape != instShape))
                 return false;
             if (!negations[1] && (Color != instColor))
                 return false;
-            if (!negations[2] && (HasDots != instHasDots))
+            if (instHasDots != HasDots)
                 return false;
 
             return true;

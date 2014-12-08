@@ -105,13 +105,7 @@ namespace Genlog
 
             return availableShapes[i];
         }
-        /*
-            Brush[] availableColors = _model.Colors.Where(brush => (brush != b)).ToArray();
-
-            int i = _randomizer.Next(availableColors.Length);
-
-            return availableColors[i];
-             */
+        
         private Brush PickOtherColor(Brush b)
         {
             return _model.Colors.Where(brush => (brush != b)).ToArray()[_randomizer.Next(_model.Colors.Count - 1)];
@@ -136,10 +130,7 @@ namespace Genlog
                 else
                     property.Color = PickOtherColor(instruction.Property.Color);
 
-                if (!instruction.Negations[2])
-                    property.HasDots = true;
-                else
-                    property.HasDots = false;
+                property.HasDots = instruction.Property.HasDots;
 
                 if (property.Respect(instruction))
                 {
@@ -157,10 +148,11 @@ namespace Genlog
                 property.Color = _model.Colors[_randomizer.Next(_model.Colors.Count)];
                 property.HasDots = _randomizer.NextDouble() < 0.5 ? true : false;
 
-                if (property.Respect(instruction))
-                {
-                    property.HasDots = !property.HasDots;
-                }
+                
+                //if (property.Respect(instruction))
+                //{
+                //    property.HasDots = !property.HasDots;
+                //}
 
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnWrongAnswer;

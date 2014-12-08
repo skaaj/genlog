@@ -15,7 +15,7 @@ namespace Genlog
 
         public Instruction(int level, FocusModel model)
         {
-            Negations = new bool[3];
+            Negations = new bool[2];
 
             int randomIndex;
             int nbPlaced = 0;
@@ -24,12 +24,17 @@ namespace Genlog
 
             Property = new ShapeProperty();
             Property.Color = model.Colors[randomizer.Next(model.Colors.Count)];
-            Property.HasDots = randomizer.NextDouble()<0.5 ? true:false ;
-            Property.Shape = (FocusModel.Shapes)randomizer.Next(FocusModel.ShapesCount);
 
-            while (nbPlaced < (level - 1)) // Tant qu'on a pas placé toutes les négations
+            if (level == 4)
+                Property.HasDots = false;
+            else
+                Property.HasDots = randomizer.NextDouble() < 0.5 ? true : false;
+            
+            Property.Shape = (FocusModel.Shapes) randomizer.Next(FocusModel.ShapesCount);
+
+            while (nbPlaced < (level - 2)) // Tant qu'on a pas placé toutes les négations
             {
-                randomIndex = randomizer.Next(0, 3);
+                randomIndex = randomizer.Next(0, Negations.Length);
 
                 if (!Negations[randomIndex])
                 {
@@ -86,7 +91,7 @@ namespace Genlog
 
             strBuilder.Append(ColorToString(Property.Color));
 
-            if (Negations[2])
+            if (!Property.HasDots)
             {
                 strBuilder.Append("qui n'ont pas de points noirs.");
             }
