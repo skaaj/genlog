@@ -24,6 +24,7 @@ namespace Genlog
 
             Property = new ShapeProperty();
             Property.Color = model.Colors[randomizer.Next(model.Colors.Count)];
+            Property.HasDots = randomizer.NextDouble()<0.5 ? true:false ;
             Property.Shape = (FocusModel.Shapes)randomizer.Next(FocusModel.ShapesCount);
 
             while (nbPlaced < (level - 1)) // Tant qu'on a pas placé toutes les négations

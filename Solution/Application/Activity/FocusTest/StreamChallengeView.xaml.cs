@@ -141,6 +141,11 @@ namespace Genlog
                 else
                     property.HasDots = false;
 
+                if (property.Respect(instruction))
+                {
+                    ;
+                }
+
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnCorrectAnswer;
                 shape.Unloaded += OnShapeGoneUnclicked;
