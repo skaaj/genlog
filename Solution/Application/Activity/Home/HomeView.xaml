@@ -6,6 +6,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        
         <Label Content="HomeView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
+        <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" HorizontalAlignment="left"  Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description }"  MaxHeight="65" MaxWidth="500"/>
+        <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description1bis }"  MaxHeight="65" MaxWidth="500"/>
+        <TextBlock Grid.ColumnSpan="2"  Grid.Column="0" Grid.Row="3" HorizontalAlignment="left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description2bis }" MaxHeight="65"  MaxWidth="500"/>
     </Grid>
 </UserControl>

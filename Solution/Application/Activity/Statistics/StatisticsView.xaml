@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Label Content="StatisticsView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <ListBox HorizontalAlignment="Left" Height="249" Margin="10,41,0,0" VerticalAlignment="Top" Width="280"
+        <ListBox HorizontalAlignment="Left" Height="176" Margin="10,114,0,0" VerticalAlignment="Top" Width="280"
                  ItemsSource="{Binding}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -18,5 +18,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="{ DynamicResource statistique }" VerticalAlignment="Top" Height="60" Width="192"/>
     </Grid>
 </UserControl>

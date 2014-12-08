@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="600">
 
@@ -20,13 +21,13 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Content="MemoryTestView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <TextBlock x:Name="description1" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1"  Margin="10,36,10,0" TextWrapping="Wrap" Text="{ DynamicResource description }"  MaxHeight="800" MaxWidth="1000"/>
+        <TextBlock x:Name="description1" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1"  Margin="10,36,10,0" TextWrapping="Wrap" Text="{ DynamicResource description1 }"  MaxHeight="800" MaxWidth="1000"/>
 
         <Label Grid.Column="0" Grid.Row="2" Content="Paramétres" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Margin="10,0,0,120"  FontWeight="Bold"/>
         <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,0,100" TextWrapping="Wrap" Text="Temps de mémorisation" />
-        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="champs_temps"  VerticalAlignment="Bottom"  Margin="0,0,10,95" TextWrapping="Wrap"  MaxWidth="300"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="champs_temps"  VerticalAlignment="Bottom"  Margin="0,0,10,95" TextWrapping="Wrap"  MaxWidth="300" Controls:TextBoxHelper.ClearTextButton="True"/>
         <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,0,70" TextWrapping="Wrap" Text="Nombre de figures"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="champs_nombre"  VerticalAlignment="Bottom" Height="23" Margin="0,0,10,65" TextWrapping="Wrap" MaxWidth="300"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="champs_nombre"  VerticalAlignment="Bottom" Height="23" Margin="0,0,10,65" TextWrapping="Wrap" MaxWidth="300" Controls:TextBoxHelper.ClearTextButton="True"/>
         <Button Grid.Column="1" Grid.Row="2" x:Name="Passez_au_test" Content="Passer au test"  Margin="10,10,10,10" VerticalAlignment="Bottom"   Click="OnSubmit"/>          
                     
         </Grid>
