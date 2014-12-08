@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace Genlog
 {
@@ -26,6 +27,7 @@ namespace Genlog
 
         public MemoryTestView(MemoryTestActivity parent)
         {
+            
             InitializeComponent();
             _parent = parent;
         }
@@ -50,11 +52,13 @@ namespace Genlog
                 champs_temps.Text = String.Empty;
                 champs_nombre.Text = String.Empty;
                 var bc = new BrushConverter();
-                Passez_au_test.Content = "Paramètres non valide. Revalidez une fois changés";
+                Passez_au_test.Content = "Paramètres non valides. Revalidez une fois changés";
                 Passez_au_test.Background = (Brush)bc.ConvertFrom("#FFFF9090"); ;
             }
             
         }
+
+        
 
     }
 }

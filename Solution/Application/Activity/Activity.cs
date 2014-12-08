@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows;
+using System.Threading;
 
 namespace Genlog
 {
@@ -18,6 +20,7 @@ namespace Genlog
 
     public abstract class Activity : IStoppable, IStartable
     {
+        
         private MainWindow Context { get; set; }
 
         private Dictionary<string, UserControl> _views;
@@ -30,7 +33,7 @@ namespace Genlog
         {
             Context = context;
             _views = new Dictionary<string, UserControl>();
-
+            SetLanguageDictionary();
             Console.WriteLine("Activity::Create called");
         }
 
@@ -82,5 +85,28 @@ namespace Genlog
                     OnViewChanged(this, new ViewChangedArgs() { RequestedView = CurrentView });
             }
         }
+
+
+        private void SetLanguageDictionary()
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (Thread.CurrentThread.CurrentCulture.ToString())
+            {
+                case "en-US":
+                    dict.Source = new Uri("../../Resources/StringResources.en.xaml",
+                                  UriKind.Relative);
+                    break;
+                case "fr-CA":
+                    dict.Source = new Uri("../../Resources/StringResources.fr.xaml",
+                                       UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("../../Resources/StringResources.fr.xaml",
+                                      UriKind.Relative);
+                    break;
+            }
+            Application.Current.Resources.MergedDictionaries.Add(dict);
+        } 
+
     }
 }

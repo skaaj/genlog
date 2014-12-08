@@ -1,0 +1,13 @@
+﻿<ResourceDictionary 
+      xmlns ="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="description">Phase 1 : Plusieurs signes différents apparaissent à l’écran, un nombre unique est inscrit à côté de chacun d’eux. L’objectif est de mémoriser pour chaque signe, le nombre qui lui est associé. Le temps qu’il vous reste pour les retenir est indiqué à l’écran.
+Phase 2 : Les signes précédents sont affichés à l’écran, vous devez renseigner dans le champs à côté du signe quel est le nombre qui lui est associé.
+Phase 3 : Les bonnes associations apparaissent à l’écran en vous indiquant où vous vous êtes trompés. Vous pouvez renseignez votre nom puis voir les statistiques dans la partie statistique du logiciel.</system:String>
+
+    <system:String x:Key="description2">description 2</system:String>
+
+    <!-- All StringResources Goes Here -->
+</ResourceDictionary> 

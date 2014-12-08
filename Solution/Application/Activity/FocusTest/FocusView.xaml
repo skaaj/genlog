@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Label Content="Description" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="Description du test" VerticalAlignment="Top" Height="139" Width="280"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="{ DynamicResource description2 }" VerticalAlignment="Top" Height="139" Width="280"/>
         <Label Content="Paramétres" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,214,0,0" TextWrapping="Wrap" Text="Vitesse" VerticalAlignment="Top"/>
         <TextBox x:Name="speedTextBox" HorizontalAlignment="Left" Height="23" Margin="82,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Text="4"/>
