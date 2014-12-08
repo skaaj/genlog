@@ -5,12 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-           
+
     <Grid>
-        <Label Content="MemoryTestRun" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Temps "/><Run Language="fr-fr" Text="restant"/></TextBlock>
-        <TextBlock Name="TBCountDown" HorizontalAlignment="Left" Margin="163,214,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="36" Width="104"/>
-        <WrapPanel Name="Affichage_image" HorizontalAlignment="Left" Height="173" Margin="0,41,0,0" VerticalAlignment="Top" Width="290" RenderTransformOrigin="0.897,0.896"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Content="MemoryTestRun" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap"  ><Run Text="Temps "/><Run Language="fr-fr" Text="restant"/></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" Name="TBCountDown" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock"  Height="36" Width="104"/>
+        <WrapPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Name="Affichage_image" HorizontalAlignment="Left"  Margin="0,0,0,0"   RenderTransformOrigin="0.897,0.896"/>
 
     </Grid>
 </UserControl>
