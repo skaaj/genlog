@@ -102,7 +102,7 @@ namespace Genlog
                     break;
                 default:
                     dict.Source = new Uri("../../Resources/StringResources.fr.xaml",
-                                      UriKind.Relative);
+                                      UriKind.Relative);                   
                     break;
             }
             Application.Current.Resources.MergedDictionaries.Add(dict);

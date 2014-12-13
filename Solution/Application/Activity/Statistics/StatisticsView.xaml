@@ -3,21 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="600">
     <Grid>
-        <Label Content="StatisticsView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <ListBox HorizontalAlignment="Left" Height="176" Margin="10,114,0,0" VerticalAlignment="Top" Width="280"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        
+        
+        <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Content="StatisticView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold" FontSize="22"/>
+        <ListBox Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"  Margin="10,10,0,0" VerticalAlignment="Center"
                  ItemsSource="{Binding}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding XPath=@firstname}" />
-                        <TextBlock Text="{Binding XPath=@lastname}" Margin="4,0,0,0" />
+                        <TextBlock Text="{Binding XPath=@firstname}" FontSize="16" />
+                        <TextBlock Text="{Binding XPath=@lastname}" Margin="4,0,0,0" FontSize="16"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="{ DynamicResource statistique }" VerticalAlignment="Top" Height="60" Width="192"/>
+        <TextBlock Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Margin="10,36,10,0" TextWrapping="Wrap" Text="{ DynamicResource statistique }"  MaxHeight="800" MaxWidth="1000" FontSize="16"/>
     </Grid>
 </UserControl>
