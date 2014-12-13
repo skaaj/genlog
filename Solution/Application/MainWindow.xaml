@@ -1,4 +1,4 @@
-﻿<Window x:Class="Genlog.MainWindow"
+﻿<Controls:MetroWindow x:Class="Genlog.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -26,4 +26,4 @@
             </UserControl.Background>
         </UserControl>
     </Grid>
-</Window>
+</Controls:MetroWindow>

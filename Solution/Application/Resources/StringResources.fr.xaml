@@ -3,11 +3,33 @@
 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
 xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="description">Phase 1 : Plusieurs signes différents apparaissent à l’écran, un nombre unique est inscrit à côté de chacun d’eux. L’objectif est de mémoriser pour chaque signe, le nombre qui lui est associé. Le temps qu’il vous reste pour les retenir est indiqué à l’écran.
+    <system:String x:Key="description1">Phase 1 : Plusieurs signes différents apparaissent à l’écran, un nombre unique est inscrit à côté de chacun d’eux. L’objectif est de mémoriser pour chaque signe, le nombre qui lui est associé. Le temps qu’il vous reste pour les retenir est indiqué à l’écran.
 Phase 2 : Les signes précédents sont affichés à l’écran, vous devez renseigner dans le champs à côté du signe quel est le nombre qui lui est associé.
 Phase 3 : Les bonnes associations apparaissent à l’écran en vous indiquant où vous vous êtes trompés. Vous pouvez renseignez votre nom puis voir les statistiques dans la partie statistique du logiciel.</system:String>
 
-    <system:String x:Key="description2">description 2</system:String>
+    <system:String x:Key="description2">Phase 1 : Une consigne va être inscrite à l’écran, indiquant les signes sur lesquels cliquer durant le test. Un test simple est effectué pour s’assurer de la compréhension de la consigne.
+Phase 2 : La vraie consigne est alors inscrite à l’écran, le test commence. 
+Phase 3 : Des signes aléatoires défilent d’un bord à l’autre de l’écran, vous devez cliquer sur les signes correspondant à la consigne. Une fois que trois formes correspondant à la consigne ont défilé, le test s’arrete.
+Phase 4 : Le nombre de bonnes associations apparaissent à l’écran. Vous pouvez renseignez votre nom puis voir les statistiques dans la partie statistique du logiciel.</system:String>
+
+
+
+    <system:String x:Key="description1bis">Test de mémoire :
+        Test pour mesurer la capacité à retenir des associations à court terme. Des associations de forme et de nombre sont affichées. Vous devez les retenir dans un temps imparti puis reconstituer les associations.
+Nombres d’association : 3-10
+Temps de mémorisation : 1-60  </system:String>
+    
+    <system:String x:Key="description2bis">Test de concentration :
+        Test pour mesurer la capacité de concentration d’une personne.
+Des formes défilent à l’écran. Vous devez cliquer sur celle correspondant à une forme, couleur, remplissage de points indiqué à l’écran avant le début du test.
+Niveaux de difficultés : 4
+Temps défilement par figure : 2-8</system:String>
+
+
+    <system:String x:Key="description">Ce programme vous permettra à travers deux tests de mesurer la capacité de mémorisation d’association et la capacité de concentration d’une personne. Ces tests sont paramétrables.</system:String>
+
+    <system:String x:Key="statistique">Ici vous sont présentés les statistiques des personnes ayant enregistré leur résultat. Sélectionnez un test pour voir le meilleur résultat, le moins bon, la moyenne et la variance.
+Sélectionnez une personne pour afficher ses résultats.</system:String>
 
     <!-- All StringResources Goes Here -->
 </ResourceDictionary> 

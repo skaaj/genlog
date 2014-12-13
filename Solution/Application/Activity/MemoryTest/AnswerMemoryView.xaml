@@ -3,13 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Label Content="MemoryTestView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold"/>
-        <Image x:Name="imagebox" HorizontalAlignment="Left" Height="100" Margin="10,41,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="nombrebox" HorizontalAlignment="Left" Height="23" Margin="156,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Suivant" Content="suivant" HorizontalAlignment="Left" Margin="173,119,0,0" VerticalAlignment="Top" Width="75" Click="Suivant_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Content="MemoryTestView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold" FontSize="22"/>
+        <Image Grid.Column="0" Grid.Row="1" x:Name="imagebox"  Height="100" Margin="10,10,0,0" VerticalAlignment="Top" />
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="nombrebox"  Height="23" Margin="10,20,0,10" TextWrapping="Wrap"  VerticalAlignment="Top"  Controls:TextBoxHelper.ClearTextButton="True" FontSize="16"/>
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Suivant" Content="suivant"  Margin="10,50,0,0" VerticalAlignment="Top"   Click="Suivant_Click" FontSize="16"/>
 
     </Grid>
 </UserControl>

@@ -97,11 +97,15 @@ namespace Genlog
             foreach (ImageNombre imgnb in _parent.listeMemorisation)
             {
                 Image image = new Image();
-                image.Height = 20 ;
-                image.Width = 50;
+                image.Height = 60 ;
+                image.Width = 150;
+                image.Margin = new Thickness(20);
+
 
                 Label lbl = new Label();
-                lbl.Width = 40;
+                lbl.Margin = new Thickness(20);
+                lbl.Width = 80;
+                lbl.FontSize = 16;
                 lbl.Content = imgnb._nombre;
 
                 image.Source = new BitmapImage(new Uri(imgnb._image));
