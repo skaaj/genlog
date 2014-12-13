@@ -8,10 +8,12 @@ namespace Genlog
 {
     public class StatisticsActivity : Activity
     {
+        MainWindow _context;
+
         public StatisticsActivity(MainWindow context)
             : base(context)
         {
-            AddView("home", new StatisticsView());
+            AddView("home", new StatisticsView(this));
 
             Show("home");
         }

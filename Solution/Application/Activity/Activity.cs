@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace Genlog
 {
@@ -35,6 +36,16 @@ namespace Genlog
             _views = new Dictionary<string, UserControl>();
             SetLanguageDictionary();
             Console.WriteLine("Activity::Create called");
+        }
+
+        public XElement GetData()
+        {
+            return Context.DataRoot;
+        }
+
+        public void SaveData()
+        {
+            Context.Save();
         }
 
         public virtual void Start()

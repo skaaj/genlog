@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Genlog
 {
@@ -25,7 +26,14 @@ namespace Genlog
 
         private Activity _currentActivity;
         private Dictionary<Activities, Activity> _activities;
+        
         public enum Activities { Home, Help, Stats, Memory, Focus };
+
+        public XElement DataRoot
+        {
+            get;
+            private set;
+        }
 
         #region Window
 
@@ -37,6 +45,16 @@ namespace Genlog
             this.Icon = BitmapFrame.Create(iconUri);
 
             _activities = new Dictionary<Activities, Activity>();
+            
+            XDocument doc = XDocument.Load("../../Data/SampleData.xml");
+            grid.DataContext = doc.Element("Users").Elements();
+
+            DataRoot = doc.Element("Users");
+        }
+
+        public void Save()
+        {
+            DataRoot.Save("../../Data/SampleData.xml");
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
