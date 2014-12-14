@@ -46,15 +46,21 @@ namespace Genlog
 
             _activities = new Dictionary<Activities, Activity>();
             
+            /*
             XDocument doc = XDocument.Load("../../Data/SampleData.xml");
-            grid.DataContext = doc.Element("Users").Elements();
+            //grid.DataContext = doc.Element("Users").Elements();
 
             DataRoot = doc.Element("Users");
+            */ 
         }
 
         public void Save()
         {
+            /*
             DataRoot.Save("../../Data/SampleData.xml");
+            XmlDataProvider lol = grid.DataContext as XmlDataProvider;
+            lol.Refresh();
+             */
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -79,7 +85,6 @@ namespace Genlog
         {
             set
             {
-                // testme
                 value.Width = contentArea.Width;
                 value.Height = contentArea.Height;
 

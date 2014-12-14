@@ -22,7 +22,11 @@ namespace Genlog
     public partial class StatisticsView : UserControl
     {
         StatisticsActivity _parent;
-        XElement _users;
+
+        XDocument _usersDoc;
+        XElement _userRoot;
+
+        //XElement _users;
 
         public StatisticsView(StatisticsActivity parent)
         {
@@ -30,27 +34,30 @@ namespace Genlog
 
             _parent = parent;
 
+            _usersDoc = XDocument.Load("../../Data/SampleData.xml");
+            _userRoot = _usersDoc.Element("Users");
 
-            _users = _parent.GetData();
-
-            /*
-            userList = (XElement)((XmlDataProvider)Resources["dataKey"]).Data;
-
-            IEnumerable<XElement> users = userList.Elements();
-            // Read the entire XML
-            foreach (var employee in users)
-            {
-                Console.WriteLine(employee);
-            }*/
+            listBox.DataContext = _usersDoc.Element("Users").Elements();
         }
 
         private void go(object sender, RoutedEventArgs e)
         {
-            _users.Add(new XElement("User",
-                new XAttribute("firstname", "ben"),
-                new XAttribute("lastname", "jo")));
-            _parent.SaveData();
-            BindingOperations.GetBindingExpressionBase(list, ListBox.ItemsSourceProperty).UpdateTarget();
+            _userRoot.Add(new XElement("User",
+                new XAttribute("firstname", "test"),
+                new XAttribute("lastname", "eur")));
+
+            _usersDoc.Save("..//..//Data//SampleData.xml");
+            listBox.DataContext = _usersDoc.Element("Users").Elements();
+        }
+
+        private void refresh(object sender, MouseButtonEventArgs e)
+        {
+            listBox.DataContext = _usersDoc.Element("Users").Elements();
+        }
+
+        private void TargetTest(object sender, DataTransferEventArgs e)
+        {
+
         }
     }
 }

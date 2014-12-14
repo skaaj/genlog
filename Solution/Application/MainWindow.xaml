@@ -3,13 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         Title="genlog ver 0.5" Width="800" Height="600" Loaded="WindowLoaded" WindowState="Maximized">
-
-    <!--<Window.Resources>
-        <XmlDataProvider Source="Data/SampleData.xml" x:Key="dataKey"  XPath="/Users/User" />
+<!--
+    <Window.Resources>
+        <local:SyncXmlDataProvider x:Name="dudule" Source="../../Data/SampleData.xml" x:Key="xmlFromFile"  XPath="/Users/User" />
     </Window.Resources>-->
 
-    <Grid x:Name="grid">
 
+    <Grid x:Name="grid">
+        
+        <!--<Grid.DataContext>
+            <XmlDataProvider x:Name="DataSource" Source="../../Data/SampleData.xml" XPath="/Users/User"  />
+        </Grid.DataContext>-->
         <Menu IsMainMenu="True" Grid.Row="0" Margin="0,3,0,0" VerticalAlignment="Top" Height="30" Background="#FFF9F9F9" Padding="10,0,0,0">
             <MenuItem Header="_Accueil" Click="OnClickHome" />
             <MenuItem Header="Test de _mémoire associative" Click="OnClickMemoryTest" />

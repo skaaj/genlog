@@ -100,6 +100,7 @@
     <Compile Include="Activity\Statistics\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SyncXmlDataProvider.cs" />
     <Page Include="Activity\FocusTest\FocusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
