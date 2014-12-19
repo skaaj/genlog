@@ -1,0 +1,1 @@
+Pour Ajouter/Supprimer des images, copier les images .png, .btm dans ce dossier ou supprimer les du dossier

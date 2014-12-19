@@ -24,12 +24,14 @@ namespace Genlog
     {
 
         private MemoryTestActivity _parent;
+        private int NImage;
 
         public MemoryTestView(MemoryTestActivity parent)
         {
             
             InitializeComponent();
             _parent = parent;
+            NumberOfImage();
         }
 
 
@@ -39,26 +41,52 @@ namespace Genlog
             catch { _parent.tempsMemorisation = 0; }
             try { _parent.difficulte = int.Parse(champs_nombre.Text); }
             catch { _parent.difficulte = 0; }
+            var bc = new BrushConverter();
             
             if (_parent.difficulte < 11 && _parent.difficulte > 0 && _parent.tempsMemorisation > 0 && _parent.tempsMemorisation < 61)
             {
+                if (_parent.difficulte > NImage)
+                {
+                    Passez_au_test.Content = "Le test ne contient pas assez d'images ("+NImage+"). Revalidez une fois changés";
+                    Passez_au_test.Background = (Brush)bc.ConvertFrom("#FFFF9090"); ;
+                }
+
+                else{
                 champs_temps.Text = String.Empty;
                 champs_nombre.Text = String.Empty;
                 _parent.Show("challenge");
+                }
             }
 
             else
             {
                 champs_temps.Text = String.Empty;
                 champs_nombre.Text = String.Empty;
-                var bc = new BrushConverter();
+
+                
                 Passez_au_test.Content = "Paramètres non valides. Revalidez une fois changés";
                 Passez_au_test.Background = (Brush)bc.ConvertFrom("#FFFF9090"); ;
             }
             
         }
 
-        
+        public void NumberOfImage()
+        {
+            DirectoryInfo directory = new DirectoryInfo("../../Img");
+            string filePath;
+            string extension;
+
+            foreach (FileInfo fichier in directory.GetFiles())
+            {
+                filePath = System.IO.Path.GetFullPath("../../Img/" + fichier.Name);
+                extension = System.IO.Path.GetExtension(filePath);
+
+                if (extension == ".png" || extension == ".btm")
+                {
+                    this.NImage = this.NImage + 1;
+                }
+            }
+        }
 
     }
 }

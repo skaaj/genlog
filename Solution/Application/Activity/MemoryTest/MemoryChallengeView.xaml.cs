@@ -62,6 +62,7 @@ namespace Genlog
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
             string filePath;
             int randomInt;
+            string extension;
             
             _images.Clear();
 
@@ -71,10 +72,15 @@ namespace Genlog
                 randomInt = _randomizer.Next(1, 999);
                 filePath = System.IO.Path.GetFullPath("../../Img/" + fichier.Name);
 
-                if (filePath[filePath.Length - 1] == 'b') continue; // bad patch fixme please!
+                extension = System.IO.Path.GetExtension(filePath);
 
-                _images.Add(new ImageNombre(filePath, (randomInt).ToString()));
+                if (extension == ".png" || extension == ".btm")
+                {
+                    _images.Add(new ImageNombre(filePath, (randomInt).ToString()));
+                }
             }
+
+
         }
 
         public void TrieAffichage()
@@ -84,13 +90,13 @@ namespace Genlog
 
             List<ImageNombre> x = _images;
 
-            for (int z = 0; z < _parent.difficulte; z++)
-            {
-                nombre = _randomizer.Next(0, x.Count);
-                _parent.listeMemorisation.Add(_images[nombre]);
-                x.RemoveAt(nombre);            
-            }
-
+                for (int z = 0; z < _parent.difficulte; z++)
+                {
+                    nombre = _randomizer.Next(0, x.Count);
+                    _parent.listeMemorisation.Add(_images[nombre]);
+                    x.RemoveAt(nombre);
+                }
+            
             Affichage_image.Children.Clear();
 
             // Affichage des images
