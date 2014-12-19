@@ -28,9 +28,9 @@
 
         <Label Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Content="Paramétres" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,0,0,0"  FontWeight="Bold" FontSize="22"/>
         <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" TextWrapping="Wrap" Text="Temps de mémorisation" FontSize="16" />
-        <TextBox Grid.Column="2" Grid.Row="2"  x:Name="champs_temps"  VerticalAlignment="Top"  Margin="0,35,10,0" TextWrapping="Wrap"  MaxWidth="300" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" Text="0-60" TextAlignment="Center"/>
+        <TextBox Grid.Column="2" Grid.Row="2"  x:Name="champs_temps"  VerticalAlignment="Top"  Margin="0,35,10,0" TextWrapping="Wrap"  MaxWidth="300" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" Text="1-60" TextAlignment="Center"/>
         <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,80,0,0" TextWrapping="Wrap" Text="Nombre de figures" FontSize="16"/>
-        <TextBox Grid.Column="2" Grid.Row="2"  x:Name="champs_nombre"  VerticalAlignment="Top"  Margin="0,75,10,0" TextWrapping="Wrap" MaxWidth="300" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" Text="1-10 " TextAlignment="Center"/>
+        <TextBox Grid.Column="2" Grid.Row="2"  x:Name="champs_nombre"  VerticalAlignment="Top"  Margin="0,75,10,0" TextWrapping="Wrap" MaxWidth="300" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" Text="3-10 " TextAlignment="Center"/>
         <Button Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" x:Name="Passez_au_test" Content="Passer au test"  Margin="10,10,10,10" VerticalAlignment="Top"   Click="OnSubmit" FontSize="16"/>          
                     
         </Grid>

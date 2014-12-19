@@ -3,6 +3,31 @@
 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
 xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="description">not yet</system:String> 
-        <!-- All StringResources Goes Here -->
+    <system:String xml:space="preserve" x:Key="description1">Step 1: several different signs appear to the screen, a unique number is registered next to each of them. The objective is to memorize for every sign, the number which is associated with it. The time when it stays in you to retain them is indicated to the screen.
+Step 2: the previous signs are shown in the screen, you have to inform in fields next to the sign which is the number which is associated with it.
+Step 3: the good associations appear to the screen by indicating to you where you made a mistake. You can inform your name then see the statistics in the statistical part(party) of logiciel. </system:String >
+
+    <system:String xml:space="preserve" x:Key="description2">Step 1: an instruction is going to be registered on the screen, indicating the signs on which to click during the test. A simple test is made to make sure of the understanding of the instruction.
+Step 2: the real instruction is then registered on the screen, the test begins. 
+Step 3: random signs scroll from an edge to other one of the screen, you have to click the signs corresponding to the instruction. When three forms corresponding to the instruction scrolled, the test be stopped.
+Step 4: the number of good associations appears to the screen. You can inform your name then see the statistics in the statistical part of the software.</system:String>
+
+
+
+    <system:String  xml:space="preserve" x:Key="description1bis">Test of memory:
+Test to measure the capacity to retain short-term associations. Associations of shape and number are shown. You have to retain them in an allotted time then reconstitute associations.
+Numbers of association: 3-10
+Time of memorization: 1-60  </system:String>
+
+    <system:String xml:space="preserve" x:Key="description2bis">Test of concentration:
+Test to measure the capacity of concentration of a person.
+Forms scroll in the screen. You have to click that corresponding in a shape, a color, a filling of points indicated to the screen before the beginning of the test.
+Levels of difficulties: 4
+Time scrolling by figure: 2-8</system:String>
+
+
+    <system:String xml:space="preserve" x:Key="description">Ce programme vous permettra à travers deux tests de mesurer la capacité de mémorisation d’association et la capacité de concentration d’une personne. Ces tests sont paramétrables.</system:String>
+
+    <system:String x:Key="statistique">Ici vous sont présentés les statistiques des personnes ayant enregistré leur résultat. Sélectionnez un test pour voir le meilleur résultat, le moins bon, la moyenne et la variance.
+Sélectionnez une personne pour afficher ses résultats.</system:String>
 </ResourceDictionary> 
