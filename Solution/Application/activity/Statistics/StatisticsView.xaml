@@ -16,28 +16,68 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0"  Grid.ColumnSpan="3">
+            <Label Content="Statistiques" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+            <TextBlock TextWrapping="Wrap" Text="{ DynamicResource statistique }" FontSize="16" />
+        </StackPanel>
 
-        <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Content="StatisticView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
-        <ListBox x:Name="listBox" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
-                 BorderThickness="2" ItemsSource="{Binding}" RenderTransformOrigin="0.5,0.5"  Margin="10,10,0,0" Grid.ColumnSpan="2" SelectionChanged="OnSelectUser">
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Content="Utilisateurs" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+            <ListBox x:Name="listBox" BorderThickness="2" ItemsSource="{Binding}" RenderTransformOrigin="0.5,0.5"  Margin="0" SelectionChanged="OnSelectUser">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Attribute[firstname].Value}" FontSize="16" />
-                        <TextBlock Text="{Binding Path=Attribute[lastname].Value}" Margin="4,0,0,0" FontSize="16"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <!--<ItemsControl ItemsSource="{Binding}"></ItemsControl>-->
-        </ListBox>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Attribute[firstname].Value}" FontSize="16" />
+                            <TextBlock Text="{Binding Path=Attribute[lastname].Value}" Margin="4,0,0,0" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
 
-        <TextBlock  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"  Margin="10,10,10,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{ DynamicResource statistique }" FontSize="16" />
-        <Label  Grid.Column="1" Grid.Row="1" Content="Memory test" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
-        <Label  Grid.Column="2" Grid.Row="1" Content="Focus test" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
-        <DataGrid x:Name="gridMemTests" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,50,10,0"  MinWidth="200" MinHeight="200" />
-        <DataGrid x:Name="gridFocusTests" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,50,10,0" MinWidth="200" MinHeight="200" />
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="Mémorisation" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+            <DataGrid x:Name="gridMemTests" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0"  MinWidth="200" MinHeight="200" ColumnWidth="*" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <Label Content="Concentration" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+            <DataGrid x:Name="gridFocusTests" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" MinWidth="200" MinHeight="200" ColumnWidth="*" />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2">
+            <Label Content="Statistiques par tests" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxTest" Margin="0,0,0,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="OnTestSelectionChanged">
+                <ComboBoxItem Content="Sélectionnez un test" IsEnabled="False"/>
+                <ComboBoxItem Content="Mémorisation"/>
+                <ComboBoxItem Content="Concentration"/>
+            </ComboBox>
+            <StackPanel x:Name="paramPanel" Margin="0,0,0,0" Visibility="Hidden">
+                <Label x:Name="labelParam1" Content="Label"/>
+                <ComboBox x:Name="comboxBoxParam1" IsReadOnly="True">
+                </ComboBox>
+                <Label x:Name="labelParam2" Content="Label"/>
+                <ComboBox x:Name="comboxBoxParam2">
+                    <ComboBoxItem Content="2"/>
+                </ComboBox>
+                <Button Content="Valider" Click="OnSubmitParams" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel x:Name="panelResults" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Label x:Name="labelScoreMax" Content="Score maximum: "/>
+            <Label x:Name="labelMaxUser" Content="Effectué par : "/>
+            <Label x:Name="labelScoreMin" Content="Score minimum : "/>
+            <Label x:Name="labelMinUser" Content="Effectué par : "/>
+            <Label x:Name="labelAvg" Content="Moyenne : "/>
+            <Label x:Name="labelVar" Content="Variance : "/>
+        </StackPanel>
+        <StackPanel x:Name="panelNoResults" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Grid.ColumnSpan="2" Visibility="Visible">
+            <Label Content="Aucun résultats disponibles" />
+        </StackPanel>
+
     </Grid>
 </UserControl>

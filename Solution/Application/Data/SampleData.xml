@@ -2,11 +2,11 @@
 <Users>
   <User firstname="Jonathan" lastname="Skinner">
     <MemTests>
-      <Result time="1" level="1.1" score="41" />
+      <Result time="4" level="4" score="41" />
       <Result time="1" level="1.2" score="41" />
     </MemTests>
     <FocusTests>
-      <Result time="1" level="1.1" score="41" />
+      <Result time="4" level="4" score="41" />
       <Result time="1" level="2.1" score="41" />
     </FocusTests>
   </User>
@@ -36,7 +36,7 @@
       <Result time="1" level="4.2" score="41" />
     </MemTests>
     <FocusTests>
-      <Result time="1" level="1.4" score="41" />
+      <Result time="4" level="4" score="2" />
       <Result time="1" level="2.4" score="41" />
     </FocusTests>
   </User>
