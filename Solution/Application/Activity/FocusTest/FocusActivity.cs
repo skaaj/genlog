@@ -16,9 +16,16 @@ namespace Genlog
         public FocusActivity(MainWindow context) : base(context)
         {
             AddView("home", new FocusView(this));
-            AddView("stream", new StreamChallengeView(this));
+            AddView("stream", new StreamChallengeView(this, false));
+            AddView("example", new StreamChallengeView(this, true));
 
             Show("home");
+        }
+
+        public void GoToRegister(int score)
+        {
+            AddView("register", new Register(this, score));
+            Show("register");
         }
     }
 }

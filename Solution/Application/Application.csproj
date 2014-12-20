@@ -96,11 +96,13 @@
     <Compile Include="Activity\MemoryTest\MemoryResultView.xaml.cs">
       <DependentUpon>MemoryResultView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Activity\Register\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Activity\Statistics\StatisticsActivity.cs" />
     <Compile Include="Activity\Statistics\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SyncXmlDataProvider.cs" />
     <Page Include="Activity\FocusTest\FocusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Activity\MemoryTest\MemoryResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Activity\Register\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,7 +196,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Data\SampleData.xml" />
+    <Resource Include="Data\SampleData.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

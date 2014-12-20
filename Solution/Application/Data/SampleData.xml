@@ -1,43 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Users>
-  <User firstname="Jonathan" lastname="Skinner">
-    <MemTests>
-      <Result time="4" level="4" score="41" />
-      <Result time="1" level="1.2" score="41" />
-    </MemTests>
+  <User firstname="Benjamin" lastname="Denom">
     <FocusTests>
-      <Result time="4" level="4" score="41" />
-      <Result time="1" level="2.1" score="41" />
+      <Result time="2" level="4" score="3" />
     </FocusTests>
+    <MemTests />
   </User>
-  <User firstname="Jane" lastname="Sharp">
-    <MemTests>
-      <Result time="1" level="2.1" score="41" />
-      <Result time="1" level="2.2" score="41" />
-    </MemTests>
+  <User firstname="Gwendal" lastname="Le Squer">
     <FocusTests>
-      <Result time="1" level="1.2" score="41" />
-      <Result time="1" level="2.2" score="41" />
+      <Result time="2" level="4" score="4" />
     </FocusTests>
+    <MemTests />
   </User>
-  <User firstname="Dan" lastname="North">
-    <MemTests>
-      <Result time="1" level="3.1" score="41" />
-      <Result time="1" level="3.2" score="41" />
-    </MemTests>
+  <User firstname="Avicii" lastname="Dur">
     <FocusTests>
-      <Result time="1" level="1.3" score="41" />
-      <Result time="1" level="3.2" score="41" />
+      <Result time="2" level="4" score="4" />
     </FocusTests>
+    <MemTests />
   </User>
-  <User firstname="Austin" lastname="North">
-    <MemTests>
-      <Result time="1" level="4.1" score="41" />
-      <Result time="1" level="4.2" score="41" />
-    </MemTests>
+  <User firstname="Ben" lastname="Jo">
     <FocusTests>
-      <Result time="4" level="4" score="2" />
-      <Result time="1" level="2.4" score="41" />
+      <Result time="2" level="4" score="0" />
     </FocusTests>
+    <MemTests />
   </User>
 </Users>

@@ -45,22 +45,6 @@ namespace Genlog
             this.Icon = BitmapFrame.Create(iconUri);
 
             _activities = new Dictionary<Activities, Activity>();
-            
-            /*
-            XDocument doc = XDocument.Load("../../Data/SampleData.xml");
-            //grid.DataContext = doc.Element("Users").Elements();
-
-            DataRoot = doc.Element("Users");
-            */ 
-        }
-
-        public void Save()
-        {
-            /*
-            DataRoot.Save("../../Data/SampleData.xml");
-            XmlDataProvider lol = grid.DataContext as XmlDataProvider;
-            lol.Refresh();
-             */
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -128,6 +112,11 @@ namespace Genlog
                     Area = _currentActivity.CurrentView;
                 }
             }
+        }
+
+        public void GoToHome()
+        {
+            Run(Activities.Home);
         }
 
         #endregion

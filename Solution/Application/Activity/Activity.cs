@@ -21,7 +21,6 @@ namespace Genlog
 
     public abstract class Activity : IStoppable, IStartable
     {
-        
         private MainWindow Context { get; set; }
 
         private Dictionary<string, UserControl> _views;
@@ -33,32 +32,17 @@ namespace Genlog
         public Activity(MainWindow context)
         {
             Context = context;
-            _views = new Dictionary<string, UserControl>();
             SetLanguageDictionary();
-            Console.WriteLine("Activity::Create called");
-        }
-
-        public XElement GetData()
-        {
-            return Context.DataRoot;
-        }
-
-        public void SaveData()
-        {
-            Context.Save();
+            _views = new Dictionary<string, UserControl>();
         }
 
         public virtual void Start()
         {
-            Console.WriteLine("Activity::Start called");
-            
             StartView();
         }
 
         public virtual void Stop()
         {
-            Console.WriteLine("Activity::Stop called");
-
             StopView();
         }
 
@@ -97,6 +81,10 @@ namespace Genlog
             }
         }
 
+        public void GoToHome()
+        {
+            Context.GoToHome();
+        }
 
         private void SetLanguageDictionary()
         {
@@ -104,16 +92,13 @@ namespace Genlog
             switch (Thread.CurrentThread.CurrentCulture.ToString())
             {
                 case "en-US":
-                    dict.Source = new Uri("../../Resources/StringResources.en.xaml",
-                                  UriKind.Relative);
+                    dict.Source = new Uri("../../Resources/StringResources.en.xaml", UriKind.Relative);
                     break;
                 case "fr-CA":
-                    dict.Source = new Uri("../../Resources/StringResources.fr.xaml",
-                                       UriKind.Relative);
+                    dict.Source = new Uri("../../Resources/StringResources.fr.xaml", UriKind.Relative);
                     break;
                 default:
-                    dict.Source = new Uri("../../Resources/StringResources.fr.xaml",
-                                      UriKind.Relative);                   
+                    dict.Source = new Uri("../../Resources/StringResources.fr.xaml", UriKind.Relative);                   
                     break;
             }
             Application.Current.Resources.MergedDictionaries.Add(dict);

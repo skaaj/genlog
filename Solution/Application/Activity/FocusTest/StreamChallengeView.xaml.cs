@@ -45,11 +45,15 @@ namespace Genlog
         private FocusModel _model;
         private Instruction instruction;
 
-        public StreamChallengeView(FocusActivity parent)
+        private bool _example;
+
+        public StreamChallengeView(FocusActivity parent, bool example)
         {
             InitializeComponent();
 
             _parent = parent;
+
+            _example = example;
 
             _randomizer = new Random();
             _model = new FocusModel();
@@ -65,13 +69,11 @@ namespace Genlog
             InitializeAnimation();
 
             _timer.Start();
-            Console.WriteLine("Timer started :)");
         }
 
         public void Stop()
         {
             _timer.Stop();
-            Console.WriteLine("Timer stopped sir !");
         }
 
         #region shapes
@@ -148,11 +150,11 @@ namespace Genlog
                 property.Color = _model.Colors[_randomizer.Next(_model.Colors.Count)];
                 property.HasDots = _randomizer.NextDouble() < 0.5 ? true : false;
 
-                
-                //if (property.Respect(instruction))
-                //{
-                //    property.HasDots = !property.HasDots;
-                //}
+
+                if (property.Respect(instruction))
+                {
+                    property.HasDots = !property.HasDots;
+                }
 
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnWrongAnswer;
@@ -172,7 +174,14 @@ namespace Genlog
             _gone++;
 
             if (_gone == 3)
+            {
                 ruleLabel.Content += " (Fin détectée)";
+
+                if (!_example)
+                    _parent.GoToRegister(_good);
+                else
+                    _parent.Show("stream");
+            }
         }
 
         void OnShapeGoneUnclicked(object sender, RoutedEventArgs e)
@@ -185,8 +194,11 @@ namespace Genlog
         {
             CustomShape canvas = sender as CustomShape;
 
-            canvas.InnerShape.Stroke = Brushes.Green;
-            canvas.InnerShape.StrokeThickness = 10;
+            if (_example)
+            {
+                canvas.InnerShape.Stroke = Brushes.Green;
+                canvas.InnerShape.StrokeThickness = 10;
+            }
 
             canvas.MouseDown -= OnCorrectAnswer;
             canvas.Unloaded -= OnShapeGoneUnclicked;
@@ -202,9 +214,11 @@ namespace Genlog
         {
             CustomShape canvas = sender as CustomShape;
 
-            canvas.InnerShape.Stroke = Brushes.Red;
-            canvas.InnerShape.StrokeThickness = 10;
-            
+            if (_example)
+            {
+                canvas.InnerShape.Stroke = Brushes.Red;
+                canvas.InnerShape.StrokeThickness = 10;
+            }
             canvas.MouseDown -= OnWrongAnswer;
 
             _bad++;

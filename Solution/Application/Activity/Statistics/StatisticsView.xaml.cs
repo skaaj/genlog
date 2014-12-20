@@ -21,14 +21,12 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour StatisticsView.xaml
     /// </summary>
-    public partial class StatisticsView : UserControl
+    public partial class StatisticsView : UserControl, IStartable
     {
         StatisticsActivity _parent;
 
         XDocument _usersDoc;
         XElement _userRoot;
-
-        //XElement _users;
 
         public StatisticsView(StatisticsActivity parent)
         {
@@ -42,26 +40,6 @@ namespace Genlog
             grid.DataContext = _usersDoc.Element("Users").Elements();
         }
 
-        private void go(object sender, RoutedEventArgs e)
-        {
-            _userRoot.Add(new XElement("User",
-                new XAttribute("firstname", "test"),
-                new XAttribute("lastname", "eur")));
-
-            _usersDoc.Save("..//..//Data//SampleData.xml");
-            grid.DataContext = _usersDoc.Element("Users").Elements();
-        }
-
-        private void refresh(object sender, MouseButtonEventArgs e)
-        {
-            grid.DataContext = _usersDoc.Element("Users").Elements();
-        }
-
-        private void TargetTest(object sender, DataTransferEventArgs e)
-        {
-
-        }
-
         private void OnSelectUser(object sender, SelectionChangedEventArgs e)
         {
             XElement user = e.AddedItems[0] as XElement;
@@ -71,12 +49,12 @@ namespace Genlog
             table.Columns.Add("Temps", System.Type.GetType("System.String"));
             table.Columns.Add("Niveau", System.Type.GetType("System.String"));
             table.Columns.Add("Score", System.Type.GetType("System.String")); 
-            foreach (XElement xEle in memTests)
+            foreach (XElement test in memTests)
             {
                 DataRow newRow = table.NewRow();
-                newRow[0] = xEle.Attribute("time").Value;
-                newRow[1] = xEle.Attribute("level").Value;
-                newRow[2] = xEle.Attribute("score").Value;
+                newRow[0] = test.Attribute("time").Value;
+                newRow[1] = test.Attribute("level").Value;
+                newRow[2] = test.Attribute("score").Value;
                 table.Rows.Add(newRow);
             }
 
@@ -88,17 +66,16 @@ namespace Genlog
             table2.Columns.Add("Temps", System.Type.GetType("System.String"));
             table2.Columns.Add("Niveau", System.Type.GetType("System.String"));
             table2.Columns.Add("Score", System.Type.GetType("System.String"));
-            foreach (XElement xEle in focusTests)
+            foreach (XElement test in focusTests)
             {
                 DataRow newRow = table2.NewRow();
-                newRow[0] = xEle.Attribute("time").Value;
-                newRow[1] = xEle.Attribute("level").Value;
-                newRow[2] = xEle.Attribute("score").Value;
+                newRow[0] = test.Attribute("time").Value;
+                newRow[1] = test.Attribute("level").Value;
+                newRow[2] = test.Attribute("score").Value;
                 table2.Rows.Add(newRow);
             }
 
             gridFocusTests.ItemsSource = table2.DefaultView;
-
         }
 
         private void OnTestSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -193,6 +170,13 @@ namespace Genlog
                 panelNoResults.Visibility = Visibility.Visible;
                 panelResults.Visibility = Visibility.Collapsed;
             }
+        }
+
+
+        void IStartable.Start()
+        {
+            _usersDoc = XDocument.Load("../../Data/SampleData.xml");
+            grid.DataContext = _usersDoc.Element("Users").Elements();
         }
     }
     
