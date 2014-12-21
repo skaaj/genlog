@@ -7,6 +7,9 @@ using System.Windows.Media;
 
 namespace Genlog
 {
+    /// <summary>
+    /// Contient les formes et couleurs disponibles
+    /// </summary>
     public class FocusModel
     {
         public enum Shapes { Square, Triangle, Circle };

@@ -76,7 +76,7 @@ namespace Genlog
 
         #region shapes
 
-        private void InitializeAnimation()
+        private void InitializeAnimation() /// Initialise l'animation de défilement et le timer
         {
             _animation = new DoubleAnimation();
             _animation.Duration = new Duration(TimeSpan.FromMilliseconds(_interval));
@@ -87,7 +87,7 @@ namespace Genlog
             _timer.Stop();
         }
 
-        private FocusModel.Shapes PickOtherShape(FocusModel.Shapes s)
+        private FocusModel.Shapes PickOtherShape(FocusModel.Shapes s) /// Sélectionne une forme autre que celle passée en paramètre
         {
             FocusModel.Shapes[] availableShapes = new FocusModel.Shapes[FocusModel.ShapesCount - 1];
 
@@ -102,21 +102,23 @@ namespace Genlog
 
             return availableShapes[i];
         }
-        
-        private Brush PickOtherColor(Brush b)
+
+        private Brush PickOtherColor(Brush b) /// Sélectionne une couleur autre que celle passée en paramètre
         {
             return _model.Colors.Where(brush => (brush != b)).ToArray()[_randomizer.Next(_model.Colors.Count - 1)];
         }
 
-        private void SpawnShape()
+        private void SpawnShape() /// Permet de faire apparaitre une nouvelle forme
         {
             CustomShape shape;
             ShapeProperty property = new ShapeProperty();
 
             bool isValid = _randomizer.NextDouble() < 0.5 ? true : false;
 
+            // Si on compte faire une forme qui respecte la consigne
             if (isValid)
             {
+                // On construit la forme en fonction de la consigne
                 if (!instruction.Negations[0])
                     property.Shape = instruction.Property.Shape;
                 else
@@ -129,21 +131,23 @@ namespace Genlog
 
                 property.HasDots = instruction.Property.HasDots;
 
+                // Les propiétés de la forme sont correctes, on généré la forme associée
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnCorrectAnswer;
                 shape.Unloaded += OnShapeGoneUnclicked;
                 shape.Unloaded += OnShapeUnloaded;
             }
-            else
+            else // Si on ne veut pas une forme correcte
             {
+                // On génére une des propriétés aléatoires
                 property.Shape = (FocusModel.Shapes) _randomizer.Next(FocusModel.ShapesCount);
                 property.Color = _model.Colors[_randomizer.Next(_model.Colors.Count)];
                 property.HasDots = _randomizer.NextDouble() < 0.5 ? true : false;
 
-
+                // Si toutefois la forme respecte la consigne (cas rare)
                 if (property.Respect(instruction))
                 {
-                    property.HasDots = !property.HasDots;
+                    property.HasDots = !property.HasDots; // On inverse la présence de points
                 }
 
                 shape = new CustomShape(property, _shapeSize);
@@ -156,11 +160,12 @@ namespace Genlog
             _animation.From = -shape.RuntimeWidth;
             shape.BeginAnimation(Canvas.LeftProperty, _animation);
 
+            // On supprime la forme qui vient de sortir sans enlever les autres éléments du canvas.
             if (canvas.Children.Count > 9)
                 canvas.Children.RemoveRange(7, 1);
         }
 
-        void OnShapeUnloaded(object sender, RoutedEventArgs e)
+        void OnShapeUnloaded(object sender, RoutedEventArgs e) /// Se produit lorsqu'une forme correcte sort de l'écran
         {
             _gone++;
 
@@ -173,13 +178,13 @@ namespace Genlog
             }
         }
 
-        void OnShapeGoneUnclicked(object sender, RoutedEventArgs e)
+        void OnShapeGoneUnclicked(object sender, RoutedEventArgs e) /// Se produit lorsqu'une forme correcte non cliquée sort de l'écran
         {
             _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
             labelBad.Content = "Mauvaises réponses : " + _bad.ToString();
         }
 
-        void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
+        void OnCorrectAnswer(object sender, MouseButtonEventArgs e) /// On vient de cliquer sur une forme correcte
         {
             CustomShape canvas = sender as CustomShape;
 
@@ -206,7 +211,7 @@ namespace Genlog
         }
 
 
-        void OnWrongAnswer(object sender, MouseButtonEventArgs e)
+        void OnWrongAnswer(object sender, MouseButtonEventArgs e) /// On vient de cliquer sur une forme non correcte
         {
             CustomShape canvas = sender as CustomShape;
 
@@ -222,7 +227,7 @@ namespace Genlog
             labelBad.Content = "Mauvaises réponses : " + _bad.ToString();
         }
 
-        private void TimerTick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e) /// Le timer lance une nouvelle forme
         {
             SpawnShape();
         }
@@ -240,7 +245,7 @@ namespace Genlog
             }
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e) /// La fenêtre est resizée
         {
             _animation.To = canvas.ActualWidth;
 
@@ -273,7 +278,7 @@ namespace Genlog
             Canvas.SetLeft(labelBad, canvas.ActualWidth - canvas.ActualWidth / 4);
         }
 
-        private void OnClickNext(object sender, RoutedEventArgs e)
+        private void OnClickNext(object sender, RoutedEventArgs e) /// On passe de la consigne au défilement
         {
             double buttonDuration = canvas.ActualWidth - Canvas.GetLeft(buttonOK);
             double labelDuration = canvas.ActualWidth - Canvas.GetLeft(ruleLabel);
@@ -293,7 +298,7 @@ namespace Genlog
             ruleLabel.BeginAnimation(Canvas.LeftProperty, leaveScreenAnim);
         }
 
-        private void OnClickQuit(object sender, RoutedEventArgs e)
+        private void OnClickQuit(object sender, RoutedEventArgs e) /// On souhaite quitter
         {
             _timer.Stop();
             if (MessageBox.Show("Voulez-vous vraiment quitter ? Vous perdrez votre progression.", "Abandonner", MessageBoxButton.YesNo) == MessageBoxResult.Yes)

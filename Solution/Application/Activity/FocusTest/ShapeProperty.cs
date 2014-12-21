@@ -13,7 +13,7 @@ namespace Genlog
         public bool HasDots { get; set; }
         public FocusModel.Shapes Shape { get; set; }
 
-        public bool Respect(Instruction instruction)
+        public bool Respect(Instruction instruction) /// Permet de savoir si les propiétés respectent la consigne
         {
             Brush instColor = instruction.Property.Color;
             bool instHasDots = instruction.Property.HasDots;

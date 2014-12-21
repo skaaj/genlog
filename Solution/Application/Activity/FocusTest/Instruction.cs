@@ -8,12 +8,15 @@ using System.Windows.Shapes;
 
 namespace Genlog
 {
+    /// <summary>
+    /// Représente une consigne
+    /// </summary>
     public class Instruction
     {
         public bool[] Negations { get; set; }
         public ShapeProperty Property { get; set; }
 
-        public Instruction(int level, FocusModel model)
+        public Instruction(int level, FocusModel model) /// Génére des propiétés en fonction des paramètre de l'utilisateur
         {
             Negations = new bool[2];
 
@@ -74,7 +77,7 @@ namespace Genlog
             }
         }
 
-        public override string ToString()
+        public override string ToString() /// Généré le texte de la consigne à partir des propiétés
         {
             StringBuilder strBuilder = new StringBuilder();
             if (Negations[0])

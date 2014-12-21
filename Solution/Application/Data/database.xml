@@ -4,7 +4,9 @@
     <FocusTests>
       <Result time="4" level="1" score="0" />
     </FocusTests>
-    <MemTests />
+    <MemTests>
+      <Result time="4" level="2" score="1" />
+    </MemTests>
   </User>
   <User firstname="Gwendal" lastname="Le Squer">
     <MemTests>

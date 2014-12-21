@@ -10,6 +10,9 @@ using System.Windows.Shapes;
 
 namespace Genlog
 {
+    /// <summary>
+    /// Permet de construire des formes personnalisées
+    /// </summary>
     public class CustomShape : Canvas
     {
         private static double eqFactor = Math.Sqrt(3.0) / 2.0;
