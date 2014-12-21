@@ -10,7 +10,17 @@
 
         WindowTransitionsEnabled="True"
         WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid x:Name="grid">
+
         <Grid.Resources>
             <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" TargetType="MenuItem">
                 <Border Name="Border">
@@ -28,11 +38,11 @@
         </Grid.Resources>
 
         <Menu IsMainMenu="True" Margin="0,0,0,0" VerticalAlignment="Top" Height="32" Padding="10,0,0,0" Background="#FF9AD063">
-            <MenuItem Header="_Accueil" Click="OnClickHome" Background="{x:Null}" FontWeight="Bold" FontSize="12" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
-            <MenuItem Header="Test de _mémoire associative" Click="OnClickMemoryTest" Background="{x:Null}" FontWeight="Bold" FontSize="12" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
-            <MenuItem Header="Test de _concentration" Click="OnClickFocusTest" Background="{x:Null}" FontWeight="Bold" FontSize="12" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
-            <MenuItem Header="_Statistiques" Click="OnClickStats" Background="{x:Null}" FontWeight="Bold" FontSize="12" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0"/>
-            <MenuItem Header="A_ide" Click="OnClickHelp" Background="{x:Null}" FontWeight="Bold" FontSize="12" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0"/>
+            <MenuItem Header="_Accueil" Click="OnClickHome" Background="{x:Null}" FontSize="14" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
+            <MenuItem Header="Test de _mémoire associative" Click="OnClickMemoryTest" Background="{x:Null}" FontSize="14" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
+            <MenuItem Header="Test de _concentration" Click="OnClickFocusTest" Background="{x:Null}" FontSize="14" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
+            <MenuItem Header="_Statistiques" Click="OnClickStats" Background="{x:Null}" FontSize="14" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0" />
+            <MenuItem Header="A_ide" Click="OnClickHelp" Background="{x:Null}" FontSize="14" Foreground="White" BorderBrush="{x:Null}" BorderThickness="0" Padding="7,5,8,6" Margin="0,4,0,0"/>
         </Menu>
 
         <UserControl x:Name="contentArea" Margin="0,32,0,0" />

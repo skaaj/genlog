@@ -5,14 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+
     <Canvas x:Name="canvas" Margin="0,0,0,0" Loaded="CanvasLoaded" SizeChanged="OnSizeChanged">
-        <StackPanel>
-            <Label x:Name="title" Content="Exemple" Canvas.Left="0" Canvas.Top="0" FontSize="18" FontFamily="Segoe UI Semibold" BorderThickness="0" Margin="0,0,0,0"/>
-            <Label x:Name="labelGood" Content="0" Canvas.Left="10" Canvas.Top="44"/>
-            <Label x:Name="labelBad" Content="0" Canvas.Left="10" Canvas.Top="70"/>
-        </StackPanel>
+        <Label x:Name="title" Content="Commençons par un exemple..." Canvas.Left="0" Canvas.Top="0" FontSize="30" FontFamily="/Application;component/Fonts/#Roboto Thin" BorderThickness="0" Margin="0,0,0,0"/>
+        <Label x:Name="labelGood" Content="Bonnes réponses : 0" Canvas.Left="10" Canvas.Top="44" FontFamily="/Application;component/Fonts/#Roboto" FontSize="14"/>
+        <Label x:Name="labelBad" Content="Mauvaises réponses : 0" Canvas.Left="10" Canvas.Top="70" FontFamily="/Application;component/Fonts/#Roboto" FontSize="14"/>
         <Rectangle x:Name="rectBackground" Fill="#FF80BA45" Height="100" Canvas.Left="0" Canvas.Top="137" Width="100" StrokeThickness="0"/>
-        <Label x:Name="ruleLabel" Content="Label" Canvas.Left="0" Canvas.Top="0" FontSize="20" FontFamily="Segoe UI Semibold" BorderThickness="0" Margin="0,0,0,0" Foreground="White" FontWeight="Bold"/>
-        <Button x:Name="buttonOK" Content=">" Canvas.Left="45" Canvas.Top="193" Width="45" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Foreground="#FF898989" FontWeight="Bold" BorderBrush="White" Background="#FFDADADA" FontSize="20"/>
+        <Label x:Name="ruleLabel" Content="Votre consigne : " Canvas.Left="0" Canvas.Top="0" FontSize="24" BorderThickness="0" Foreground="White" FontWeight="Bold" FontFamily="/Application;component/Fonts/#Roboto Light"/>
+        <Button x:Name="buttonOK" Canvas.Left="60" Width="75" Height="75" Canvas.Top="151" Style="{DynamicResource MetroCircleButtonStyle}" Foreground="White" FontWeight="Bold" BorderBrush="#FF3A7300" Background="#FF9AD063" FontSize="20" BorderThickness="5" Cursor="Hand" Click="OnClickNext">
+            <Rectangle Width="25"
+               Height="25"
+               Fill="#FF578F1E">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                         Visual="{DynamicResource appbar_chevron_right}"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
     </Canvas>
 </UserControl>

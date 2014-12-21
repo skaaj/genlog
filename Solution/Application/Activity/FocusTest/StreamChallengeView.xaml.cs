@@ -80,10 +80,6 @@ namespace Genlog
         {
             _animation = new DoubleAnimation();
             _animation.Duration = new Duration(TimeSpan.FromMilliseconds(_interval));
-            EasingFunctionBase ease = new CircleEase();
-            ease.EasingMode = EasingMode.EaseIn;
-            _animation.EasingFunction = ease;
-
 
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(TimerTick);
@@ -132,11 +128,6 @@ namespace Genlog
 
                 property.HasDots = instruction.Property.HasDots;
 
-                if (property.Respect(instruction))
-                {
-                    ;
-                }
-
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnCorrectAnswer;
                 shape.Unloaded += OnShapeGoneUnclicked;
@@ -157,14 +148,15 @@ namespace Genlog
                 shape = new CustomShape(property, _shapeSize);
                 shape.MouseDown += OnWrongAnswer;
             }
-
-            _animation.From = -shape.RuntimeWidth;
+            
             canvas.Children.Add(shape);
             Canvas.SetTop(shape, _yCenter - (_shapeSize / 2));
+
+            _animation.From = -shape.RuntimeWidth;
             shape.BeginAnimation(Canvas.LeftProperty, _animation);
 
-            if (canvas.Children.Count > 6)
-                canvas.Children.RemoveRange(4, 1);
+            if (canvas.Children.Count > 8)
+                canvas.Children.RemoveRange(6, 1);
         }
 
         void OnShapeUnloaded(object sender, RoutedEventArgs e)
@@ -173,8 +165,6 @@ namespace Genlog
 
             if (_gone == 3)
             {
-                ruleLabel.Content += " (Fin détectée)";
-
                 if (!_example)
                     _parent.Show("register");
                 else
@@ -185,7 +175,7 @@ namespace Genlog
         void OnShapeGoneUnclicked(object sender, RoutedEventArgs e)
         {
             _bad++; // la forme est supprimée sans avoir été cliquée, on ajoute une erreur
-            labelBad.Content = _bad.ToString();
+            labelBad.Content = "Mauvaises réponses : " + _bad.ToString();
         }
 
         void OnCorrectAnswer(object sender, MouseButtonEventArgs e)
@@ -203,10 +193,17 @@ namespace Genlog
 
             _good++;
 
-            labelGood.Content = _good.ToString();
+            labelGood.Content = "Bonnes réponses : " + _good.ToString();
 
-            Console.WriteLine("Correct answer");
+            if(_good == 3)
+            {
+                if (!_example)
+                    _parent.Show("register");
+                else
+                    _parent.Show("stream");
+            }
         }
+
 
         void OnWrongAnswer(object sender, MouseButtonEventArgs e)
         {
@@ -220,9 +217,8 @@ namespace Genlog
             canvas.MouseDown -= OnWrongAnswer;
 
             _bad++;
-            labelBad.Content = _bad.ToString();
 
-            Console.WriteLine("Bad answer");
+            labelBad.Content = "Mauvaises réponses : " + _bad.ToString();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -234,12 +230,18 @@ namespace Genlog
 
         private void CanvasLoaded(object sender, RoutedEventArgs e)
         {
-
+            //ruleLabel.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Roboto Light");
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            // refactoring inc
+            if (!_example)
+            {
+                title.Content = "Passons aux choses sérieuses...";
+
+                labelBad.Visibility = Visibility.Collapsed;
+                labelGood.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -250,25 +252,49 @@ namespace Genlog
             _yCenter = canvas.ActualHeight / 2;
             _xCenter = canvas.ActualWidth / 2;
 
-            //Line middle = new Line();
-            //middle.Stroke = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
-            //middle.X1 = canvas.ActualWidth / 2;
-            //middle.X2 = middle.X1;
-            //middle.Y1 = 0;
-            //middle.Y2 = canvas.ActualHeight;
-            //middle.StrokeThickness = 2;
+            // Titre
+            Canvas.SetTop(title, canvas.ActualHeight / 8 - (title.ActualHeight / 2));
+            Canvas.SetLeft(title, canvas.ActualWidth / 2 - (title.ActualWidth / 2));
 
-            //canvas.Children.Add(middle);
-
+            // Rectangle vert
             Canvas.SetTop(rectBackground, canvas.ActualHeight / 4);
             rectBackground.Width = canvas.ActualWidth;
             rectBackground.Height = (int)(canvas.ActualHeight / 2);
 
+            // Consigne
             Canvas.SetTop(ruleLabel, canvas.ActualHeight / 2 - (ruleLabel.ActualHeight / 2));
             Canvas.SetLeft(ruleLabel, canvas.ActualWidth / 2 - (ruleLabel.ActualWidth / 2));
 
-            Canvas.SetTop(buttonOK, canvas.ActualHeight / 2 - (ruleLabel.ActualHeight / 2));
-            Canvas.SetLeft(buttonOK, canvas.ActualWidth / 2 + (ruleLabel.ActualWidth / 2) + 10);
+            // Bouton suivant
+            Canvas.SetTop(buttonOK, canvas.ActualHeight / 2 - (buttonOK.ActualHeight / 2));
+            Canvas.SetLeft(buttonOK, canvas.ActualWidth - (canvas.ActualWidth / 8));
+
+            // Scores
+            Canvas.SetTop(labelGood, canvas.ActualHeight - (canvas.ActualHeight / 8) - (labelGood.ActualHeight / 2));
+            Canvas.SetLeft(labelGood, canvas.ActualWidth / 4);
+
+            Canvas.SetTop(labelBad, canvas.ActualHeight - (canvas.ActualHeight / 8) - (labelGood.ActualHeight / 2));
+            Canvas.SetLeft(labelBad, canvas.ActualWidth - canvas.ActualWidth / 4);
+        }
+
+        private void OnClickNext(object sender, RoutedEventArgs e)
+        {
+            double buttonDuration = canvas.ActualWidth - Canvas.GetLeft(buttonOK);
+            double labelDuration = canvas.ActualWidth - Canvas.GetLeft(ruleLabel);
+
+            DoubleAnimation leaveScreenAnim = new DoubleAnimation();
+            leaveScreenAnim.Duration = new Duration(TimeSpan.FromMilliseconds(buttonDuration));
+            leaveScreenAnim.To = canvas.ActualWidth;
+
+            buttonOK.BeginAnimation(Canvas.LeftProperty, leaveScreenAnim);
+
+            leaveScreenAnim.Duration = new Duration(TimeSpan.FromMilliseconds(labelDuration));
+            leaveScreenAnim.Completed += (s, ev) =>
+            {
+                SpawnShape();
+                _timer.Start();
+            };
+            ruleLabel.BeginAnimation(Canvas.LeftProperty, leaveScreenAnim);
         }
     }
 }
