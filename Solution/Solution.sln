@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{B1E0D35A-6E1C-4A4F-B0F8-ACBB6A71DDA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsUnitaires", "AnswerMemoryTest\TestsUnitaires.csproj", "{ADEC66FB-8B60-48F1-963D-24C6A3551446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,10 @@ Global
 		{B1E0D35A-6E1C-4A4F-B0F8-ACBB6A71DDA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E0D35A-6E1C-4A4F-B0F8-ACBB6A71DDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1E0D35A-6E1C-4A4F-B0F8-ACBB6A71DDA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADEC66FB-8B60-48F1-963D-24C6A3551446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEC66FB-8B60-48F1-963D-24C6A3551446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEC66FB-8B60-48F1-963D-24C6A3551446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEC66FB-8B60-48F1-963D-24C6A3551446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

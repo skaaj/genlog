@@ -17,10 +17,10 @@
             <RowDefinition Height="2*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-
+        
         <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Content="Bienvenue" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold" FontSize="22"/>
-        <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"  Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description }"  MaxHeight="65" MaxWidth="500" FontSize="16"/>
-        <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description1bis }"  MaxHeight="65" MaxWidth="500" FontSize="16"/>
-        <TextBlock Grid.ColumnSpan="2"  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description2bis }" MaxHeight="65"  MaxWidth="500" FontSize="16"/>
+        <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"  Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description }"  MaxHeight="65" MaxWidth="1000" FontSize="16"/>
+        <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description1bis }"  MaxHeight="65" MaxWidth="1000" FontSize="16"/>
+        <TextBlock Grid.ColumnSpan="2"  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description2bis }" MaxHeight="65"  MaxWidth="1000" FontSize="16"/>
     </Grid>
 </UserControl>
