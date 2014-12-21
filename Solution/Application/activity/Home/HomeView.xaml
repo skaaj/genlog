@@ -11,14 +11,14 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="4*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         
-        <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Content="Accueil" Margin="10,10,0,0" VerticalAlignment="Top" Width="280" FontSize="36" FontFamily="/Application;component/Fonts/#Roboto Thin"/>
+        <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Content="Accueil" Margin="10,0,0,0" VerticalAlignment="Top" Width="280" FontSize="36" FontFamily="/Application;component/Fonts/#Roboto Thin"/>
         <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"  Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description }" MaxWidth="1000" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto"/>
         <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description1bis }" MaxWidth="1000" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto"/>
         <TextBlock Grid.ColumnSpan="2"  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="{ DynamicResource description2bis }" MaxWidth="1000" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto"/>
