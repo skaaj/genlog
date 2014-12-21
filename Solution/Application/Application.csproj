@@ -75,7 +75,6 @@
     <Compile Include="Activity\FocusTest\StreamChallengeView.xaml.cs">
       <DependentUpon>StreamChallengeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Activity\Help\HelpActivity.cs" />
     <Compile Include="Activity\Home\HomeActivity.cs" />
     <Compile Include="Activity\IStartable.cs" />
     <Compile Include="Activity\IStoppable.cs" />
@@ -89,9 +88,6 @@
     <Compile Include="Activity\MemoryTest\MemoryActivity.cs" />
     <Compile Include="Activity\FocusTest\FocusView.xaml.cs">
       <DependentUpon>FocusView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Activity\Help\HelpView.xaml.cs">
-      <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Activity\MemoryTest\MemoryView.xaml.cs">
       <DependentUpon>MemoryView.xaml</DependentUpon>
@@ -112,10 +108,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Activity\FocusTest\StreamChallengeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Activity\Help\HelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

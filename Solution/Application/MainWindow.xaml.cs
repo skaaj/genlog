@@ -50,7 +50,6 @@ namespace Genlog
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             AddActivity(Activities.Home, new HomeActivity(this));
-            AddActivity(Activities.Help, new HelpActivity(this));
             AddActivity(Activities.Focus, new FocusActivity(this));
             AddActivity(Activities.Stats, new StatisticsActivity(this));
             AddActivity(Activities.Memory, new MemoryTestActivity(this));
