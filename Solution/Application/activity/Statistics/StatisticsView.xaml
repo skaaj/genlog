@@ -14,14 +14,14 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0"  Grid.ColumnSpan="3">
             <Label Content="Statistiques" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Application;component/Fonts/#Roboto Thin" Margin="0,20"/>
-            <TextBlock TextWrapping="Wrap" Text="{ DynamicResource statistique }" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto" MaxWidth="600" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="{ DynamicResource statistique }" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto" MaxWidth="1000"  HorizontalAlignment="Center"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">

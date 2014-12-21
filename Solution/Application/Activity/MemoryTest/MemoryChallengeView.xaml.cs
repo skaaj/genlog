@@ -20,7 +20,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour MemorizationView.xaml
     /// </summary>
-    public partial class MemorizationView : UserControl, IStartable
+    public partial class MemorizationView : UserControl, IStartable ///Permet la gestion de la vue concernant la phase de challenge de l'utilisateur au test de mémoire
     {
         private MemoryTestActivity _parent;
         private List<ImageNombre> _images;
@@ -42,8 +42,8 @@ namespace Genlog
             _timer.Interval = new TimeSpan(0, 0, 1);
         }
 
-        // A chaque tick, rafraichir le compteur
-        public void TimerTick(object sender, EventArgs e)
+        
+        public void TimerTick(object sender, EventArgs e)///A chaque tick, rafraichir le compteur indiquant le temps restant
         {
             int timeLeft = int.Parse(TBCountDown.Text);
             TBCountDown.Text = (timeLeft - 1).ToString();
@@ -55,8 +55,8 @@ namespace Genlog
             }
         }
 
-        // Méthode création des listes d'images avec nombres 
-        public void LoadImagesFromDirectory(string directoryPath)
+         
+        public void LoadImagesFromDirectory(string directoryPath)///Méthode création des listes d'association d'images avec nombres
         {
             //Ajout des images du dossier dans une liste
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
@@ -83,7 +83,7 @@ namespace Genlog
 
         }
 
-        public void TrieAffichage()
+        public void TrieAffichage()///Récupére un nombre d'association et affiche la liste d'association dans un ordre aléatoire
         {
             int nombre;
             _parent.listeMemorisation.Clear();
@@ -121,8 +121,8 @@ namespace Genlog
             }
         }
 
-        // Start du timer
-        public void Start()
+
+        public void Start()///Start de la view
         {
             LoadImagesFromDirectory("../../Images");
             TrieAffichage();

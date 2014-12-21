@@ -19,7 +19,7 @@ namespace Genlog
         }
     }
 
-    public abstract class Activity : IStoppable, IStartable
+    public abstract class Activity : IStoppable, IStartable///Détermine l'Activity utilisée pour les Views
     {
         private MainWindow Context { get; set; }
 
@@ -92,7 +92,7 @@ namespace Genlog
             Context.GoToHome();
         }
 
-        private void SetLanguageDictionary()
+        private void SetLanguageDictionary()///Permet de récupérer les ressources linguistiques selon la langue utilisée sur le système d'exploitation
         {
             ResourceDictionary dict = new ResourceDictionary();
             switch (Thread.CurrentThread.CurrentCulture.ToString())

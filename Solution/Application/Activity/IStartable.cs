@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genlog
 {
-    interface IStartable
+    interface IStartable///Permet d'utiliser le start dans Activity
     {
         void Start();
     }

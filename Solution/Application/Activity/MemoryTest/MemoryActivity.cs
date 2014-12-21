@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Genlog
 {
-    public class MemoryTestActivity : Activity
+    public class MemoryTestActivity : Activity///Détermine l'Activity utilisée pour les Views concernant le test de mémoire
     {
         public int tempsMemorisation;       // Temps donné pour la mémorisation des figure et des nombres
         public int difficulte;              // Difficulté de la mémorisation
@@ -29,7 +29,7 @@ namespace Genlog
             Show("home");
         }
 
-        public override void Reload()
+        public override void Reload() ///Rechargement des différentes Views
         {
             base.Reload();
 

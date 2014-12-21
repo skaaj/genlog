@@ -21,7 +21,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow///Permet de gérer le bandeau de tête de l'application. Ce bandeau se retrouve dans toutes les views
     {
 
         private Activity _currentActivity;

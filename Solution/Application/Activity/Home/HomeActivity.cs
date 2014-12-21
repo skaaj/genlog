@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genlog
 {
-    public class HomeActivity : Activity
+    public class HomeActivity : Activity///Détermine l'Activity utilisée pour la View Home
     {
         public HomeActivity(MainWindow context) : base(context)
         {

@@ -20,7 +20,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour AnswerMemoryView.xaml
     /// </summary>
-    public partial class AnswerMemoryView : UserControl, IStartable
+    public partial class AnswerMemoryView : UserControl, IStartable ///Permet la gestion de la vue concernant la phase de réponse de l'utilisateur au test de mémoire
     {
         private MemoryTestActivity _parent;
 
@@ -37,7 +37,7 @@ namespace Genlog
 
 
 
-        public void AffichageRandom()
+        public void AffichageRandom()   ///Permet d'afficher une association que l'utilisateur doit compléter, de façon aléatoire
         {
             List<int> listecompte = new List<int> { };
             listedebox = new List<TextBox> { };
@@ -51,9 +51,9 @@ namespace Genlog
             int nombre; 
             Random rnd = new Random();
             
-            // Equivalence entre le nouveau random et l'affichage initial
+            
 
-            for (int c = 0; listecompte.Count > 0; c++)
+            for (int c = 0; listecompte.Count > 0; c++) // Equivalence entre le nouveau random et l'affichage initial
             {
                 nombre = rnd.Next(1, listecompte.Count);
                 equivalent[c] = listecompte.ElementAt(nombre-1);
@@ -61,8 +61,8 @@ namespace Genlog
 
             }
 
-            //Affichage des images
-
+            
+                //Affichage des images
                 Label lbl = new Label();
                 lbl.Width = 40;
                 lbl.Content = _parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._nombre;
@@ -71,8 +71,8 @@ namespace Genlog
 
 
 
-        // Verification des réponses apportées par l'utilisateur
-        public void VerificationReponse()
+        
+        public void VerificationReponse()/// Verification des réponses apportées par l'utilisateur
         {
             
             for (int z = 0; z < _parent.listeMemorisation.Count; z++)
@@ -86,7 +86,7 @@ namespace Genlog
         }
 
 
-        private void Suivant_Click(object sender, RoutedEventArgs e)
+        private void Suivant_Click(object sender, RoutedEventArgs e)///Vérifie qu'il reste des associations auquelles répondre sinon envoie à la page de résultat
         {
             try
             {
@@ -110,7 +110,7 @@ namespace Genlog
             }
         }
 
-        public void Start()
+        public void Start()///Start de la view
         {
             _parent.ListeReponse = new List<ImageNombre> { };
             _parent.ListeReponse.Clear();

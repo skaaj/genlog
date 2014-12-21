@@ -8,8 +8,9 @@ using Genlog;
 namespace AnswerMemoryTest
 {
     [TestClass]
-    public class MemoryAnswerTest
+    public class MemoryAnswerTest ///Permet d'effectuer un test unitaire sur des méthodes présentes dans MemoryTestView
     {
+        //Il semble que le fait d'utiliser des bibliothèques externes implique une mise en place des tests unitaires différentes de celles vues en cours, un débogage n'a pas été trouvé
         [TestMethod]
         public void CountAnswerTest()
         {

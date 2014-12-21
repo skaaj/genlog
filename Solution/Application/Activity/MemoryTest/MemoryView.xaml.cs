@@ -20,7 +20,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour MemoryTestView.xaml
     /// </summary>
-    public partial class MemoryTestView : UserControl
+    public partial class MemoryTestView : UserControl ///Permet la gestion de la vue concernant l'accueil de l'utilisateur au test de mémoire
     {
 
         private MemoryTestActivity _parent;
@@ -35,7 +35,7 @@ namespace Genlog
         }
 
 
-        private void OnSubmit(object sender, RoutedEventArgs e)
+        private void OnSubmit(object sender, RoutedEventArgs e)///Vérifie les entrées dans les champs de paramètre et le nombre d'images disponibles
         {
             try {_parent.tempsMemorisation = int.Parse(champs_temps.Text);}
             catch { _parent.tempsMemorisation = 0; }
@@ -70,7 +70,7 @@ namespace Genlog
             
         }
 
-        public void NumberOfImage()
+        public void NumberOfImage()///Compte le nombre d'images disponibles
         {
             DirectoryInfo directory = new DirectoryInfo("../../Images");
             string filePath;

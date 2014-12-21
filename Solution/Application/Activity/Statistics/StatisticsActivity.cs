@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genlog
 {
-    public class StatisticsActivity : Activity
+    public class StatisticsActivity : Activity///Détermine l'Activity utilisée pour la View Statistics
     {
         MainWindow _context;
 

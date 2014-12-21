@@ -20,7 +20,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour ResulatatMemorizationView.xaml
     /// </summary>
-    public partial class ResultatMemorizationView : UserControl, IStartable
+    public partial class ResultatMemorizationView : UserControl, IStartable ///Permet la gestion de la vue concernant l'affichage des résultats de l'utilisateur au test de mémoire
     {
         private MemoryTestActivity _parent;
 
@@ -69,7 +69,7 @@ namespace Genlog
         }
 
 
-        private XElement UserExists(XElement root)
+        private XElement UserExists(XElement root)///Récupération des informations renseignées sur l'utilisateur
         {
             IEnumerable<XElement> users = root.Elements("User");
             foreach (var user in users)
@@ -82,7 +82,7 @@ namespace Genlog
             return null;
         }
 
-        public void AffichageResultat()
+        public void AffichageResultat()///Affiche les images avec les réponses données, indique si la réponse est juste ou fausse
         {
             Affichage_resultat.Children.Clear();
 
@@ -123,7 +123,7 @@ namespace Genlog
 
         }
 
-        public void Start()
+        public void Start()///Start de la view
         {
             AffichageResultat();
         }

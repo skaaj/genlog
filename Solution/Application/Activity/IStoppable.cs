@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genlog
 {
-    interface IStoppable
+    interface IStoppable///Permet d'utiliser le stop dans Activity
     {
         void Stop();
     }

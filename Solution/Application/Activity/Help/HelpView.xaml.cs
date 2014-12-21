@@ -21,7 +21,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour HelpView.xaml
     /// </summary>
-    public partial class HelpView : UserControl
+    public partial class HelpView : UserControl ///Permet de gérer la View Help
     {
         public HelpView()
         {

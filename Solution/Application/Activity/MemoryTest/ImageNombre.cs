@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genlog
 {
-    public class ImageNombre
+    public class ImageNombre///Classe permettant de créer des associations Image/Nombre
     {
         public string _image { get; set; }
         public string _nombre { get; set; }

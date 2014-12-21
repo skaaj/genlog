@@ -1,7 +1,7 @@
 ﻿
 namespace Genlog
 {
-    public class HelpActivity : Activity
+    public class HelpActivity : Activity///Détermine l'Activity utilisée pour la View Help
     {
 
         public HelpActivity(MainWindow context) : base(context)
