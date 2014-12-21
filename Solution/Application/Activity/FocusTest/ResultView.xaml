@@ -2,15 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" Width="300">
     <Grid>
-        <StackPanel Margin="0">
-            <Label Content="S'inscrire"/>
-            <TextBox x:Name="textBoxFirstname" Height="23" TextWrapping="Wrap" Text="Prénom"/>
-            <TextBox x:Name="textBoxLastname" Height="23" TextWrapping="Wrap" Text="Nom"/>
-            <Button Content="Valider" Click="OnSubmit"/>
+        <StackPanel Margin="0" MaxWidth="400">
+            <Label Content="S'inscrire" FontFamily="/Application;component/Fonts/#Roboto Thin" FontSize="46" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+            <TextBox x:Name="textBoxFirstname" Height="23" TextWrapping="Wrap" Text="Prénom" Margin="10" Controls:TextBoxHelper.ClearTextButton="True"/>
+            <TextBox x:Name="textBoxLastname" Height="23" TextWrapping="Wrap" Text="Nom" Margin="10,0,10,10" Controls:TextBoxHelper.ClearTextButton="True"/>
+            <Button Content="Valider" Click="OnSubmit" Margin="10,0,10,10" FontFamily="/Application;component/Fonts/#Roboto"/>
         </StackPanel>
     </Grid>
 </UserControl>

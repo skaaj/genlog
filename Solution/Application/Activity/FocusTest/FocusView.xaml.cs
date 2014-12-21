@@ -42,12 +42,6 @@ namespace Genlog
                 _parent.Level = level;
                 _parent.Show("example");
             }
-            else
-            {
-                _parent.Speed = 2;
-                _parent.Level = 4;
-                _parent.Show("example");
-            }
         }
     }
 }

@@ -6,9 +6,16 @@ namespace Genlog
 
         public HelpActivity(MainWindow context) : base(context)
         {
-            AddView("home", new HelpView());
+            Reload();
 
             Show("home");
+        }
+
+        public override void Reload()
+        {
+            base.Reload();
+
+            AddView("home", new HelpView());
         }
     }
 }

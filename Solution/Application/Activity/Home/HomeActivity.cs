@@ -10,9 +10,16 @@ namespace Genlog
     {
         public HomeActivity(MainWindow context) : base(context)
         {
-            AddView("home", new HomeView());
+            Reload();
 
             Show("home");
+        }
+
+        public override void Reload()
+        {
+            base.Reload();
+
+            AddView("home", new HomeView());
         }
     }
 }

@@ -84,6 +84,7 @@ namespace Genlog
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Interval = TimeSpan.FromMilliseconds(_interval / 2);
+            _timer.Stop();
         }
 
         private FocusModel.Shapes PickOtherShape(FocusModel.Shapes s)
@@ -155,15 +156,15 @@ namespace Genlog
             _animation.From = -shape.RuntimeWidth;
             shape.BeginAnimation(Canvas.LeftProperty, _animation);
 
-            if (canvas.Children.Count > 8)
-                canvas.Children.RemoveRange(6, 1);
+            if (canvas.Children.Count > 9)
+                canvas.Children.RemoveRange(7, 1);
         }
 
         void OnShapeUnloaded(object sender, RoutedEventArgs e)
         {
             _gone++;
 
-            if (_gone == 3)
+            if (_gone == 3 && _good != 3)
             {
                 if (!_example)
                     _parent.Show("register");
@@ -292,9 +293,27 @@ namespace Genlog
             leaveScreenAnim.Completed += (s, ev) =>
             {
                 SpawnShape();
-                _timer.Start();
+                if (_example)
+                    _timer.Start();
+                else
+                    testc();
             };
             ruleLabel.BeginAnimation(Canvas.LeftProperty, leaveScreenAnim);
+        }
+
+        private void OnClickQuit(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+            if (MessageBox.Show("Voulez-vous vraiment quitter ? Vous perdrez votre progression.", "Abandonner", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                _parent.GoToHome();
+            else
+                _timer.Start();
+        }
+
+        private void testc()
+        {
+            Console.WriteLine("wtf");
+            _timer.Start();
         }
     }
 }

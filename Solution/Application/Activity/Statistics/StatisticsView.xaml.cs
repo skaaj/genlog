@@ -21,7 +21,7 @@ namespace Genlog
     /// <summary>
     /// Logique d'interaction pour StatisticsView.xaml
     /// </summary>
-    public partial class StatisticsView : UserControl, IStartable
+    public partial class StatisticsView : UserControl
     {
         StatisticsActivity _parent;
 
@@ -42,12 +42,14 @@ namespace Genlog
 
         private void OnSelectUser(object sender, SelectionChangedEventArgs e)
         {
+            if (e.AddedItems.Count < 1) return;
+
             XElement user = e.AddedItems[0] as XElement;
             IEnumerable<XElement> memTests = user.Element("MemTests").Elements("Result");
             
             DataTable table = new DataTable();
             table.Columns.Add("Temps", System.Type.GetType("System.String"));
-            table.Columns.Add("Niveau", System.Type.GetType("System.String"));
+            table.Columns.Add("Nombre de figures", System.Type.GetType("System.String"));
             table.Columns.Add("Score", System.Type.GetType("System.String")); 
             foreach (XElement test in memTests)
             {
@@ -172,8 +174,7 @@ namespace Genlog
             }
         }
 
-
-        void IStartable.Start()
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
             _usersDoc = XDocument.Load("../../Data/database.xml");
             grid.DataContext = _usersDoc.Element("Users").Elements();

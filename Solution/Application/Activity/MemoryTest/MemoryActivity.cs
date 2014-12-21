@@ -24,6 +24,15 @@ namespace Genlog
         public MemoryTestActivity(MainWindow context)
             : base(context)
         {
+            Reload();
+
+            Show("home");
+        }
+
+        public override void Reload()
+        {
+            base.Reload();
+
             homeView = new MemoryTestView(this);
             challengeView = new MemorizationView(this);
             resultView = new ResultatMemorizationView(this);
@@ -33,9 +42,6 @@ namespace Genlog
             AddView("result", resultView);
             AddView("challenge", challengeView);
             AddView("answer", answerView);
-
-            Show("home");
         }
-
     }
 }

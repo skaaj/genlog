@@ -44,6 +44,12 @@ namespace Genlog
         public virtual void Stop()
         {
             StopView();
+            Reload();
+        }
+
+        public virtual void Reload()
+        {
+            _views.Clear();
         }
 
         private void StartView()

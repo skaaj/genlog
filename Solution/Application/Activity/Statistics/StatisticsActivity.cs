@@ -13,9 +13,16 @@ namespace Genlog
         public StatisticsActivity(MainWindow context)
             : base(context)
         {
-            AddView("home", new StatisticsView(this));
+            Reload();
 
             Show("home");
+        }
+
+        public override void Reload()
+        {
+            base.Reload();
+
+            AddView("home", new StatisticsView(this));
         }
     }
 }

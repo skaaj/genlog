@@ -22,5 +22,15 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
+        <Button x:Name="buttonQuit" Canvas.Right="10" Width="40" Height="40" Canvas.Top="10" Style="{DynamicResource MetroCircleButtonStyle}" Foreground="White" FontWeight="Bold" BorderBrush="#FF8F1E1E" Background="#FFD06363" FontSize="20" BorderThickness="5" Cursor="Hand" Click="OnClickQuit">
+            <Rectangle Width="10"
+               Height="10"
+               Fill="#FF8F1E1E">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                         Visual="{DynamicResource appbar_stop}"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
     </Canvas>
 </UserControl>
