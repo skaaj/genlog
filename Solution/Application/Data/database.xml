@@ -2,37 +2,13 @@
 <Users>
   <User firstname="Benjamin" lastname="Denom">
     <FocusTests>
-      <Result time="2" level="4" score="3" />
+      <Result time="4" level="1" score="0" />
     </FocusTests>
     <MemTests />
   </User>
   <User firstname="Gwendal" lastname="Le Squer">
-    <FocusTests>
-      <Result time="2" level="4" score="4" />
-    </FocusTests>
-    <MemTests />
-  </User>
-  <User firstname="Avicii" lastname="Dur">
-    <FocusTests>
-      <Result time="2" level="4" score="4" />
-    </FocusTests>
-    <MemTests />
-  </User>
-  <User firstname="Ben" lastname="Jo">
-    <FocusTests>
-      <Result time="2" level="4" score="0" />
-    </FocusTests>
-    <MemTests />
-  </User>
-  <User firstname="Test" lastname="eurNom">
-    <FocusTests>
-      <Result time="2" level="4" score="0" />
-    </FocusTests>
-    <MemTests />
-  </User>
-  <User firstname="Gwen" lastname="Douille">
     <MemTests>
-      <Result time="2" level="2" score="2" />
+      <Result time="10" level="5" score="0" />
     </MemTests>
     <FocusTests />
   </User>

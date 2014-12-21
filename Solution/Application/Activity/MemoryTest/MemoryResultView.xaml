@@ -15,21 +15,18 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-
-        <Label Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Content="MemoryResultat View" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,10,0,0"  Width="280" FontWeight="Bold" FontSize="22"/>
-        <TextBlock Grid.ColumnSpan="2"  Grid.Column="0" Grid.Row="0"  Margin="10,60,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="Temps terminé, résultats"  Height="24" FontSize="16" />
-        <Button Grid.Column="1" Grid.Row="3" x:Name="Sauvegarde_Fin" Content="Sauvegarder et quitter"  Margin="10,10,0,0" VerticalAlignment="Top"  Click="OnSubmit" Background="#FFCDCDCD" FontSize="16"/>
-        <WrapPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" x:Name="Affichage_resultat" HorizontalAlignment="Left"  Margin="10,10,10,10"  RenderTransformOrigin="0.897,0.896"/>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Nombre de réponses justes :" HorizontalAlignment="Left" Margin="10,10,0,0"  RenderTransformOrigin="-0.921,-0.423" FontSize="16" FontWeight="Bold" TextWrapping="Wrap"/>
-        <Label Grid.Column="0" Grid.Row="2" x:Name="Nombre_reponses_justes" Content="Label" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Width="112" FontSize="16"/>
-        <Label Grid.Column="1" Grid.Row="2" Content="Votre Nom :"  Margin="10,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.211,0.154" FontSize="16" />
-        <Label Grid.Column="1" Grid.Row="2" Content="Votre Prénom :"  Margin="10,55,0,0" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="textBoxFirstname" HorizontalAlignment="Right"  Margin="10,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" MinWidth="200" MaxWidth="300" RenderTransformOrigin="0.158,1.652" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16"/>
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="textBoxLastname" HorizontalAlignment="Right"  Margin="10,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" MinWidth="200" MaxWidth="300" RenderTransformOrigin="0.158,1.652" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" />
+        <Label Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Content="Voici votre résultat" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="28" FontFamily="/Application;component/Fonts/#Roboto Light" Margin="0,40,0,0" Padding="0" />
+        <Button Grid.Column="1" Grid.Row="3" x:Name="Sauvegarde_Fin" Content="Sauvegarder et quitter"  Margin="0" VerticalAlignment="Center"  Click="OnSubmit" Background="#FFCDCDCD" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto" HorizontalAlignment="Center" Padding="20,10,23,10"/>
+        <WrapPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" x:Name="Affichage_resultat" HorizontalAlignment="Center"  Margin="10,10,10,10"  RenderTransformOrigin="0.897,0.896"/>
+        <Label Grid.Column="1" x:Name="Nombre_reponses_justes" Content="Label" HorizontalAlignment="Center" Margin="0,65,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto"/>
+        <Label Grid.Column="1" Grid.Row="2" Content="Votre nom :"  Margin="10,15,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto" HorizontalAlignment="Left"/>
+        <Label Grid.Column="1" Grid.Row="2" Content="Votre prénom :"  Margin="10,55,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="/Application;component/Fonts/#Roboto" HorizontalAlignment="Left"/>
+        <TextBox Grid.Column="1" Grid.Row="2" x:Name="textBoxLastname" HorizontalAlignment="Right"  Margin="10,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" MinWidth="200" MaxWidth="300" RenderTransformOrigin="0.158,1.652" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16"/>
+        <TextBox Grid.Column="1" Grid.Row="2" x:Name="textBoxFirstname" HorizontalAlignment="Right"  Margin="10,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" MinWidth="200" MaxWidth="300" RenderTransformOrigin="0.158,1.652" Controls:TextBoxHelper.ClearTextButton="True" FontSize="16" />
 
     </Grid>
 </UserControl>
