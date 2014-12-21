@@ -189,7 +189,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="UML.cd" />
     <Resource Include="Fonts\Roboto-Regular.ttf" />
     <Resource Include="Fonts\Roboto-Bold.ttf" />
     <Resource Include="Fonts\Roboto-Light.ttf" />

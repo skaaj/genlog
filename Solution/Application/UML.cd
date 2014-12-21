@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Ci dessous les vues associées aux activités du dessus. C'est classes sont toutes héritées de UserControl.">
+    <Position X="0.5" Y="7.5" Height="0.75" Width="10.545" />
+  </Comment>
+  <Comment CommentText="Ci dessous, les classes créées pour le besoin des classes ci dessus">
+    <Position X="0.5" Y="22.43" Height="0.75" Width="10.525" />
+  </Comment>
+  <Comment CommentText="Ci dessous classe définissant le bandeau header de l'application.">
+    <Position X="12.25" Y="7.5" Height="0.75" Width="2.064" />
+  </Comment>
+  <Comment CommentText="Classes concernant les view &quot;Focus&quot;">
+    <Position X="5.011" Y="23.443" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Classes concernant les view &quot;Memory&quot;">
+    <Position X="2.696" Y="23.447" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Home">
+    <Position X="0.5" Y="8.604" Height="0.422" Width="1.496" />
+  </Comment>
+  <Comment CommentText="Memory">
+    <Position X="2.775" Y="8.594" Height="0.422" Width="1.496" />
+  </Comment>
+  <Comment CommentText="Focus">
+    <Position X="4.982" Y="8.595" Height="0.422" Width="1.496" />
+  </Comment>
+  <Comment CommentText="Help">
+    <Position X="7.28" Y="8.585" Height="0.422" Width="1.496" />
+  </Comment>
+  <Comment CommentText="Statistics">
+    <Position X="9.533" Y="8.586" Height="0.422" Width="1.496" />
+  </Comment>
+  <Comment CommentText="Ressources pour MahApps.Metro">
+    <Position X="7.25" Y="23.448" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Ressources Linguistiques">
+    <Position X="9.341" Y="23.448" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Autres">
+    <Position X="11.972" Y="23.438" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="Genlog.ViewChangedArgs" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Activity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.Activity" Collapsed="true">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAiAAAAgAACAAAAAAAAAMAAAAIKAAAEAAAAA=</HashCode>
+      <FileName>Activity\Activity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.213" />
+  </Class>
+  <Class Name="Genlog.CustomShape">
+    <Position X="5" Y="27.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAABACAAAAAAAAAAAAEgAACBAkAIAAAACAAQABAAA=</HashCode>
+      <FileName>Activity\FocusTest\CustomShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.FocusActivity">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAgAAAAAAAABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\FocusTest\FocusActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.FocusModel">
+    <Position X="5" Y="32" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Genlog.FocusModel.Shapes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Activity\FocusTest\FocusModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAgAAAAAA=</HashCode>
+      <FileName>Activity\FocusTest\FocusModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.FocusView">
+    <Position X="5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\FocusTest\FocusView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.Instruction">
+    <Position X="5" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAAAQAAgCA=</HashCode>
+      <FileName>Activity\FocusTest\Instruction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.ResultView">
+    <Position X="5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAoAAQAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\FocusTest\ResultView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.ShapeProperty">
+    <Position X="5" Y="34.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAEAAAAAAAAAAAAgAAAAAAAAgAAAIAAAAAAgAAAAiA=</HashCode>
+      <FileName>Activity\FocusTest\ShapeProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.StreamChallengeView" BaseTypeListCollapsed="true">
+    <Position X="5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkAoAABACCxAAAFAjAEAABQgAAAAACAKQEAAAIAhAA=</HashCode>
+      <FileName>Activity\FocusTest\StreamChallengeView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Genlog.HelpActivity">
+    <Position X="7.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Help\HelpActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.HelpView">
+    <Position X="7.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Help\HelpView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.HomeActivity">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Home\HomeActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.HomeView" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Home\HomeView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Genlog.AnswerMemoryView" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAAAAAAAAAIAQQAAAAAAAAIIAAAAAEAA=</HashCode>
+      <FileName>Activity\MemoryTest\AnswerMemoryView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Genlog.ImageNombre">
+    <Position X="2.75" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Activity\MemoryTest\ImageNombre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.MemoryTestActivity">
+    <Position X="2.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEBAAAAAACIABAAABAAAAAAAAAAAAAAAAABAAAAI=</HashCode>
+      <FileName>Activity\MemoryTest\MemoryActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.MemorizationView" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAyAAAAAAAEAAAQAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Activity\MemoryTest\MemoryChallengeView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Genlog.ResultatMemorizationView" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAACoAAwAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\MemoryTest\MemoryResultView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Genlog.MemoryTestView">
+    <Position X="2.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAIAAAAAAAAAAAIQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\MemoryTest\MemoryView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.StatisticsActivity">
+    <Position X="9.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Statistics\StatisticsActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.StatisticsView" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgAEAAAEAAAAAAAAAQAAAAAAAAAAACABAAAAQ=</HashCode>
+      <FileName>Activity\Statistics\StatisticsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Genlog.Extension">
+    <Position X="12" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Activity\Statistics\StatisticsView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.App" Collapsed="true">
+    <Position X="7.25" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.MainWindow">
+    <Position X="12.5" Y="8.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Genlog.MainWindow.Activities" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MainWindow.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAAACAAEAACgAAAAAAAgIAAAAAAIQAAAIBAgAQAAAAI=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.Properties.Resources">
+    <Position X="9.5" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genlog.Properties.Settings">
+    <Position X="12" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Genlog.IStartable" Collapsed="true">
+    <Position X="3.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity\IStartable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Genlog.IStoppable" Collapsed="true">
+    <Position X="5.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Activity\IStoppable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
