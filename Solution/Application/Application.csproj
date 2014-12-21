@@ -68,6 +68,9 @@
     <Compile Include="Activity\FocusTest\FocusActivity.cs" />
     <Compile Include="Activity\FocusTest\Instruction.cs" />
     <Compile Include="Activity\FocusTest\FocusModel.cs" />
+    <Compile Include="Activity\FocusTest\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Activity\FocusTest\ShapeProperty.cs" />
     <Compile Include="Activity\FocusTest\StreamChallengeView.xaml.cs">
       <DependentUpon>StreamChallengeView.xaml</DependentUpon>
@@ -96,14 +99,15 @@
     <Compile Include="Activity\MemoryTest\MemoryResultView.xaml.cs">
       <DependentUpon>MemoryResultView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Activity\Register\Register.xaml.cs">
-      <DependentUpon>Register.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Activity\Statistics\StatisticsActivity.cs" />
     <Compile Include="Activity\Statistics\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Activity\FocusTest\FocusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Activity\FocusTest\ResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,10 +132,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Activity\MemoryTest\MemoryResultView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Activity\Register\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,11 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Data\SampleData.xml">
-      <SubType>Designer</SubType>
-    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -24,4 +24,16 @@
     </FocusTests>
     <MemTests />
   </User>
+  <User firstname="Test" lastname="eurNom">
+    <FocusTests>
+      <Result time="2" level="4" score="0" />
+    </FocusTests>
+    <MemTests />
+  </User>
+  <User firstname="Gwen" lastname="Douille">
+    <MemTests>
+      <Result time="2" level="2" score="2" />
+    </MemTests>
+    <FocusTests />
+  </User>
 </Users>

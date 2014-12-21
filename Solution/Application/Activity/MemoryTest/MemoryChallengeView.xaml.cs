@@ -70,7 +70,7 @@ namespace Genlog
             foreach (FileInfo fichier in directory.GetFiles())
             {
                 randomInt = _randomizer.Next(1, 999);
-                filePath = System.IO.Path.GetFullPath("../../Img/" + fichier.Name);
+                filePath = System.IO.Path.GetFullPath("../../Images/" + fichier.Name);
 
                 extension = System.IO.Path.GetExtension(filePath);
 
@@ -124,7 +124,7 @@ namespace Genlog
         // Start du timer
         public void Start()
         {
-            LoadImagesFromDirectory("../../Img");
+            LoadImagesFromDirectory("../../Images");
             TrieAffichage();
             TBCountDown.Text = (_parent.tempsMemorisation).ToString();
             _timer.Start();

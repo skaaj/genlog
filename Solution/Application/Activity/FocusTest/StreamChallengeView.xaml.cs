@@ -178,7 +178,7 @@ namespace Genlog
                 ruleLabel.Content += " (Fin détectée)";
 
                 if (!_example)
-                    _parent.GoToRegister(_good);
+                    _parent.Show("register");
                 else
                     _parent.Show("stream");
             }

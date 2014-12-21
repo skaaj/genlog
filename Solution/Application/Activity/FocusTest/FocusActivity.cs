@@ -10,6 +10,7 @@ namespace Genlog
     {
         public int Speed { get; set; }
         public int Level { get; set; }
+        public int Score { get; set; }
 
         public static Random Randomizer = new Random();
 
@@ -18,14 +19,9 @@ namespace Genlog
             AddView("home", new FocusView(this));
             AddView("stream", new StreamChallengeView(this, false));
             AddView("example", new StreamChallengeView(this, true));
+            AddView("register", new ResultView(this));
 
             Show("home");
-        }
-
-        public void GoToRegister(int score)
-        {
-            AddView("register", new Register(this, score));
-            Show("register");
         }
     }
 }

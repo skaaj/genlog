@@ -23,9 +23,6 @@
                         <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,2"/>
                         <Setter TargetName="Border" Property="BorderBrush" Value="White"/>
                     </Trigger>
-                    <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
-                    </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
         </Grid.Resources>

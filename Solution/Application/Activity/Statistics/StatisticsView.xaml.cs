@@ -34,7 +34,7 @@ namespace Genlog
 
             _parent = parent;
 
-            _usersDoc = XDocument.Load("../../Data/SampleData.xml");
+            _usersDoc = XDocument.Load("../../Data/database.xml");
             _userRoot = _usersDoc.Element("Users");
 
             grid.DataContext = _usersDoc.Element("Users").Elements();
@@ -175,7 +175,7 @@ namespace Genlog
 
         void IStartable.Start()
         {
-            _usersDoc = XDocument.Load("../../Data/SampleData.xml");
+            _usersDoc = XDocument.Load("../../Data/database.xml");
             grid.DataContext = _usersDoc.Element("Users").Elements();
         }
     }

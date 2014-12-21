@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
 
 namespace Genlog
 {
@@ -23,23 +24,67 @@ namespace Genlog
     {
         private MemoryTestActivity _parent;
 
+        private const string databasePath = "../../Data/database.xml";
+        private int _score;
+
         public ResultatMemorizationView(MemoryTestActivity parent)
         {
             InitializeComponent();
-            _parent = parent;
 
+            _parent = parent;
+            _score = 0;
         }
         private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            _parent.Show("home");
+            XElement root = XElement.Load(databasePath);
+
+            XElement user = UserExists(root);
+            if (user != null)
+            {
+                user.Element("MemTests").Add(new XElement("Result",
+                    new XAttribute("time", _parent.tempsMemorisation),
+                    new XAttribute("level", _parent.difficulte),
+                    new XAttribute("score", _score)
+                    ));
+            }
+            else
+            {
+                XElement mTests = new XElement("MemTests");
+                mTests.Add(new XElement("Result",
+                    new XAttribute("time", _parent.tempsMemorisation),
+                    new XAttribute("level", _parent.difficulte),
+                    new XAttribute("score", _score)
+                    ));
+
+                root.Add(new XElement("User",
+                    new XAttribute("firstname", textBoxFirstname.Text),
+                    new XAttribute("lastname", textBoxLastname.Text),
+                    mTests,
+                    new XElement("FocusTests")
+                    ));
+            }
+
+            root.Save(databasePath);
+            _parent.GoToHome();
         }
 
 
+        private XElement UserExists(XElement root)
+        {
+            IEnumerable<XElement> users = root.Elements("User");
+            foreach (var user in users)
+            {
+                if (user.Attribute("firstname").Value == textBoxFirstname.Text
+                    && user.Attribute("lastname").Value == textBoxLastname.Text)
+                    return user;
+            }
+
+            return null;
+        }
 
         public void AffichageResultat()
         {
             Affichage_resultat.Children.Clear();
-            int nbreponsejuste = 0;
 
             // Affichage des images
             foreach (ImageNombre imgnb in _parent.ListeReponse)
@@ -66,7 +111,7 @@ namespace Genlog
                 }
                 else 
                 {
-                    nbreponsejuste = nbreponsejuste + 1;
+                    _score++;
                     lbl.Background = (Brush)bc.ConvertFrom("#8ad628");
                 }
 
@@ -74,7 +119,7 @@ namespace Genlog
                 Affichage_resultat.Children.Add(lbl); 
             }
 
-            Nombre_reponses_justes.Content = (nbreponsejuste).ToString() + " / " + (_parent.ListeReponse.Count).ToString();
+            Nombre_reponses_justes.Content = (_score).ToString() + " / " + (_parent.ListeReponse.Count).ToString();
 
         }
 

@@ -72,13 +72,13 @@ namespace Genlog
 
         public void NumberOfImage()
         {
-            DirectoryInfo directory = new DirectoryInfo("../../Img");
+            DirectoryInfo directory = new DirectoryInfo("../../Images");
             string filePath;
             string extension;
 
             foreach (FileInfo fichier in directory.GetFiles())
             {
-                filePath = System.IO.Path.GetFullPath("../../Img/" + fichier.Name);
+                filePath = System.IO.Path.GetFullPath("../../Images/" + fichier.Name);
                 extension = System.IO.Path.GetExtension(filePath);
 
                 if (extension == ".png" || extension == ".btm")
