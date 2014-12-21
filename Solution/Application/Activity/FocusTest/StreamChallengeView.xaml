@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
 
-    <Canvas x:Name="canvas" Margin="0,0,0,0" Loaded="CanvasLoaded" SizeChanged="OnSizeChanged">
+    <Canvas x:Name="canvas" Margin="0,0,0,0" SizeChanged="OnSizeChanged">
         <Label x:Name="title" Content="Commençons par un exemple..." Canvas.Left="0" Canvas.Top="0" FontSize="30" FontFamily="/Application;component/Fonts/#Roboto Thin" BorderThickness="0" Margin="0,0,0,0"/>
         <Label x:Name="labelGood" Content="Bonnes réponses : 0" Canvas.Left="10" Canvas.Top="44" FontFamily="/Application;component/Fonts/#Roboto" FontSize="14"/>
         <Label x:Name="labelBad" Content="Mauvaises réponses : 0" Canvas.Left="10" Canvas.Top="70" FontFamily="/Application;component/Fonts/#Roboto" FontSize="14"/>

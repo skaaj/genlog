@@ -42,6 +42,8 @@ namespace Genlog
             AddView("result", resultView);
             AddView("challenge", challengeView);
             AddView("answer", answerView);
+
+            Show("home");
         }
     }
 }

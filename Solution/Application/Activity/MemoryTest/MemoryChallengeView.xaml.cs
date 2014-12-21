@@ -129,5 +129,14 @@ namespace Genlog
             TBCountDown.Text = (_parent.tempsMemorisation).ToString();
             _timer.Start();
         }
+
+        private void OnQuit(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+            if (MessageBox.Show("Voulez-vous vraiment quitter ? Vous perdrez votre progression.", "Abandonner", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                _parent.GoToHome();
+            else
+                _timer.Start();
+        }
     }
 }

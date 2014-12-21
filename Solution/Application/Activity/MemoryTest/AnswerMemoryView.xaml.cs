@@ -68,9 +68,6 @@ namespace Genlog
                 lbl.Content = _parent.listeMemorisation.ElementAt(equivalent[cpt]-1)._nombre;
                 imagebox.Source = new BitmapImage(new Uri(_parent.listeMemorisation.ElementAt(equivalent[cpt] - 1)._image));
         }
-
-
-
         
         public void VerificationReponse()/// Verification des réponses apportées par l'utilisateur
         {
@@ -84,7 +81,6 @@ namespace Genlog
                 }
             }
         }
-
 
         private void Suivant_Click(object sender, RoutedEventArgs e)///Vérifie qu'il reste des associations auquelles répondre sinon envoie à la page de résultat
         {
@@ -116,6 +112,12 @@ namespace Genlog
             _parent.ListeReponse.Clear();
             cpt = 0;
             AffichageRandom();
+        }
+
+        private void OnQuit(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous vraiment quitter ? Vous perdrez votre progression.", "Abandonner", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                _parent.GoToHome();
         }
 
     }

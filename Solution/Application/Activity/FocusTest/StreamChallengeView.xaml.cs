@@ -229,11 +229,6 @@ namespace Genlog
 
         #endregion
 
-        private void CanvasLoaded(object sender, RoutedEventArgs e)
-        {
-            //ruleLabel.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Roboto Light");
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (!_example)
@@ -293,10 +288,7 @@ namespace Genlog
             leaveScreenAnim.Completed += (s, ev) =>
             {
                 SpawnShape();
-                if (_example)
-                    _timer.Start();
-                else
-                    testc();
+                _timer.Start();
             };
             ruleLabel.BeginAnimation(Canvas.LeftProperty, leaveScreenAnim);
         }
@@ -308,12 +300,6 @@ namespace Genlog
                 _parent.GoToHome();
             else
                 _timer.Start();
-        }
-
-        private void testc()
-        {
-            Console.WriteLine("wtf");
-            _timer.Start();
         }
     }
 }

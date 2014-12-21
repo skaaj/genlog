@@ -17,6 +17,18 @@
             <RowDefinition Height="5*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
+
+        <Button x:Name="buttonQuit" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" FontWeight="Bold" BorderBrush="#FF8F1E1E" Background="#FFD06363" FontSize="20" BorderThickness="5" Cursor="Hand" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Click="OnQuit">
+            <Rectangle Width="10"
+               Height="10"
+               Fill="#FF8F1E1E">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                         Visual="{DynamicResource appbar_stop}"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+
         <Label Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Content="Quel était le nombre associé ?" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="28" FontFamily="/Application;component/Fonts/#Roboto Light" Margin="0,40,0,0" Padding="0" />
         <Image Grid.Column="0" Grid.Row="1" x:Name="imagebox"  Height="194" Margin="10,10,0,0" VerticalAlignment="Top" />
         <TextBox Grid.Column="1" Grid.Row="1" x:Name="nombrebox"  Height="23" Margin="10,20,0,10" TextWrapping="Wrap"  VerticalAlignment="Top"  Controls:TextBoxHelper.ClearTextButton="True" FontSize="16"/>
