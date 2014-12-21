@@ -67,8 +67,6 @@ namespace Genlog
             ruleLabel.Content = instruction;
 
             InitializeAnimation();
-
-            _timer.Start();
         }
 
         public void Stop()
@@ -236,28 +234,41 @@ namespace Genlog
 
         private void CanvasLoaded(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            // refactoring inc
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
             _animation.To = canvas.ActualWidth;
 
             _shapeSize = (int)(canvas.ActualHeight / 3);
             _yCenter = canvas.ActualHeight / 2;
             _xCenter = canvas.ActualWidth / 2;
 
-            Line middle = new Line();
-            middle.Stroke = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
-            middle.X1 = canvas.ActualWidth / 2;
-            middle.X2 = middle.X1;
-            middle.Y1 = 0;
-            middle.Y2 = canvas.ActualHeight;
-            middle.StrokeThickness = 2;
+            //Line middle = new Line();
+            //middle.Stroke = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
+            //middle.X1 = canvas.ActualWidth / 2;
+            //middle.X2 = middle.X1;
+            //middle.Y1 = 0;
+            //middle.Y2 = canvas.ActualHeight;
+            //middle.StrokeThickness = 2;
 
-            canvas.Children.Add(middle);
+            //canvas.Children.Add(middle);
 
-            SpawnShape();
-        }
+            Canvas.SetTop(rectBackground, canvas.ActualHeight / 4);
+            rectBackground.Width = canvas.ActualWidth;
+            rectBackground.Height = (int)(canvas.ActualHeight / 2);
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            // refactoring inc
+            Canvas.SetTop(ruleLabel, canvas.ActualHeight / 2 - (ruleLabel.ActualHeight / 2));
+            Canvas.SetLeft(ruleLabel, canvas.ActualWidth / 2 - (ruleLabel.ActualWidth / 2));
+
+            Canvas.SetTop(buttonOK, canvas.ActualHeight / 2 - (ruleLabel.ActualHeight / 2));
+            Canvas.SetLeft(buttonOK, canvas.ActualWidth / 2 + (ruleLabel.ActualWidth / 2) + 10);
         }
     }
 }
