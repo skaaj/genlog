@@ -1,4 +1,4 @@
 genlog
 ======
 
-Logiciel pour tester la mémoire et la capacité de concentration d'une personne.
+School project to test memory and focus of a subject
